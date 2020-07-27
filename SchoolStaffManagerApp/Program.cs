@@ -33,7 +33,7 @@ namespace SchoolStaffManagerApp
                     default:
                         break;
                 }
-                Console.WriteLine("\nDo you want to continue?(Enter y for yes)\n");
+                Console.WriteLine("\nDo you want to change staff type and continue?(Enter y for yes)\n");
                 ifContinue = Convert.ToChar(Console.ReadLine()).Equals('y') ? true : false;
             } while (ifContinue);
 
