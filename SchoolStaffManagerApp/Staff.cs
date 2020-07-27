@@ -5,21 +5,21 @@ using System.Text;
 namespace SchoolStaffManagerApp
 {
     
-    class Address
+    public class Address
     {
         public string houseName;
         public string addressLine1;
         public string addressLine2;
     }
 
-    enum StaffType
+    public enum StaffType
     {
         teachingStaff,
         administrativeStaff,
         supportStaff
     }
 
-    abstract class Staff
+    public abstract class Staff
     {
         protected int _staffID;
         protected int StaffID
@@ -35,7 +35,10 @@ namespace SchoolStaffManagerApp
                 if (value > 0 && value < 500)
                     _staffID = StaffID;
                 else
-                    throw new ArgumentOutOfRangeException();
+                {
+                    Console.WriteLine("\nStaff ID should be between 1 and 500\n");
+                    _staffID = 0;
+                }
 
             }
         }
@@ -52,7 +55,10 @@ namespace SchoolStaffManagerApp
             {
                 if (long.TryParse(value, out _phoneNumber)) ;
                 else
-                    throw new FormatException();
+                {
+                    Console.WriteLine("Phone Number Should be 10 digit integer\n");
+                    _phoneNumber = 0;
+                }
 
             }
         }

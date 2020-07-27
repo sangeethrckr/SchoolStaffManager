@@ -20,7 +20,12 @@ namespace SchoolStaffManagerApp
             name = Console.ReadLine();
 
             Console.WriteLine("\nEnter Staff ID\n");
-            StaffID = Convert.ToInt32(Console.ReadLine());       
+            StaffID = Convert.ToInt32(Console.ReadLine());
+            if (StaffID == 0)
+            {
+                Console.WriteLine("\nEnter Staff ID\n");
+                StaffID = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.WriteLine("\nEnter Address\nHouse name:");
             address.houseName = Console.ReadLine();
@@ -31,6 +36,11 @@ namespace SchoolStaffManagerApp
 
             Console.WriteLine("\nEnter Phone Number\n");
             PhoneNumber = Console.ReadLine();
+            if (PhoneNumber == "0")
+            {
+                Console.WriteLine("\nEnter Phone Number\n");
+                PhoneNumber = Console.ReadLine();
+            }
 
             Console.WriteLine("\nEnter Salary\n");
             salary = Convert.ToDouble(Console.ReadLine());
