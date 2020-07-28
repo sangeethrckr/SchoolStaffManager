@@ -1,69 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 
 namespace SchoolStaffManagerApp
 {
-    class Program
+    public class Program
     {
-
-        static void Main(string[] args)
+        
+        public static void Main(string[] args)
         {
-                    
-            
-            bool ifContinue ;
-            
-            do
+            string schoolName = ConfigurationManager.AppSettings.Get("SchoolName");
+            Console.WriteLine("Hello {0}\n", schoolName);
+            StaffMenu();
+        }
+
+        private static void StaffMenu()
+        {
+            Console.WriteLine("Choose Staff Type\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n");   //Staff Menu
+            int staffTypeChoice = Convert.ToInt32(Console.ReadLine());
+            switch (staffTypeChoice)
             {
-                Console.WriteLine("\nChoose Staff Type\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n");   //Staff Menu
-                int actionChoice = Convert.ToInt32(Console.ReadLine());
+                case 1:
+                    TeachingStaff teachingStaff = new TeachingStaff();
+                    ActionMenu(teachingStaff);
+                    break;
+                case 2:
+                    AdminstrativeStaff adminstrativeStaff = new AdminstrativeStaff();
+                    ActionMenu(adminstrativeStaff);
+                    break;
+                case 3:
+                    SupportStaff supportStaff = new SupportStaff();
+                    ActionMenu(supportStaff);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void ActionMenu(Staff staff)
+        {
+
+            while(true)
+            {
+                int actionChoice;
+                Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.Update Staff Details\n4.Exit\n"); //Action Menu
+                actionChoice = Convert.ToInt32(Console.ReadLine());
                 switch (actionChoice)
                 {
                     case 1:
-                        TeachingStaff teachingStaff = new TeachingStaff();
-                        Action(teachingStaff);
+                        staff.AddStaff();
                         break;
                     case 2:
-                        AdminstrativeStaff adminstrativeStaff = new AdminstrativeStaff();
-                        Action(adminstrativeStaff);
+                        staff.ViewDetails();
                         break;
                     case 3:
-                        SupportStaff supportStaff = new SupportStaff();
-                        Action(supportStaff);
+                        staff.Update();
+                        break;
+                    case 4:
+                        System.Environment.Exit(0);
                         break;
                     default:
                         break;
                 }
-                Console.WriteLine("\nDo you want to change staff type and continue?(Enter y for yes)\n");
-                ifContinue = Convert.ToChar(Console.ReadLine()).Equals('y') ? true : false;
-            } while (ifContinue);
-
-
-            void Action(Staff staff)
-            {
-                
-                do
-                {
-                    Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.Update Staff Details\n"); //Action Menu
-                    int actionChoice = Convert.ToInt32(Console.ReadLine());
-                    switch (actionChoice)
-                    {
-                        case 1:
-                            staff.AddStaff();
-                            break;
-                        case 2:
-                            staff.ViewDetails();
-                            break;
-                        case 3:
-                            staff.Update();
-                            break;
-                        default:
-                            break;
-                    }
-                    Console.WriteLine("\nDo you want to perform more actions on this staff?(Enter y for yes)\n");
-                    ifContinue = Convert.ToChar(Console.ReadLine()).Equals('y') ? true : false;
-
-                } while (ifContinue);
-            }
+                               
+            } 
         }
     }
 }

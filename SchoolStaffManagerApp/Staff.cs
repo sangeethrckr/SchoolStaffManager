@@ -19,60 +19,92 @@ namespace SchoolStaffManagerApp
         supportStaff
     }
 
+    
+
     public abstract class Staff
     {
-        protected int _staffID;
-        protected int StaffID
-        {
-            get
-            {
-                return _staffID;
-            }
-
-            set
-            {
-
-                if (value > 0 && value < 500)
-                    _staffID = StaffID;
-                else
-                {
-                    Console.WriteLine("\nStaff ID should be between 1 and 500\n");
-                    _staffID = 0;
-                }
-
-            }
-        }
+        protected int staffID;
         protected string name;
         protected Address address = new Address();
-        protected long _phoneNumber;
-        protected string PhoneNumber
-        {
-            get
-            {
-                return Convert.ToString(_phoneNumber);
-            }
-            set
-            {
-                if (long.TryParse(value, out _phoneNumber)) ;
-                else
-                {
-                    Console.WriteLine("Phone Number Should be 10 digit integer\n");
-                    _phoneNumber = 0;
-                }
-
-            }
-        }
+        protected long phoneNumber;
         protected double salary;
-
         protected StaffType staffType;
+              
 
-        
+        public virtual void AddStaff()
+        {
+            Console.WriteLine("\nEnter Name\n");
+            name = Console.ReadLine();
 
-        public abstract void AddStaff();
+            AskStaffID();
+
+            Console.WriteLine("\nEnter Address\nHouse name:");
+            address.houseName = Console.ReadLine();
+            Console.WriteLine("Address Line 1:");
+            address.addressLine1 = Console.ReadLine();
+            Console.WriteLine("Address line 2:");
+            address.addressLine2 = Console.ReadLine();
+
+            Console.WriteLine("\nEnter Phone Number\n");
+            phoneNumber = Convert.ToInt64(Console.ReadLine());
+
+            Console.WriteLine("\nEnter Salary\n");
+            salary = Convert.ToDouble(Console.ReadLine());
+        }
 
         public abstract void ViewDetails();
 
-        public abstract void Update();
+        public virtual void Update()
+        {
+            Console.WriteLine("\nUpdate Staff Details\nWhat do you need to update?\n1.Address\n2.Salary");
+            int updateChoice = Convert.ToInt32(Console.ReadLine());
+
+            switch (updateChoice)
+            {
+                case 1:
+                    Console.WriteLine("\nEnter updated Address\nHouse name:");
+                    address.houseName = Console.ReadLine();
+                    Console.WriteLine("Addres Line 1:");
+                    address.addressLine1 = Console.ReadLine();
+                    Console.WriteLine("Address line 2:");
+                    address.addressLine2 = Console.ReadLine();
+                    break;
+                case 2:
+                    Console.WriteLine("\nEnter updated Salary\n");
+                    salary = Convert.ToDouble(Console.ReadLine());
+                    break;
+                default:
+                    Console.WriteLine("\nIncorrect Option\n");
+                    break;
+            }
+        }
+
+        private bool ValidateStaffID(int staffID)
+        {
+            if(staffID>0 && staffID <= 500)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void AskStaffID()
+        {
+            Console.WriteLine("\nEnter Staff ID\n");
+            int inputStaffID = Convert.ToInt32(Console.ReadLine());
+            if (ValidateStaffID(inputStaffID))
+            {
+                staffID = inputStaffID;
+            }
+            else
+            {
+                Console.WriteLine("Staff ID should be between 1 and 500\n");
+                AskStaffID();
+            }
+        }
 
 
 
