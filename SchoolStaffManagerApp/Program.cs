@@ -10,14 +10,14 @@ namespace SchoolStaffManagerApp
         
         public static void Main(string[] args)
         {
-            string schoolName = ConfigurationManager.AppSettings.Get("SchoolName");
-            Console.WriteLine("Hello {0}\n", schoolName);
+            //string schoolName = ConfigurationManager.AppSettings.Get("SchoolName");
+            //Console.WriteLine("Hello {0}\n", schoolName);
             StaffMenu();
         }
 
         private static void StaffMenu()
         {
-            Console.WriteLine("Choose Staff Type\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n");   //Staff Menu
+            Console.WriteLine("Choose Staff Type in {0}\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n", ConfigurationManager.AppSettings.Get("SchoolName"));   //Staff Menu
             int staffTypeChoice = Convert.ToInt32(Console.ReadLine());
             switch (staffTypeChoice)
             {

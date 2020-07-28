@@ -10,6 +10,7 @@ namespace SchoolStaffManagerApp
         public string houseName;
         public string addressLine1;
         public string addressLine2;
+        public int pin;
     }
 
     public enum StaffType
@@ -44,20 +45,36 @@ namespace SchoolStaffManagerApp
             address.addressLine1 = Console.ReadLine();
             Console.WriteLine("Address line 2:");
             address.addressLine2 = Console.ReadLine();
+            Console.WriteLine("PIN:");
+            address.pin = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("\nEnter Phone Number\n");
-            phoneNumber = Convert.ToInt64(Console.ReadLine());
+            AskPhoneNumber();
 
             Console.WriteLine("\nEnter Salary\n");
             salary = Convert.ToDouble(Console.ReadLine());
         }
 
-        public abstract void ViewDetails();
+        public virtual void ViewDetails()
+        {
+            Console.WriteLine("\nTeaching Staff Details\n\nName : {0}", name);
+
+            Console.WriteLine("Staff ID : {0}", staffID);
+
+
+            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", address.houseName, address.addressLine1, address.addressLine2,address.pin);
+
+            Console.WriteLine("\tPhone Number : {0}", phoneNumber);
+
+            Console.WriteLine("\nSalary : {0}", salary);
+        }
+
+        protected abstract int SelectUpdateChoice();
+        protected abstract void UpdateSpecificDetails();
 
         public virtual void Update()
         {
-            Console.WriteLine("\nUpdate Staff Details\nWhat do you need to update?\n1.Address\n2.Salary");
-            int updateChoice = Convert.ToInt32(Console.ReadLine());
+            
+            int updateChoice = SelectUpdateChoice();
 
             switch (updateChoice)
             {
@@ -68,10 +85,15 @@ namespace SchoolStaffManagerApp
                     address.addressLine1 = Console.ReadLine();
                     Console.WriteLine("Address line 2:");
                     address.addressLine2 = Console.ReadLine();
+                    Console.WriteLine("PIN:");
+                    address.pin = Convert.ToInt32(Console.ReadLine());
                     break;
                 case 2:
                     Console.WriteLine("\nEnter updated Salary\n");
                     salary = Convert.ToDouble(Console.ReadLine());
+                    break;
+                case 3:
+                    UpdateSpecificDetails();
                     break;
                 default:
                     Console.WriteLine("\nIncorrect Option\n");
@@ -106,7 +128,42 @@ namespace SchoolStaffManagerApp
             }
         }
 
+        private long ValidatePhoneNumber(string phoneNumber)
+        {
+            long outputPhoneNumber;
+            if (long.TryParse(phoneNumber, out outputPhoneNumber))
+            {
+                
+                if(phoneNumber.Length == 10)
+                {
+                    return outputPhoneNumber;
+                }
+                else
+                {
+                    Console.WriteLine("\nPhone number should have 10 digits");
+                    return -1;
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nPhone number should not contain characters");
+                return -1;
+            }
+        }
 
+        private void AskPhoneNumber()
+        {
+            Console.WriteLine("\nEnter Phone number");
+            string inputPhoneNumber = Console.ReadLine();
+            if (ValidatePhoneNumber(inputPhoneNumber) != -1)
+            {
+                phoneNumber = ValidatePhoneNumber(inputPhoneNumber);
+            }
+            else
+            {
+                AskPhoneNumber();
+            }
+        }
 
     }
 }
