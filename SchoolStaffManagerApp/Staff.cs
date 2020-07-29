@@ -1,28 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 //using System.Collections.Generic;
 //using System.Text;
 
 namespace SchoolStaffManagerApp
 {
-     
-    
-    public abstract class Staff
+        
+    public class Staff
     {
-        protected int staffID;
+
+        public string staffID;
         protected string name;
-        protected Address address = new Address();
+        protected Address address;
         protected long phoneNumber;
         protected double salary;
         protected StaffType staffType;
               
 
-        public virtual void AddStaff()
+        public virtual void AddStaff(string predecessorStaffId)
         {
             Console.WriteLine("\nEnter Name\n");
             name = Console.ReadLine();
 
-            staffID = HelperMethods.AskStaffID();
+            //staffID = HelperMethods.AskStaffID();
 
+            address = new Address();
             Console.WriteLine("\nEnter Address\nHouse name:");
             address.houseName = Console.ReadLine();
             Console.WriteLine("Address Line 1:");
@@ -52,8 +54,8 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("\nSalary : {0}", salary);
         }
 
-        protected abstract int SelectUpdateChoice();
-        protected abstract void UpdateSpecificDetails();
+        protected virtual int SelectUpdateChoice() { return 1; }
+        protected virtual void UpdateSpecificDetails() { }
 
         public void Update()
         {
