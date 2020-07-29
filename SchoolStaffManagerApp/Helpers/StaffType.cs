@@ -1,6 +1,5 @@
 ﻿namespace SchoolStaffManagerApp
-{
-    
+{    
     public enum StaffType
     {
         teachingStaff,
