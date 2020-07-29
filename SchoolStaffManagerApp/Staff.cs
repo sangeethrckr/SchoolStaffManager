@@ -1,27 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+//using System.Collections.Generic;
+//using System.Text;
 
 namespace SchoolStaffManagerApp
 {
+     
     
-    public class Address
-    {
-        public string houseName;
-        public string addressLine1;
-        public string addressLine2;
-        public int pin;
-    }
-
-    public enum StaffType
-    {
-        teachingStaff,
-        administrativeStaff,
-        supportStaff
-    }
-
-    
-
     public abstract class Staff
     {
         protected int staffID;
@@ -37,7 +21,7 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("\nEnter Name\n");
             name = Console.ReadLine();
 
-            AskStaffID();
+            staffID = HelperMethods.AskStaffID();
 
             Console.WriteLine("\nEnter Address\nHouse name:");
             address.houseName = Console.ReadLine();
@@ -48,7 +32,7 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("PIN:");
             address.pin = Convert.ToInt32(Console.ReadLine());
 
-            AskPhoneNumber();
+            phoneNumber = HelperMethods.AskPhoneNumber();
 
             Console.WriteLine("\nEnter Salary\n");
             salary = Convert.ToDouble(Console.ReadLine());
@@ -71,7 +55,7 @@ namespace SchoolStaffManagerApp
         protected abstract int SelectUpdateChoice();
         protected abstract void UpdateSpecificDetails();
 
-        public virtual void Update()
+        public void Update()
         {
             
             int updateChoice = SelectUpdateChoice();
@@ -100,70 +84,7 @@ namespace SchoolStaffManagerApp
                     break;
             }
         }
-
-        private bool ValidateStaffID(int staffID)
-        {
-            if(staffID>0 && staffID <= 500)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void AskStaffID()
-        {
-            Console.WriteLine("\nEnter Staff ID\n");
-            int inputStaffID = Convert.ToInt32(Console.ReadLine());
-            if (ValidateStaffID(inputStaffID))
-            {
-                staffID = inputStaffID;
-            }
-            else
-            {
-                Console.WriteLine("Staff ID should be between 1 and 500\n");
-                AskStaffID();
-            }
-        }
-
-        private long ValidatePhoneNumber(string phoneNumber)
-        {
-            long outputPhoneNumber;
-            if (long.TryParse(phoneNumber, out outputPhoneNumber))
-            {
-                
-                if(phoneNumber.Length == 10)
-                {
-                    return outputPhoneNumber;
-                }
-                else
-                {
-                    Console.WriteLine("\nPhone number should have 10 digits");
-                    return -1;
-                }
-            }
-            else
-            {
-                Console.WriteLine("\nPhone number should not contain characters");
-                return -1;
-            }
-        }
-
-        private void AskPhoneNumber()
-        {
-            Console.WriteLine("\nEnter Phone number");
-            string inputPhoneNumber = Console.ReadLine();
-            if (ValidatePhoneNumber(inputPhoneNumber) != -1)
-            {
-                phoneNumber = ValidatePhoneNumber(inputPhoneNumber);
-            }
-            else
-            {
-                AskPhoneNumber();
-            }
-        }
+                       
 
     }
 }
