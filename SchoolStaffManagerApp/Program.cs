@@ -10,9 +10,9 @@ namespace SchoolStaffManagerApp
         
         public static void Main(string[] args)
         {
-            //string schoolName = ConfigurationManager.AppSettings.Get("SchoolName");
-            //Console.WriteLine("Hello {0}\n", schoolName);
+            
             StaffMenu();
+
         }
 
         private static void StaffMenu()
@@ -23,109 +23,104 @@ namespace SchoolStaffManagerApp
             {
                 case 1:
                     List<Staff> teachingStaffs = new List<TeachingStaff>().ConvertAll(x => (Staff)x);
-                    ActionMenu(teachingStaffs,1);
+                    ActionMenu(teachingStaffs,StaffType.teachingStaff);
                     break;
                 case 2:
                     List<Staff> administrativeStaffs = new List<AdminstrativeStaff>().ConvertAll(x => (Staff)x);
-                    ActionMenu(administrativeStaffs,2);
+                    ActionMenu(administrativeStaffs,StaffType.administrativeStaff);
                     break;
                 case 3:
                     List<Staff> supportStaffs = new List<SupportStaff>().ConvertAll(x => (Staff)x);
-                    ActionMenu(supportStaffs,3);
+                    ActionMenu(supportStaffs,StaffType.supportStaff);
                     break;
                 default:
                     break;
             }
         }
 
-        private static void ActionMenu(List<Staff> staffs,int typeID)
+        private static void ActionMenu(List<Staff> staffs,StaffType staffType)
         {
 
-            while(true)
-            {
-                int actionChoice;
-                Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.Update Staff Details\n4.Remove Staff\n5.Exit\n"); //Action Menu
-                actionChoice = Convert.ToInt32(Console.ReadLine());
-                int pos;
-                string staffId;
-                string predecessorStaffID;
-                switch (actionChoice)
-                {
-                    case 1:
-                        switch (typeID)
-                        {
-                            case 1:
-                                staffs.Add(new TeachingStaff());
-                                break;
-                            case 2:
-                                staffs.Add(new AdminstrativeStaff());
-                                break;
-                            case 3:
-                                staffs.Add(new SupportStaff());
-                                break;
-                        }
-                        
-                        pos = staffs.Count;
-                        if (pos - 2 != -1)
-                        {
-                            predecessorStaffID = staffs[pos - 2].staffID;
-                        }
-                        else
-                        {
-                            predecessorStaffID = null;
-                        }
-                        staffs[pos-1].AddStaff(predecessorStaffID);
-                        break;
-                    case 2:
-                        Console.WriteLine("\nEnter Staff ID");
-                        staffId = Console.ReadLine();
-                        pos = staffs.FindIndex(x => x.staffID == staffId);
-                        if (pos != -1)
-                        {
-                            staffs[pos].ViewDetails();
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nStaff not found");
-                        }
-                        break;
-                    case 3:
-                        Console.WriteLine("\nEnter Staff ID");
-                        staffId = Console.ReadLine();
-                        pos = staffs.FindIndex(x => x.staffID == staffId);
-                        if (pos != -1)
-                        {
-                            staffs[pos].Update();
-                            Console.WriteLine("\nStaff details updated");
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nStaff not found");
-                        }
-                        break;
-                    case 4:
-                        Console.WriteLine("\nEnter Staff ID");
-                        staffId = Console.ReadLine();
-                        pos = staffs.FindIndex(x => x.staffID == staffId);
-                        if (pos != -1)
-                        {
-                            staffs.RemoveAt(pos);
-                            Console.WriteLine("\nStaff ({0}) removed", staffId);
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nStaff not found");
-                        }
-                        break;
-                    case 5:
-                        System.Environment.Exit(0);
-                        break;
-                    default:
-                        break;
-                }
-                               
-            }
             
+            int actionChoice;
+            Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.Update Staff Details\n4.Remove Staff\n5.Exit\n"); //Action Menu
+            actionChoice = Convert.ToInt32(Console.ReadLine());
+            int position;
+            int staffId;
+                
+            switch (actionChoice)
+            {
+                case 1:
+                    switch (staffType)
+                    {
+                        case StaffType.teachingStaff:
+                            TeachingStaff newTeachingStaff = new TeachingStaff();
+                            newTeachingStaff.AddStaff();
+                            staffs.Add(newTeachingStaff);
+                            break;
+                        case StaffType.administrativeStaff:
+                            AdminstrativeStaff newAdministrativeStaff = new AdminstrativeStaff();
+                            newAdministrativeStaff.AddStaff();
+                            staffs.Add(newAdministrativeStaff);
+                            break;
+                        case StaffType.supportStaff:
+                            SupportStaff newSupportStaff = new SupportStaff();
+                            newSupportStaff.AddStaff();
+                            staffs.Add(newSupportStaff);
+                            break;
+                    }
+                                                
+                    break;
+                case 2:
+                    Console.WriteLine("\nEnter Staff ID");
+                    staffId = Convert.ToInt32(Console.ReadLine());
+                    position = staffs.FindIndex(x => x.staffId == staffId);
+                    if (position != -1)
+                    {
+                        staffs[position].ViewDetails();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nStaff not found");
+                    }
+                    break;
+                case 3:
+                    Console.WriteLine("\nEnter Staff ID");
+                    staffId = Convert.ToInt32(Console.ReadLine());
+                    position = staffs.FindIndex(x => x.staffId == staffId);
+                    if (position != -1)
+                    {
+                        staffs[position].Update();
+                        Console.WriteLine("\nStaff details updated");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nStaff not found");
+                    }
+                    break;
+                case 4:
+                    Console.WriteLine("\nEnter Staff ID");
+                    staffId = Convert.ToInt32(Console.ReadLine());
+                    position = staffs.FindIndex(x => x.staffId == staffId);
+                    if (position != -1)
+                    {
+                        staffs.RemoveAt(position);
+                        Console.WriteLine("\nStaff ({0}) removed", staffId);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nStaff not found");
+                    }
+                    break;
+                case 5:
+                    System.Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
+            ActionMenu(staffs, staffType);
+                              
+                      
             
         }
     }

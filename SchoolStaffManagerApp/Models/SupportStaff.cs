@@ -13,24 +13,16 @@ namespace SchoolStaffManagerApp
             staffType = StaffType.supportStaff;
         }
 
-        public override void AddStaff(string predcessorStaffID)
+        public override void AddStaff()
         {
 
-            if (predcessorStaffID == null)
-            {
-                staffID = "S1";
-            }
-            else
-            {
-                int staffIdNum = Convert.ToInt32(predcessorStaffID.Remove(0, 1));
-                staffID = "S" + Convert.ToString(staffIdNum + 1);
-            }
-            base.AddStaff(predcessorStaffID);
+            
+            base.AddStaff();
 
             Console.WriteLine("\nEnter Post\n");
             post = Console.ReadLine();
 
-            Console.WriteLine("\nSupport Staff added\tStaffID : {0}", staffID);
+            Console.WriteLine("\nSupport Staff added\tStaffID : {0}", staffId);
 
         }
 

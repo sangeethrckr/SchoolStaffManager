@@ -3,34 +3,9 @@
 
 namespace SchoolStaffManagerApp
 {
-    public class HelperMethods
+    public class Validator
     {
-        private static bool ValidateStaffID(int inputStaffId)
-        {
-            if (inputStaffId > 0 && inputStaffId <= 500)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static int AskStaffID()
-        {
-            Console.WriteLine("\nEnter Staff ID\n");
-            int inputStaffId = Convert.ToInt32(Console.ReadLine());
-            if (ValidateStaffID(inputStaffId))
-            {
-                return inputStaffId;
-            }
-            else
-            {
-                Console.WriteLine("Staff ID should be between 1 and 500\n");
-                return AskStaffID();
-            }
-        }
+        
 
 
         private static long ValidatePhoneNumber(string phoneNumber)
@@ -67,6 +42,34 @@ namespace SchoolStaffManagerApp
             else
             {
                 return AskPhoneNumber();
+            }
+        }
+
+
+        private static bool ValidateStaffID(int inputStaffId)
+        {
+            if (inputStaffId > 0 && inputStaffId <= 500)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static int AskStaffID()
+        {
+            Console.WriteLine("\nEnter Staff ID\n");
+            int inputStaffId = Convert.ToInt32(Console.ReadLine());
+            if (ValidateStaffID(inputStaffId))
+            {
+                return inputStaffId;
+            }
+            else
+            {
+                Console.WriteLine("Staff ID should be between 1 and 500\n");
+                return AskStaffID();
             }
         }
     }

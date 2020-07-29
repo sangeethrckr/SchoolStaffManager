@@ -6,10 +6,10 @@ using System.Collections.Generic;
 namespace SchoolStaffManagerApp
 {
         
-    public class Staff
+    public abstract class Staff
     {
 
-        public string staffID;
+        public int staffId;
         protected string name;
         protected Address address;
         protected long phoneNumber;
@@ -17,12 +17,12 @@ namespace SchoolStaffManagerApp
         protected StaffType staffType;
               
 
-        public virtual void AddStaff(string predecessorStaffId)
+        public virtual void AddStaff()
         {
             Console.WriteLine("\nEnter Name\n");
             name = Console.ReadLine();
 
-            //staffID = HelperMethods.AskStaffID();
+            staffId = Validator.AskStaffID();
 
             address = new Address();
             Console.WriteLine("\nEnter Address\nHouse name:");
@@ -34,7 +34,7 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("PIN:");
             address.pin = Convert.ToInt32(Console.ReadLine());
 
-            phoneNumber = HelperMethods.AskPhoneNumber();
+            phoneNumber = Validator.AskPhoneNumber();
 
             Console.WriteLine("\nEnter Salary\n");
             salary = Convert.ToDouble(Console.ReadLine());
@@ -44,7 +44,7 @@ namespace SchoolStaffManagerApp
         {
             Console.WriteLine("\nTeaching Staff Details\n\nName : {0}", name);
 
-            Console.WriteLine("Staff ID : {0}", staffID);
+            Console.WriteLine("Staff ID : {0}", staffId);
 
 
             Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", address.houseName, address.addressLine1, address.addressLine2,address.pin);
@@ -54,8 +54,8 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("\nSalary : {0}", salary);
         }
 
-        protected virtual int SelectUpdateChoice() { return 1; }
-        protected virtual void UpdateSpecificDetails() { }
+        protected abstract int SelectUpdateChoice();
+        protected abstract void UpdateSpecificDetails();
 
         public void Update()
         {
