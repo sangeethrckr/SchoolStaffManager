@@ -14,7 +14,7 @@ namespace SchoolStaffManagerApp
         protected Address address;
         protected long phoneNumber;
         protected double salary;
-        protected StaffType staffType;
+        public StaffType staffType;
               
 
         public virtual void AddStaff()
@@ -42,7 +42,7 @@ namespace SchoolStaffManagerApp
 
         public virtual void ViewDetails()
         {
-            Console.WriteLine("\nTeaching Staff Details\n\nName : {0}", name);
+            Console.WriteLine("\nStaff Details\n\nName : {0}", name);
 
             Console.WriteLine("Staff ID : {0}", staffId);
 

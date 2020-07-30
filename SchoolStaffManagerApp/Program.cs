@@ -10,45 +10,26 @@ namespace SchoolStaffManagerApp
         
         public static void Main(string[] args)
         {
-            
-            StaffMenu();
-
-        }
-
-        private static void StaffMenu()
-        {
-            Console.WriteLine("Choose Staff Type in {0}\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n", ConfigurationManager.AppSettings.Get("SchoolName"));   //Staff Menu
-            int staffTypeChoice = Convert.ToInt32(Console.ReadLine());
             List<Staff> lstStaff = new List<Staff>();
-            switch (staffTypeChoice)
-            {
-                case 1:
-                    ActionMenu(lstStaff,StaffType.teachingStaff);
-                    break;
-                case 2:
-                    ActionMenu(lstStaff,StaffType.administrativeStaff);
-                    break;
-                case 3:
-                    ActionMenu(lstStaff,StaffType.supportStaff);
-                    break;
-                default:
-                    break;
-            }
+            //StaffMenu(lstStaff);
+            ActionMenu(lstStaff);
+
         }
 
-        private static void ActionMenu(List<Staff> lstStaff,StaffType staffType)
+       
+        private static void ActionMenu(List<Staff> lstStaff)
         {
-
-            
+                        
             int actionChoice;
+            Staff staffFound;
+
             Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.View All Staff Details\n4.Update Staff Details\n5.Remove Staff\n6.Exit\n"); //Action Menu
             actionChoice = Convert.ToInt32(Console.ReadLine());
-            int position;
-            int staffId;
-                
+            
             switch (actionChoice)
             {
                 case 1:
+                    StaffType staffType = StaffMenu();
                     switch (staffType)
                     {
                         case StaffType.teachingStaff:
@@ -70,50 +51,38 @@ namespace SchoolStaffManagerApp
                                                 
                     break;
                 case 2:
-                    Console.WriteLine("\nEnter Staff ID");
-                    staffId = Convert.ToInt32(Console.ReadLine());
-                    position = lstStaff.FindIndex(x => x.staffId == staffId);
-                    if (position != -1)
+                    staffFound = FindStaff(lstStaff);
+                    if(staffFound != null)
                     {
-                        lstStaff[position].ViewDetails();
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nStaff not found");
+                        staffFound.ViewDetails();
                     }
                     break;
                 case 3:
+                    if(lstStaff.Count == 0)
+                    {
+                        Console.WriteLine("\nNo staff found");
+                        break;
+                    }
                     foreach(Staff staff in lstStaff)
                     {
                         staff.ViewDetails();
+                        
                     }
                     break;
                 case 4:
-                    Console.WriteLine("\nEnter Staff ID");
-                    staffId = Convert.ToInt32(Console.ReadLine());
-                    position = lstStaff.FindIndex(x => x.staffId == staffId);
-                    if (position != -1)
+                    staffFound = FindStaff(lstStaff);
+                    if (staffFound != null)
                     {
-                        lstStaff[position].Update();
+                        staffFound.Update();
                         Console.WriteLine("\nStaff details updated");
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nStaff not found");
                     }
                     break;
                 case 5:
-                    Console.WriteLine("\nEnter Staff ID");
-                    staffId = Convert.ToInt32(Console.ReadLine());
-                    position = lstStaff.FindIndex(x => x.staffId == staffId);
-                    if (position != -1)
+                    staffFound = FindStaff(lstStaff);
+                    if (staffFound != null)
                     {
-                        lstStaff.RemoveAt(position);
-                        Console.WriteLine("\nStaff ({0}) removed", staffId);
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nStaff not found");
+                        lstStaff.Remove(staffFound);
+                        Console.WriteLine("\nStaff removed!!");
                     }
                     break;
                 case 6:
@@ -122,10 +91,50 @@ namespace SchoolStaffManagerApp
                 default:
                     break;
             }
-            ActionMenu(lstStaff, staffType);
-                              
-                      
+            ActionMenu(lstStaff);
+                             
+                    
+           
+        }
+
+        private static StaffType StaffMenu()
+        {
+            Console.WriteLine("\nChoose Staff Type in {0}\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n", ConfigurationManager.AppSettings.Get("SchoolName"));   //Staff Menu
+            int staffTypeChoice = Convert.ToInt32(Console.ReadLine());
+
+            switch (staffTypeChoice)
+            {
+                case 1:
+                    return StaffType.teachingStaff;
+
+                case 2:
+                    return StaffType.administrativeStaff;
+
+                case 3:
+                    return StaffType.supportStaff;
+
+                default:
+                    Console.WriteLine("\nIncorrect Option");
+                    return StaffMenu();
+            }
+        }
+
+        private static Staff FindStaff(List<Staff> lstStaff)
+        {
+            Console.WriteLine("\nEnter Staff ID");
+            int staffId = Convert.ToInt32(Console.ReadLine());
             
+            foreach (Staff staff in lstStaff)
+            {
+                if (staff.staffId == staffId)
+                {
+                    return staff;
+                    
+                }
+            }
+            Console.WriteLine("\nStaff not found");
+            return null;
+
         }
     }
 }

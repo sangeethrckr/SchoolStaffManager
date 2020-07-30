@@ -12,6 +12,7 @@ namespace SchoolStaffManagerApp
         public TeachingStaff()
         {
             staffType = StaffType.teachingStaff;
+            
         }
         public override void AddStaff()
         {
