@@ -6,47 +6,14 @@ namespace SchoolStaffManagerApp
 {
     public class SupportStaff : Staff
     {
-        private string post;
+        public string post;
 
         public SupportStaff()
         {
             staffType = StaffType.supportStaff;
-        }
-
-        public override void AddStaff()
-        {
-
             
-            base.AddStaff();
-
-            Console.WriteLine("\nEnter Post\n");
-            post = Console.ReadLine();
-
-            Console.WriteLine("\nSupport Staff added\tStaffID : {0}", staffId);
-
         }
 
-        public override void ViewDetails()
-        {
-            base.ViewDetails();
-
-            Console.WriteLine("\nPost : {0}", post);
-
-
-
-        }
-
-        protected override int SelectUpdateChoice()
-        {
-            Console.WriteLine("\nUpdate Staff Details\nWhat do you need to update?\n1.Address\n2.Salary\n3.Post");
-            return Convert.ToInt32(Console.ReadLine());
-        }
-
-        protected override void UpdateSpecificDetails()
-        {
-            Console.WriteLine("\nEnter updated post");
-            post = Console.ReadLine();
-        }
-
+        
     }
 }

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\StaffHelper.cs" />
     <Compile Include="Models\AdministrativeStaff.cs" />
     <Compile Include="Helpers\Address.cs" />
     <Compile Include="Helpers\StaffType.cs" />

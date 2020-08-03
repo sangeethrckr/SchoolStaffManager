@@ -11,7 +11,6 @@ namespace SchoolStaffManagerApp
         public static void Main(string[] args)
         {
             List<Staff> lstStaff = new List<Staff>();
-            //StaffMenu(lstStaff);
             ActionMenu(lstStaff);
 
         }
@@ -33,19 +32,13 @@ namespace SchoolStaffManagerApp
                     switch (staffType)
                     {
                         case StaffType.teachingStaff:
-                            TeachingStaff newTeachingStaff = new TeachingStaff();
-                            newTeachingStaff.AddStaff();
-                            lstStaff.Add(newTeachingStaff);
+                            lstStaff.Add(StaffHelper.AddStaff(StaffType.teachingStaff));
                             break;
                         case StaffType.administrativeStaff:
-                            AdminstrativeStaff newAdministrativeStaff = new AdminstrativeStaff();
-                            newAdministrativeStaff.AddStaff();
-                            lstStaff.Add(newAdministrativeStaff);
+                            lstStaff.Add(StaffHelper.AddStaff(StaffType.administrativeStaff));
                             break;
                         case StaffType.supportStaff:
-                            SupportStaff newSupportStaff = new SupportStaff();
-                            newSupportStaff.AddStaff();
-                            lstStaff.Add(newSupportStaff);
+                            lstStaff.Add(StaffHelper.AddStaff(StaffType.supportStaff));
                             break;
                     }
                                                 
@@ -54,7 +47,8 @@ namespace SchoolStaffManagerApp
                     staffFound = FindStaff(lstStaff);
                     if(staffFound != null)
                     {
-                        staffFound.ViewDetails();
+                        //staffFound.ViewDetails();
+                        StaffHelper.ViewDetails(staffFound);
                     }
                     break;
                 case 3:
@@ -65,15 +59,16 @@ namespace SchoolStaffManagerApp
                     }
                     foreach(Staff staff in lstStaff)
                     {
-                        staff.ViewDetails();
-                        
+                        //staff.ViewDetails();
+                        StaffHelper.ViewDetails(staff);
+
                     }
                     break;
                 case 4:
                     staffFound = FindStaff(lstStaff);
                     if (staffFound != null)
                     {
-                        staffFound.Update();
+                        StaffHelper.Update(staffFound);
                         Console.WriteLine("\nStaff details updated");
                     }
                     break;

@@ -5,9 +5,33 @@ namespace SchoolStaffManagerApp
 {
     public class Validator
     {
-        
 
 
+        public static string AskName()
+        {
+            Console.WriteLine("\nEnter Name\n");
+            return Console.ReadLine();
+        }
+
+        public static Address AskAddress()
+        {
+            Address address = new Address();
+            Console.WriteLine("\nEnter Address\nHouse name:");
+            address.houseName = Console.ReadLine();
+            Console.WriteLine("Address Line 1:");
+            address.addressLine1 = Console.ReadLine();
+            Console.WriteLine("Address line 2:");
+            address.addressLine2 = Console.ReadLine();
+            Console.WriteLine("PIN:");
+            address.pin = Convert.ToInt32(Console.ReadLine());
+            return address;
+        }
+
+        public static Double AskSalary()
+        {
+            Console.WriteLine("\nEnter Salary\n");
+            return Convert.ToDouble(Console.ReadLine());
+        }
         private static long ValidatePhoneNumber(string phoneNumber)
         {
             long outputPhoneNumber;
@@ -71,6 +95,27 @@ namespace SchoolStaffManagerApp
                 Console.WriteLine("Staff ID should be between 1 and 500\n");
                 return AskStaffID();
             }
+        }
+
+
+        public static string AskSubject()
+        {
+            Console.WriteLine("\nEnter Subject\n");
+            return Console.ReadLine();
+
+            
+        }
+
+        public static string AskClass()
+        {
+            Console.WriteLine("\nEnter Class Assigned");
+            return Console.ReadLine();
+        }
+
+        public static string AskPost()
+        {
+            Console.WriteLine("\nEnter Post\n");
+            return Console.ReadLine();
         }
     }
 }
