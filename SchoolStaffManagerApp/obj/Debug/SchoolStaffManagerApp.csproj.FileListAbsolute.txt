@@ -1,7 +1,0 @@
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\bin\Debug\SchoolStaffManagerApp.exe.config
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\bin\Debug\SchoolStaffManagerApp.exe
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\bin\Debug\SchoolStaffManagerApp.pdb
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\obj\Debug\SchoolStaffManagerApp.csprojAssemblyReference.cache
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\obj\Debug\SchoolStaffManagerApp.csproj.CoreCompileInputs.cache
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\obj\Debug\SchoolStaffManagerApp.exe
-C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\obj\Debug\SchoolStaffManagerApp.pdb
