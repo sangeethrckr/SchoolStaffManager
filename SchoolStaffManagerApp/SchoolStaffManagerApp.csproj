@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\AdministrativeStaffHelper.cs" />
+    <Compile Include="Helpers\SupportStaffHelper.cs" />
+    <Compile Include="Helpers\TeachingStaffHelper.cs" />
+    <Compile Include="StaffOperations\InMemoryStaffOperator.cs" />
+    <Compile Include="StaffOperations\IStaffOperator.cs" />
     <Compile Include="Helpers\StaffHelper.cs" />
     <Compile Include="Models\AdministrativeStaff.cs" />
     <Compile Include="Helpers\Address.cs" />

@@ -10,126 +10,60 @@ namespace SchoolStaffManagerApp
         
         public static void Main(string[] args)
         {
-            List<Staff> lstStaff = new List<Staff>();
-            ActionMenu(lstStaff);
+            Console.WriteLine("Hello {0}", ConfigurationManager.AppSettings.Get("SchoolName"));
+            IStaffOperator staffOperator = new InMemoryStaffOperator();
+            ActionMenu(staffOperator);
 
         }
 
        
-        private static void ActionMenu(List<Staff> lstStaff)
+        private static void ActionMenu(IStaffOperator staffOperator)
         {
                         
             int actionChoice;
-            Staff staffFound;
+            StaffType staffType;
+            int staffId;
 
-            Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.View All Staff Details\n4.Update Staff Details\n5.Remove Staff\n6.Exit\n"); //Action Menu
+            Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.View All Staff of type\n4.Update Staff Details\n5.Remove Staff\n6.Exit\n"); //Action Menu
             actionChoice = Convert.ToInt32(Console.ReadLine());
             
             switch (actionChoice)
             {
                 case 1:
-                    StaffType staffType = StaffMenu();
-                    switch (staffType)
-                    {
-                        case StaffType.teachingStaff:
-                            lstStaff.Add(StaffHelper.AddStaff(StaffType.teachingStaff));
-                            break;
-                        case StaffType.administrativeStaff:
-                            lstStaff.Add(StaffHelper.AddStaff(StaffType.administrativeStaff));
-                            break;
-                        case StaffType.supportStaff:
-                            lstStaff.Add(StaffHelper.AddStaff(StaffType.supportStaff));
-                            break;
-                    }
+                    staffType = Validator.AskStaffType();
+                    staffOperator.CreateStaff(staffType);
                                                 
                     break;
                 case 2:
-                    staffFound = FindStaff(lstStaff);
-                    if(staffFound != null)
-                    {
-                        //staffFound.ViewDetails();
-                        StaffHelper.ViewDetails(staffFound);
-                    }
+                    staffId = Validator.AskStaffID();
+                    staffOperator.GetStaffByStaffId(staffId);
                     break;
                 case 3:
-                    if(lstStaff.Count == 0)
-                    {
-                        Console.WriteLine("\nNo staff found");
-                        break;
-                    }
-                    foreach(Staff staff in lstStaff)
-                    {
-                        //staff.ViewDetails();
-                        StaffHelper.ViewDetails(staff);
-
-                    }
+                    staffType = Validator.AskStaffType();
+                    staffOperator.GetAllStaffByStaffType(staffType);
                     break;
                 case 4:
-                    staffFound = FindStaff(lstStaff);
-                    if (staffFound != null)
-                    {
-                        StaffHelper.Update(staffFound);
-                        Console.WriteLine("\nStaff details updated");
-                    }
+                    staffId = Validator.AskStaffID();
+                    staffOperator.UpdateStaff(staffId);
                     break;
                 case 5:
-                    staffFound = FindStaff(lstStaff);
-                    if (staffFound != null)
-                    {
-                        lstStaff.Remove(staffFound);
-                        Console.WriteLine("\nStaff removed!!");
-                    }
+                    staffId = Validator.AskStaffID();
+                    staffOperator.DeleteStaff(staffId);
                     break;
+                    
                 case 6:
                     System.Environment.Exit(0);
                     break;
                 default:
                     break;
             }
-            ActionMenu(lstStaff);
-                             
-                    
+            ActionMenu(staffOperator);
+                           
+                   
            
         }
 
-        private static StaffType StaffMenu()
-        {
-            Console.WriteLine("\nChoose Staff Type in {0}\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n", ConfigurationManager.AppSettings.Get("SchoolName"));   //Staff Menu
-            int staffTypeChoice = Convert.ToInt32(Console.ReadLine());
-
-            switch (staffTypeChoice)
-            {
-                case 1:
-                    return StaffType.teachingStaff;
-
-                case 2:
-                    return StaffType.administrativeStaff;
-
-                case 3:
-                    return StaffType.supportStaff;
-
-                default:
-                    Console.WriteLine("\nIncorrect Option");
-                    return StaffMenu();
-            }
-        }
-
-        private static Staff FindStaff(List<Staff> lstStaff)
-        {
-            Console.WriteLine("\nEnter Staff ID");
-            int staffId = Convert.ToInt32(Console.ReadLine());
-            
-            foreach (Staff staff in lstStaff)
-            {
-                if (staff.staffId == staffId)
-                {
-                    return staff;
-                    
-                }
-            }
-            Console.WriteLine("\nStaff not found");
-            return null;
-
-        }
+        
+                
     }
 }

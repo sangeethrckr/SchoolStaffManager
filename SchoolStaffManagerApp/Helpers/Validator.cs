@@ -117,5 +117,27 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("\nEnter Post\n");
             return Console.ReadLine();
         }
+
+        public static StaffType AskStaffType()
+        {
+            Console.WriteLine("\nChoose Staff Type\n1.Teaching Staff\n2.Admninistrative Staff\n3.Support Staff\n");  
+            int staffTypeChoice = Convert.ToInt32(Console.ReadLine());
+
+            switch (staffTypeChoice)
+            {
+                case 1:
+                    return StaffType.teachingStaff;
+
+                case 2:
+                    return StaffType.administrativeStaff;
+
+                case 3:
+                    return StaffType.supportStaff;
+
+                default:
+                    Console.WriteLine("\nIncorrect Option");
+                    return AskStaffType();
+            }
+        }
     }
 }
