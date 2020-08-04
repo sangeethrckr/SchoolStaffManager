@@ -92,7 +92,7 @@ namespace SchoolStaffManagerApp
                     Console.WriteLine("\nPost : {0}", adminStaff.post);
                     break;
                 case StaffType.supportStaff:
-                    SupportStaff supportStaff = new SupportStaff();
+                    SupportStaff supportStaff = (SupportStaff)staff;
                     Console.WriteLine("\nPost : {0}", supportStaff.post);
                     break;
                 default:
@@ -155,7 +155,7 @@ namespace SchoolStaffManagerApp
                             adminStaff.post = Console.ReadLine();
                             break;
                         case StaffType.supportStaff:
-                            SupportStaff supportStaff = new SupportStaff();
+                            SupportStaff supportStaff = (SupportStaff) staff;
                             Console.WriteLine("\nEnter updated post");
                             supportStaff.post = Console.ReadLine();
                             break;
