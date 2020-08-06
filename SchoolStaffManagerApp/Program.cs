@@ -11,7 +11,7 @@ namespace SchoolStaffManagerApp
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello {0}", ConfigurationManager.AppSettings.Get("SchoolName"));
-            IStaffOperator staffOperator = new InMemoryStaffOperator();
+            IStaffOperator staffOperator = new JsonStaffOperator();
             ActionMenu(staffOperator);
 
         }

@@ -9,12 +9,12 @@ namespace SchoolStaffManagerApp
     public class Staff
     {
 
-        public int staffId;
-        public string name;
-        public Address address;
-        public long phoneNumber;
-        public double salary;
-        public StaffType staffType;
+        public int StaffId { get; set; }
+        public string Name { get; set; }
+        public Address Address { get; set; }
+        public long PhoneNumber { get; set; }
+        public double Salary { get; set; }
+        public StaffType StaffType { get; set; }
              
                                       
 

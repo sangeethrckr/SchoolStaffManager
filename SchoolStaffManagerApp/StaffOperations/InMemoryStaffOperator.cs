@@ -46,7 +46,7 @@ namespace SchoolStaffManagerApp
             bool staffFound = false;
             foreach (Staff staff in lstStaff)
             {
-                if (staff.staffType == staffType)
+                if (staff.StaffType == staffType)
                 {
                     StaffHelper.ViewDetails(staff);
                     staffFound = true;
@@ -84,7 +84,7 @@ namespace SchoolStaffManagerApp
                         
             foreach (Staff staff in lstStaff)
             {
-                if (staff.staffId == staffId)
+                if (staff.StaffId == staffId)
                 {
                     return staff;
 
@@ -100,7 +100,7 @@ namespace SchoolStaffManagerApp
 
             foreach (Staff staff in lstStaff)
             {
-                if (staff.staffType == staffType)
+                if (staff.StaffType == staffType)
                 {
                     return staff;
 

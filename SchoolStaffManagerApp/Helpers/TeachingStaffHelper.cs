@@ -8,21 +8,21 @@ namespace SchoolStaffManagerApp
 {
     public class TeachingStaffHelper
     {
-        public static Staff AddStaff()
+        public static TeachingStaff AddStaff()
         {
             TeachingStaff teachingStaff = new TeachingStaff();
 
-            teachingStaff.name = Validator.AskName();
-            teachingStaff.staffId = Validator.AskStaffID();
+            teachingStaff.Name = Validator.AskName();
+            teachingStaff.StaffId = Validator.AskStaffID();
 
-            teachingStaff.address = Validator.AskAddress();
-            teachingStaff.phoneNumber = Validator.AskPhoneNumber();
-            teachingStaff.salary = Validator.AskSalary();
-            teachingStaff.subject = Validator.AskSubject();
-            teachingStaff.assignedClass = Validator.AskClass();
+            teachingStaff.Address = Validator.AskAddress();
+            teachingStaff.PhoneNumber = Validator.AskPhoneNumber();
+            teachingStaff.Salary = Validator.AskSalary();
+            teachingStaff.Subject = Validator.AskSubject();
+            teachingStaff.AssignedClass = Validator.AskClass();
 
 
-            Console.WriteLine("\nTeacher Staff added\tStaffID : {0}", teachingStaff.staffId);
+            Console.WriteLine("\nTeacher Staff added\tStaffID : {0}", teachingStaff.StaffId);
             return teachingStaff;
         }
 
@@ -30,9 +30,9 @@ namespace SchoolStaffManagerApp
         {
             StaffHelper.ViewCommonDetails(teachingStaff);
 
-            Console.WriteLine("\nSubject : {0}", teachingStaff.subject);
+            Console.WriteLine("\nSubject : {0}", teachingStaff.Subject);
 
-            Console.WriteLine("Class Assigned: {0}", teachingStaff.assignedClass);
+            Console.WriteLine("Class Assigned: {0}", teachingStaff.AssignedClass);
         }
 
         public static void Update(TeachingStaff teachingStaff)
@@ -49,7 +49,7 @@ namespace SchoolStaffManagerApp
             else
             {
                 Console.WriteLine("\nUpdate Class Assigned");
-                teachingStaff.assignedClass = Validator.AskClass();
+                teachingStaff.AssignedClass = Validator.AskClass();
             }
         }
     }

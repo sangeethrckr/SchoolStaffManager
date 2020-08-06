@@ -8,21 +8,21 @@ namespace SchoolStaffManagerApp
 {
     class SupportStaffHelper
     {
-        public static Staff AddStaff()
+        public static SupportStaff AddStaff()
         {
             SupportStaff supportStaff = new SupportStaff();
 
-            supportStaff.name = Validator.AskName();
-            supportStaff.staffId = Validator.AskStaffID();
+            supportStaff.Name = Validator.AskName();
+            supportStaff.StaffId = Validator.AskStaffID();
 
-            supportStaff.address = Validator.AskAddress();
-            supportStaff.phoneNumber = Validator.AskPhoneNumber();
-            supportStaff.salary = Validator.AskSalary();
-            supportStaff.post = Validator.AskPost();
+            supportStaff.Address = Validator.AskAddress();
+            supportStaff.PhoneNumber = Validator.AskPhoneNumber();
+            supportStaff.Salary = Validator.AskSalary();
+            supportStaff.Post = Validator.AskPost();
 
 
 
-            Console.WriteLine("\nAdministrative Staff added\tStaffID : {0}", supportStaff.staffId);
+            Console.WriteLine("\nAdministrative Staff added\tStaffID : {0}", supportStaff.StaffId);
             return supportStaff;
         }
 
@@ -30,7 +30,7 @@ namespace SchoolStaffManagerApp
         {
             StaffHelper.ViewCommonDetails(supportStaff);
 
-            Console.WriteLine("\nPost : {0}", supportStaff.post);
+            Console.WriteLine("\nPost : {0}", supportStaff.Post);
 
 
         }
@@ -49,7 +49,7 @@ namespace SchoolStaffManagerApp
             else
             {
                 Console.WriteLine("\nUpdate Post");
-                supportStaff.post = Validator.AskPost();
+                supportStaff.Post = Validator.AskPost();
             }
         }
 

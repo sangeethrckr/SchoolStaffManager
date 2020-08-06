@@ -6,12 +6,12 @@ namespace SchoolStaffManagerApp
 {
     public class TeachingStaff : Staff
     {
-        public string subject;
-        public string assignedClass;
+        public string Subject { get; set; }
+        public string AssignedClass { get; set; }
 
         public TeachingStaff()
         {
-            staffType = StaffType.teachingStaff;
+            StaffType = StaffType.teachingStaff;
             
 
         }

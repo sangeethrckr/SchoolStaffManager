@@ -32,7 +32,7 @@ namespace SchoolStaffManagerApp
         public static void ViewDetails(Staff staff)
         {
            
-            switch (staff.staffType)
+            switch (staff.StaffType)
             {
                 case StaffType.teachingStaff:
                     TeachingStaff teachingStaff = (TeachingStaff)staff;
@@ -56,7 +56,7 @@ namespace SchoolStaffManagerApp
 
         public static void Update(Staff staff)
         {
-            switch (staff.staffType)
+            switch (staff.StaffType)
             {
                 case StaffType.teachingStaff:
                     TeachingStaff teachingStaff = (TeachingStaff)staff;
@@ -77,16 +77,16 @@ namespace SchoolStaffManagerApp
 
         public static void ViewCommonDetails(Staff staff)
         {
-            Console.WriteLine("\nStaff Details\n\nName : {0}", staff.name);
+            Console.WriteLine("\nStaff Details\n\nName : {0}", staff.Name);
 
-            Console.WriteLine("Staff ID : {0}", staff.staffId);
+            Console.WriteLine("Staff ID : {0}", staff.StaffId);
 
 
-            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", staff.address.houseName, staff.address.addressLine1, staff.address.addressLine2, staff.address.pin);
+            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", staff.Address.houseName, staff.Address.addressLine1, staff.Address.addressLine2, staff.Address.pin);
 
-            Console.WriteLine("\tPhone Number : {0}", staff.phoneNumber);
+            Console.WriteLine("\tPhone Number : {0}", staff.PhoneNumber);
 
-            Console.WriteLine("\nSalary : {0}", staff.salary);
+            Console.WriteLine("\nSalary : {0}", staff.Salary);
         }
 
         public static void CommonUpdate(Staff staff, int updateChoice)
@@ -95,11 +95,11 @@ namespace SchoolStaffManagerApp
             {
                 case 1:
                     Console.WriteLine("\nUpdate Address\n");
-                    staff.address = Validator.AskAddress();
+                    staff.Address = Validator.AskAddress();
                     break;
                 case 2:
                     Console.WriteLine("\nUpdate Salary\n");
-                    staff.salary = Validator.AskSalary();
+                    staff.Salary = Validator.AskSalary();
                     break;
             }
         }

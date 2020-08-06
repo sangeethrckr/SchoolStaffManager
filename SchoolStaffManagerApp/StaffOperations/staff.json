@@ -1,0 +1,3 @@
+﻿{"Subject":"maths","AssignedClass":"12","StaffId":1,"Name":"stu","Address":{},"PhoneNumber":1231231231,"Salary":30000,"StaffType":0}
+{"Post":"clerk","StaffId":2,"Name":"larry","Address":{},"PhoneNumber":9446565656,"Salary":23000,"StaffType":1}
+{"Subject":"physics","AssignedClass":"12","StaffId":3,"Name":"franny","Address":{},"PhoneNumber":9447343434,"Salary":40000,"StaffType":0}

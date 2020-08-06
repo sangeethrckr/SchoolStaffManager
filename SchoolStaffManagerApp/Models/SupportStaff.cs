@@ -6,11 +6,11 @@ namespace SchoolStaffManagerApp
 {
     public class SupportStaff : Staff
     {
-        public string post;
+        public string Post { get; set; }
 
         public SupportStaff()
         {
-            staffType = StaffType.supportStaff;
+            StaffType = StaffType.supportStaff;
             
         }
 
