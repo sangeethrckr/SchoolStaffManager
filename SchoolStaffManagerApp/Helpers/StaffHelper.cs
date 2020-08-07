@@ -65,11 +65,11 @@ namespace SchoolStaffManagerApp
 
                 case StaffType.administrativeStaff:
                     AdminstrativeStaff adminStaff = (AdminstrativeStaff)staff;
-                    AdministrativeStaffHelper.ViewDetails(adminStaff);
+                    AdministrativeStaffHelper.Update(adminStaff);
                     break;
                 case StaffType.supportStaff:
                     SupportStaff supportStaff = (SupportStaff)staff;
-                    SupportStaffHelper.ViewDetails(supportStaff);
+                    SupportStaffHelper.Update(supportStaff);
                     break;
 
             }
@@ -82,7 +82,7 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("Staff ID : {0}", staff.StaffId);
 
 
-            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", staff.Address.houseName, staff.Address.addressLine1, staff.Address.addressLine2, staff.Address.pin);
+            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", staff.Address.HouseName, staff.Address.AddressLine1, staff.Address.AddressLine2, staff.Address.Pin);
 
             Console.WriteLine("\tPhone Number : {0}", staff.PhoneNumber);
 

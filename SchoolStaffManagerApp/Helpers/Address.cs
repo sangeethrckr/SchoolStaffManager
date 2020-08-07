@@ -6,16 +6,17 @@ namespace SchoolStaffManagerApp
 {
     public class Address
     {
-        public string houseName;
-        public string addressLine1;
-        public string addressLine2;
-        public int pin;
+        public string HouseName { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public int Pin { get; set; }
 
         public Address()
         {
-            houseName = "nil";
-            addressLine1 = "nil";
-            addressLine2 = "nil";
+            HouseName = "nil";
+            AddressLine1 = "nil";
+            AddressLine2 = "nil";
+
         }
     }
 }

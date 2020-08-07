@@ -17,13 +17,13 @@ namespace SchoolStaffManagerApp
         {
             Address address = new Address();
             Console.WriteLine("\nEnter Address\nHouse name:");
-            address.houseName = Console.ReadLine();
+            address.HouseName = Console.ReadLine();
             Console.WriteLine("Address Line 1:");
-            address.addressLine1 = Console.ReadLine();
+            address.AddressLine1 = Console.ReadLine();
             Console.WriteLine("Address line 2:");
-            address.addressLine2 = Console.ReadLine();
+            address.AddressLine2 = Console.ReadLine();
             Console.WriteLine("PIN:");
-            address.pin = Convert.ToInt32(Console.ReadLine());
+            address.Pin = Convert.ToInt32(Console.ReadLine());
             return address;
         }
 

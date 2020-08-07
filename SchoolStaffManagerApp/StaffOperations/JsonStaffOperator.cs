@@ -20,6 +20,7 @@ namespace SchoolStaffManagerApp
             {
                 case StaffType.teachingStaff:
                     TeachingStaff teachingStaff = TeachingStaffHelper.AddStaff();
+
                     jsonString = JsonSerializer.Serialize(teachingStaff);
                     break;
                 case StaffType.administrativeStaff:
@@ -122,8 +123,82 @@ namespace SchoolStaffManagerApp
             }
         }
 
-        public void DeleteStaff(int staffId) { }
-        public void UpdateStaff(int staffID) { }
+        public void DeleteStaff(int staffId)
+        {
+            string tempFile = Path.GetTempFileName();
+            using (StreamReader sr = new StreamReader(path))
+            {
+                using (StreamWriter sw = new StreamWriter(tempFile))
+                {
+                    string line;
+                    Staff staff;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+
+                        staff = JsonSerializer.Deserialize<Staff>(line);
+
+                        if (staff.StaffId != staffId)
+                        {
+                            sw.WriteLine(line);
+
+                        }
+
+                    }
+                }
+            }
+            File.Delete(path);
+            File.Move(tempFile, path);
+        }
+        public void UpdateStaff(int staffId)
+        {
+            string tempFile = Path.GetTempFileName();
+            using (StreamReader sr = new StreamReader(path))
+            {
+                using (StreamWriter sw = new StreamWriter(tempFile))
+                {
+                    string line;
+                    Staff staff;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+
+                        staff = JsonSerializer.Deserialize<Staff>(line);
+
+                        if (staff.StaffId != staffId)
+                        {
+                            sw.WriteLine(line);
+
+                        }
+                        else
+                        {
+                            switch (staff.StaffType)
+                            {
+                                case StaffType.teachingStaff:
+                                    TeachingStaff teachingStaff = JsonSerializer.Deserialize<TeachingStaff>(line);
+                                    StaffHelper.Update(teachingStaff);
+                                    jsonString = JsonSerializer.Serialize(teachingStaff);
+                                    break;
+                                case StaffType.administrativeStaff:
+                                    AdminstrativeStaff adminStaff = JsonSerializer.Deserialize<AdminstrativeStaff>(line);
+                                    StaffHelper.Update(adminStaff);
+                                    jsonString = JsonSerializer.Serialize(adminStaff);
+                                    break;
+                                case StaffType.supportStaff:
+                                    SupportStaff supportStaff = JsonSerializer.Deserialize<SupportStaff>(line);
+                                    StaffHelper.Update(supportStaff);
+                                    jsonString = JsonSerializer.Serialize(supportStaff);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            sw.WriteLine(jsonString.ToString());
+                        }
+
+                    }
+                }
+            }
+            File.Delete(path);
+            File.Move(tempFile, path);
+        }
 
         
 

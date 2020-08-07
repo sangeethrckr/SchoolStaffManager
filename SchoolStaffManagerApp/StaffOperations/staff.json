@@ -1,3 +1,5 @@
-﻿{"Subject":"maths","AssignedClass":"12","StaffId":1,"Name":"stu","Address":{},"PhoneNumber":1231231231,"Salary":30000,"StaffType":0}
-{"Post":"clerk","StaffId":2,"Name":"larry","Address":{},"PhoneNumber":9446565656,"Salary":23000,"StaffType":1}
-{"Subject":"physics","AssignedClass":"12","StaffId":3,"Name":"franny","Address":{},"PhoneNumber":9447343434,"Salary":40000,"StaffType":0}
+{"Subject":"Maths","AssignedClass":"10","StaffId":1,"Name":"Nick","Address":{"HouseName":"abc","AddressLine1":"qwe","AddressLine2":"asd","Pin":670670},"PhoneNumber":9446565656,"Salary":30000,"StaffType":0}
+{"Subject":"physics","AssignedClass":"10","StaffId":2,"Name":"Alice","Address":{"HouseName":"qwe","AddressLine1":"sad","AddressLine2":"asd","Pin":670123},"PhoneNumber":9776343434,"Salary":30000,"StaffType":0}
+{"Post":"clerk","StaffId":4,"Name":"franny","Address":{"HouseName":"xcv","AddressLine1":"sdf","AddressLine2":"wer","Pin":675675},"PhoneNumber":9887787878,"Salary":30000,"StaffType":2}
+{"Post":"asst manager","StaffId":4,"Name":"Tom","Address":{"HouseName":"zxc","AddressLine1":"asd","AddressLine2":"fgh","Pin":678456},"PhoneNumber":9665343434,"Salary":20000,"StaffType":1}
+{"Post":"manager","StaffId":5,"Name":"kate","Address":{"HouseName":"Housexyz","AddressLine1":"townxyz","AddressLine2":"districtxyz","Pin":670670},"PhoneNumber":9008767676,"Salary":40000,"StaffType":1}
