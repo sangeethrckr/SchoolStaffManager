@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SchoolStaffManagerApp
 {
     class InMemoryStaffOperator: IStaffOperator
@@ -75,7 +76,7 @@ namespace SchoolStaffManagerApp
             if (staffFound != null)
             {
                 StaffHelper.Update(staffFound);
-                Console.WriteLine("\nStaff removed!!");
+                Console.WriteLine("\nStaff updated!!");
             }
         }
 

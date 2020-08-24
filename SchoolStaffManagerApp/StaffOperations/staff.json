@@ -1,5 +1,68 @@
-{"Subject":"Maths","AssignedClass":"10","StaffId":1,"Name":"Nick","Address":{"HouseName":"abc","AddressLine1":"qwe","AddressLine2":"asd","Pin":670670},"PhoneNumber":9446565656,"Salary":30000,"StaffType":0}
-{"Subject":"physics","AssignedClass":"10","StaffId":2,"Name":"Alice","Address":{"HouseName":"qwe","AddressLine1":"sad","AddressLine2":"asd","Pin":670123},"PhoneNumber":9776343434,"Salary":30000,"StaffType":0}
-{"Post":"clerk","StaffId":4,"Name":"franny","Address":{"HouseName":"xcv","AddressLine1":"sdf","AddressLine2":"wer","Pin":675675},"PhoneNumber":9887787878,"Salary":30000,"StaffType":2}
-{"Post":"asst manager","StaffId":4,"Name":"Tom","Address":{"HouseName":"zxc","AddressLine1":"asd","AddressLine2":"fgh","Pin":678456},"PhoneNumber":9665343434,"Salary":20000,"StaffType":1}
-{"Post":"manager","StaffId":5,"Name":"kate","Address":{"HouseName":"Housexyz","AddressLine1":"townxyz","AddressLine2":"districtxyz","Pin":670670},"PhoneNumber":9008767676,"Salary":40000,"StaffType":1}
+{
+  "Staff": {
+    "teachingStaff": [
+      {
+        "Subject": "maths",
+        "AssignedClass": "10",
+        "StaffId": 1,
+        "Name": "Stu",
+        "Address": {
+          "HouseName": "asd",
+          "AddressLine1": "asd",
+          "AddressLine2": "asd",
+          "Pin": 670670
+        },
+        "PhoneNumber": 9446565656,
+        "Salary": 40000.0,
+        "StaffType": 0
+      },
+      {
+        "Subject": "Chemistry",
+        "AssignedClass": "8",
+        "StaffId": 4,
+        "Name": "Nick",
+        "Address": {
+          "HouseName": "cvb",
+          "AddressLine1": "cvb",
+          "AddressLine2": "cvb",
+          "Pin": 780780
+        },
+        "PhoneNumber": 9566453423,
+        "Salary": 35000.0,
+        "StaffType": 0
+      }
+    ],
+    "administrativeStaff": [
+      {
+        "Post": "manager",
+        "StaffId": 2,
+        "Name": "Franny",
+        "Address": {
+          "HouseName": "asd",
+          "AddressLine1": "qwe",
+          "AddressLine2": "zxc",
+          "Pin": 678679
+        },
+        "PhoneNumber": 9556787878,
+        "Salary": 45000.0,
+        "StaffType": 1
+      }
+    ],
+    "supportStaff": [
+      {
+        "Post": "peoun",
+        "StaffId": 3,
+        "Name": "alice",
+        "Address": {
+          "HouseName": "zxc",
+          "AddressLine1": "zxc",
+          "AddressLine2": "zxc",
+          "Pin": 670670
+        },
+        "PhoneNumber": 9778676767,
+        "Salary": 15000.0,
+        "StaffType": 2
+      }
+    ]
+  }
+}

@@ -1,206 +1,265 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 
 namespace SchoolStaffManagerApp
 {
     class JsonStaffOperator : IStaffOperator
     {
         public string path = @"C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\StaffOperations\staff.json";
-        private string jsonString;
+        
 
         
 
         public void CreateStaff(StaffType staffType)
         {
-            
-            switch (staffType)
+            Staff staff = StaffHelper.AddStaff(staffType);
+            try
             {
-                case StaffType.teachingStaff:
-                    TeachingStaff teachingStaff = TeachingStaffHelper.AddStaff();
 
-                    jsonString = JsonSerializer.Serialize(teachingStaff);
-                    break;
-                case StaffType.administrativeStaff:
-                    AdminstrativeStaff adminStaff = AdministrativeStaffHelper.AddStaff();
-                    jsonString = JsonSerializer.Serialize(adminStaff);
-                    break;
-                case StaffType.supportStaff:
-                    SupportStaff supportStaff = SupportStaffHelper.AddStaff();
-                    jsonString = JsonSerializer.Serialize(supportStaff);
-                    break;
-                default:
-                    jsonString = "Error";
-                    break;
+                string json = File.ReadAllText(path);
+                JObject jsonObject = JObject.Parse(json);
+                JObject newStaff = JObject.FromObject(staff);
+                
+                JArray staffArray = (JArray)jsonObject["Staff"][staffType.ToString()];
+                staffArray.Add(newStaff);
+                jsonObject["Staff"][staffType.ToString()] = staffArray;
+
+                string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                File.WriteAllText(path, newJsonResult);
             }
-            using (StreamWriter sw = new StreamWriter(path, true))
+            catch (Exception e)
             {
-                sw.WriteLine(jsonString.ToString());
-                sw.Close();
+                Console.WriteLine("File addition error" + e);
             }
 
         }
 
-        
+       
 
         public void GetAllStaffByStaffType(StaffType staffType)
         {
-            using (StreamReader sr = new StreamReader(path))
+            try
             {
-                string line;
-                Staff staff;
-                while ((line = sr.ReadLine()) != null)
+                string json = File.ReadAllText(path);
+                JObject jsonObject = JObject.Parse(json);
+                string staffArray = jsonObject["Staff"][staffType.ToString()].ToString();
+                switch (staffType)
                 {
-
-                    staff = JsonSerializer.Deserialize<Staff>(line);
-
-                    if (staff.StaffType == staffType)
-                    {
-
-                        switch (staff.StaffType)
+                    case StaffType.teachingStaff:
+                        List<TeachingStaff> teachingStafflist = JsonConvert.DeserializeObject<List<TeachingStaff>>(staffArray);
+                        foreach (Staff staff in teachingStafflist)
                         {
-                            case StaffType.teachingStaff:
-                                TeachingStaff teachingStaff = JsonSerializer.Deserialize<TeachingStaff>(line);
-                                StaffHelper.ViewDetails(teachingStaff);
-                                break;
-                            case StaffType.administrativeStaff:
-                                AdminstrativeStaff adminStaff = JsonSerializer.Deserialize<AdminstrativeStaff>(line);
-                                StaffHelper.ViewDetails(adminStaff);
-                                break;
-                            case StaffType.supportStaff:
-                                SupportStaff supportStaff = JsonSerializer.Deserialize<SupportStaff>(line);
-                                StaffHelper.ViewDetails(supportStaff);
-                                break;
-                            default:
-                                break;
+                            StaffHelper.ViewDetails(staff);
                         }
-                    }
-
+                        break;
+                    case StaffType.administrativeStaff:
+                        List<AdminstrativeStaff> adminStafflist = JsonConvert.DeserializeObject<List<AdminstrativeStaff>>(staffArray);
+                        foreach (Staff staff in adminStafflist)
+                        {
+                            StaffHelper.ViewDetails(staff);
+                        }
+                        break;
+                    case StaffType.supportStaff:
+                        List<SupportStaff> supportStaffList = JsonConvert.DeserializeObject<List<SupportStaff>>(staffArray);
+                        foreach (Staff staff in supportStaffList)
+                        {
+                            StaffHelper.ViewDetails(staff);
+                        }
+                        break;
                 }
-                //Console.WriteLine("\nStaff not found");
-
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine( e);
             }
         }
 
         public void GetStaffByStaffId(int staffId)
         {
-            using (StreamReader sr = new StreamReader(path))
+            string json = File.ReadAllText(path);
+            JObject jsonObject = JObject.Parse(json);
+            string staffArray = jsonObject["Staff"]["teachingStaff"].ToString();
+            List<TeachingStaff> teachingStafflist = JsonConvert.DeserializeObject<List<TeachingStaff>>(staffArray);
+            foreach (Staff staff in teachingStafflist)
             {
-                string line;
-                Staff staff;
-                while ((line = sr.ReadLine()) != null)
+                if (staff.StaffId == staffId)
                 {
-
-                    staff = JsonSerializer.Deserialize<Staff>(line);
-
-                    if (staff.StaffId == staffId)
-                    {
-
-                        switch (staff.StaffType)
-                        {
-                            case StaffType.teachingStaff:
-                                TeachingStaff teachingStaff = JsonSerializer.Deserialize<TeachingStaff>(line);
-                                StaffHelper.ViewDetails(teachingStaff);
-                                break;
-                            case StaffType.administrativeStaff:
-                                AdminstrativeStaff adminStaff = JsonSerializer.Deserialize<AdminstrativeStaff>(line);
-                                StaffHelper.ViewDetails(adminStaff);
-                                break;
-                            case StaffType.supportStaff:
-                                SupportStaff supportStaff = JsonSerializer.Deserialize<SupportStaff>(line);
-                                StaffHelper.ViewDetails(supportStaff);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
+                    StaffHelper.ViewDetails(staff);
+                    return;
                 }
-                //Console.WriteLine("\nStaff not found");
-                
             }
+            staffArray = jsonObject["Staff"]["administrativeStaff"].ToString();
+            List<AdminstrativeStaff> adminStafflist = JsonConvert.DeserializeObject<List<AdminstrativeStaff>>(staffArray);
+            foreach (Staff staff in adminStafflist)
+            {
+                if (staff.StaffId == staffId)
+                {
+                    StaffHelper.ViewDetails(staff);
+                    return;
+                }
+            }
+            staffArray = jsonObject["Staff"]["supportStaff"].ToString();
+            List<SupportStaff> supportStaffList = JsonConvert.DeserializeObject<List<SupportStaff>>(staffArray);
+            foreach (Staff staff in supportStaffList)
+            {
+                if (staff.StaffId == staffId)
+                {
+                    StaffHelper.ViewDetails(staff);
+                    return;
+                }
+            }
+            Console.WriteLine("\nStaff Not Found!");
         }
 
         public void DeleteStaff(int staffId)
         {
-            string tempFile = Path.GetTempFileName();
-            using (StreamReader sr = new StreamReader(path))
+            string json = File.ReadAllText(path);
+            JObject jsonObject = JObject.Parse(json);
+            JArray teacherJArray = (JArray)jsonObject["Staff"]["teachingStaff"];
+            foreach(JObject staff in teacherJArray)
             {
-                using (StreamWriter sw = new StreamWriter(tempFile))
+                if (staff["StaffId"].ToString() == staffId.ToString())
                 {
-                    string line;
-                    Staff staff;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-
-                        staff = JsonSerializer.Deserialize<Staff>(line);
-
-                        if (staff.StaffId != staffId)
-                        {
-                            sw.WriteLine(line);
-
-                        }
-
-                    }
+                    teacherJArray.Remove(staff);
+                    jsonObject["Staff"]["teachingStaff"] = teacherJArray;
+                    string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                    File.WriteAllText(path, newJsonResult);
+                    Console.WriteLine("Staff Removed\n");
+                    return;
                 }
             }
-            File.Delete(path);
-            File.Move(tempFile, path);
+            JArray adminJarray = (JArray)jsonObject["Staff"]["administrativeStaff"];
+            foreach (JObject staff in adminJarray)
+            {
+                if (staff["StaffId"].ToString() == staffId.ToString())
+                {
+                    adminJarray.Remove(staff);
+                    jsonObject["Staff"]["administrativeStaff"] = adminJarray;
+                    string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                    File.WriteAllText(path, newJsonResult);
+                    Console.WriteLine("Staff Removed\n");
+                    return;
+                }
+            }
+            JArray supportJArray = (JArray)jsonObject["Staff"]["supportStaff"];
+            foreach (JObject staff in supportJArray)
+            {
+                if (staff["StaffId"].ToString() == staffId.ToString())
+                {
+                    supportJArray.Remove(staff);
+                    jsonObject["Staff"]["supportStaff"] = supportJArray;
+                    string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                    File.WriteAllText(path, newJsonResult);
+                    Console.WriteLine("Staff Removed\n");
+                    return;
+                }
+            }
+            Console.WriteLine("\nStaff Not Found!");
+
+
         }
         public void UpdateStaff(int staffId)
         {
-            string tempFile = Path.GetTempFileName();
-            using (StreamReader sr = new StreamReader(path))
+            string json = File.ReadAllText(path);
+            JObject jsonObject = JObject.Parse(json);
+            JArray teacherJArray = (JArray)jsonObject["Staff"]["teachingStaff"];
+            foreach (JObject staff in teacherJArray)
             {
-                using (StreamWriter sw = new StreamWriter(tempFile))
+                if (staff["StaffId"].ToString() == staffId.ToString())
                 {
-                    string line;
-                    Staff staff;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-
-                        staff = JsonSerializer.Deserialize<Staff>(line);
-
-                        if (staff.StaffId != staffId)
-                        {
-                            sw.WriteLine(line);
-
-                        }
-                        else
-                        {
-                            switch (staff.StaffType)
-                            {
-                                case StaffType.teachingStaff:
-                                    TeachingStaff teachingStaff = JsonSerializer.Deserialize<TeachingStaff>(line);
-                                    StaffHelper.Update(teachingStaff);
-                                    jsonString = JsonSerializer.Serialize(teachingStaff);
-                                    break;
-                                case StaffType.administrativeStaff:
-                                    AdminstrativeStaff adminStaff = JsonSerializer.Deserialize<AdminstrativeStaff>(line);
-                                    StaffHelper.Update(adminStaff);
-                                    jsonString = JsonSerializer.Serialize(adminStaff);
-                                    break;
-                                case StaffType.supportStaff:
-                                    SupportStaff supportStaff = JsonSerializer.Deserialize<SupportStaff>(line);
-                                    StaffHelper.Update(supportStaff);
-                                    jsonString = JsonSerializer.Serialize(supportStaff);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            sw.WriteLine(jsonString.ToString());
-                        }
-
-                    }
+                    teacherJArray.Remove(staff);
+                    JObject updatedStaff = Update(staffId,StaffType.teachingStaff);
+                    teacherJArray.Add(updatedStaff);
+                    jsonObject["Staff"]["teachingStaff"] = teacherJArray;
+                    string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                    File.WriteAllText(path, newJsonResult);
+                    Console.WriteLine("Staff Updated\n");
+                    return;
                 }
             }
-            File.Delete(path);
-            File.Move(tempFile, path);
+            JArray adminJarray = (JArray)jsonObject["Staff"]["administrativeStaff"];
+            foreach (JObject staff in adminJarray)
+            {
+                if (staff["StaffId"].ToString() == staffId.ToString())
+                {
+                    adminJarray.Remove(staff);
+                    JObject updatedStaff = Update(staffId, StaffType.administrativeStaff);
+                    adminJarray.Add(updatedStaff);
+                    jsonObject["Staff"]["administrativeStaff"] = adminJarray;
+                    string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                    File.WriteAllText(path, newJsonResult);
+                    Console.WriteLine("Staff Updated\n");
+                    return;
+                }
+            }
+            JArray supportJArray = (JArray)jsonObject["Staff"]["supportStaff"];
+            foreach (JObject staff in supportJArray)
+            {
+                if (staff["StaffId"].ToString() == staffId.ToString())
+                {
+                    supportJArray.Remove(staff);
+                    JObject updatedStaff = Update(staffId, StaffType.supportStaff);
+                    supportJArray.Add(updatedStaff);
+                    jsonObject["Staff"]["supportStaff"] = supportJArray;
+                    string newJsonResult = JsonConvert.SerializeObject(jsonObject, Formatting.Indented);
+                    File.WriteAllText(path, newJsonResult);
+                    Console.WriteLine("Staff Updated\n");
+                    return;
+                }
+            }
+            Console.WriteLine("\nStaff Not Found!");
         }
 
-        
+        private JObject Update(int staffId,StaffType staffType)
+        {
+            string json = File.ReadAllText(path);
+            JObject jsonObject = JObject.Parse(json);
+            string staffArray = jsonObject["Staff"][staffType.ToString()].ToString();
+            switch (staffType)
+            {
+                case StaffType.teachingStaff:
+                    List<TeachingStaff> teachingStafflist = JsonConvert.DeserializeObject<List<TeachingStaff>>(staffArray);
+                    foreach (Staff staff in teachingStafflist)
+                    {
+                        if (staff.StaffId == staffId)
+                        {
+                            StaffHelper.Update(staff);
+                            return JObject.FromObject(staff);
+                        }
+                    }
+                    break;
+                case StaffType.administrativeStaff:
+                    List<AdminstrativeStaff> adminStaffList = JsonConvert.DeserializeObject<List<AdminstrativeStaff>>(staffArray);
+                    foreach (Staff staff in adminStaffList)
+                    {
+                        if (staff.StaffId == staffId)
+                        {
+                            StaffHelper.Update(staff);
+                            return JObject.FromObject(staff);
+                        }
+                    }
+                    break;
+                case StaffType.supportStaff:
+                    List<SupportStaff> supportStaffList = JsonConvert.DeserializeObject<List<SupportStaff>>(staffArray);
+                    foreach (Staff staff in supportStaffList)
+                    {
+                        if (staff.StaffId == staffId)
+                        {
+                            StaffHelper.Update(staff);
+                            return JObject.FromObject(staff);
+                        }
+                    }
+                    break;
+            }
+            
+            return null;
+        }
+
 
     }
 }
