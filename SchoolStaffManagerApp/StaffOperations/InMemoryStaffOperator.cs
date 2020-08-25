@@ -18,18 +18,8 @@ namespace SchoolStaffManagerApp
 
         public void CreateStaff(StaffType staffType)
         {
-            switch (staffType)
-            {
-                case StaffType.teachingStaff:
-                    lstStaff.Add(StaffHelper.AddStaff(StaffType.teachingStaff));
-                    break;
-                case StaffType.administrativeStaff:
-                    lstStaff.Add(StaffHelper.AddStaff(StaffType.administrativeStaff));
-                    break;
-                case StaffType.supportStaff:
-                    lstStaff.Add(StaffHelper.AddStaff(StaffType.supportStaff));
-                    break;
-            }
+            Staff newStaff = StaffHelper.AddStaff(staffType);
+            lstStaff.Add(newStaff);
         }
         public void DeleteStaff(int staffID)
         {
@@ -66,7 +56,11 @@ namespace SchoolStaffManagerApp
             if (staffFound != null)
             {
                 StaffHelper.ViewDetails(staffFound);
-                Console.WriteLine("\nStaff removed!!");
+                
+            }
+            else
+            {
+                Console.WriteLine("\nStaff not found!!");
             }
         }
 
@@ -77,6 +71,10 @@ namespace SchoolStaffManagerApp
             {
                 StaffHelper.Update(staffFound);
                 Console.WriteLine("\nStaff updated!!");
+            }
+            else
+            {
+                Console.WriteLine("\nStaff not found!!");
             }
         }
 
@@ -96,20 +94,6 @@ namespace SchoolStaffManagerApp
 
         }
 
-        private Staff FindStaff(StaffType staffType)
-        {
-
-            foreach (Staff staff in lstStaff)
-            {
-                if (staff.StaffType == staffType)
-                {
-                    return staff;
-
-                }
-            }
-            Console.WriteLine("\nStaff not found");
-            return null;
-
-        }
+        
     }
 }

@@ -10,137 +10,107 @@ namespace SchoolStaffManagerApp
     class JsonStaffOperator : IStaffOperator
     {
         private string path = @"C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\StaffOperations\staff.json";
-        private readonly JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+        private JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+        private List<Staff> staffList = new List<Staff>();
 
+        private void Deserialize()
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
+                staffList = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void Serialize()
+        {
+            try
+            {
+                string newJsonResult = JsonConvert.SerializeObject(staffList, Formatting.Indented, settings);
+                File.WriteAllText(path, newJsonResult);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
 
         public void CreateStaff(StaffType staffType)
         {
             Staff staff = StaffHelper.AddStaff(staffType);
-            try
-            {
-                string json = File.ReadAllText(path);
-                
-                List<Staff> Stafflist = JsonConvert.DeserializeObject<List<Staff>>(json,settings);
-                Stafflist.Add(staff);
-
-                string newJsonResult = JsonConvert.SerializeObject(Stafflist,Formatting.Indented, settings);
-                File.WriteAllText(path, newJsonResult);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("File addition error" + e);
-            }
-
+            Deserialize();
+            staffList.Add(staff);
+            Serialize();
         }
                
         public void GetAllStaffByStaffType(StaffType staffType)
         {
-            try
-            {
-                string json = File.ReadAllText(path);
-                
-                List<Staff> Stafflist = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
+            Deserialize();
 
-                foreach(Staff staff in Stafflist)
+            foreach (Staff staff in staffList)
+            {
+                if (staff.StaffType == staffType)
                 {
-                    if(staff.StaffType == staffType)
-                    {
-                        StaffHelper.ViewDetails(staff);
-                    }
+                    StaffHelper.ViewDetails(staff);
                 }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine( e);
             }
         }
 
         public void GetStaffByStaffId(int staffId)
         {
 
-            try
-            {
-                string json = File.ReadAllText(path);
-                
-                List<Staff> Stafflist = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
+            Deserialize();
 
-                foreach (Staff staff in Stafflist)
-                {
-                    if (staff.StaffId == staffId)
-                    {
-                        StaffHelper.ViewDetails(staff);
-                        return;
-                    }
-                }
-                Console.WriteLine("Staff not found!\n");
-            }
-            catch (Exception e)
+            foreach (Staff staff in staffList)
             {
-                Console.WriteLine(e);
+                if (staff.StaffId == staffId)
+                {
+                    StaffHelper.ViewDetails(staff);
+                    return;
+                }
             }
+            Console.WriteLine("Staff not found!\n");
         }
 
         public void DeleteStaff(int staffId)
         {
-            try
-            {
-                string json = File.ReadAllText(path);
-                
-                List<Staff> Stafflist = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
+            Deserialize();
 
-                foreach (Staff staff in Stafflist)
+            foreach (Staff staff in staffList)
+            {
+                if (staff.StaffId == staffId)
                 {
-                    if (staff.StaffId == staffId)
-                    {
-                        Stafflist.Remove(staff);
+                    staffList.Remove(staff);
 
+                    Serialize();
 
-                        string newJsonResult = JsonConvert.SerializeObject(Stafflist, Formatting.Indented, settings);
-                        File.WriteAllText(path, newJsonResult);
-
-                        Console.WriteLine("Staff  Removed!\n");
-                        return;
-                    }
+                    Console.WriteLine("Staff  Removed!\n");
+                    return;
                 }
-                Console.WriteLine("Staff not found!\n");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            Console.WriteLine("Staff not found!\n");
         }
         public void UpdateStaff(int staffId)
         {
-            try
+            Deserialize();
+
+            foreach (Staff staff in staffList)
             {
-                string json = File.ReadAllText(path);
-
-
-                List<Staff> Stafflist = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
-
-                foreach (Staff staff in Stafflist)
+                if (staff.StaffId == staffId)
                 {
-                    if (staff.StaffId == staffId)
-                    {
-                        Stafflist.Remove(staff);
-                        StaffHelper.Update(staff);
-                        Stafflist.Add(staff);
+                    StaffHelper.Update(staff);
 
-                        string newJsonResult = JsonConvert.SerializeObject(Stafflist, Formatting.Indented, settings);
-                        File.WriteAllText(path, newJsonResult);
+                    Serialize();
 
-                        Console.WriteLine("Staff  Updated!\n");
-                        return;
-                    }
+                    Console.WriteLine("Staff  Updated!\n");
+                    return;
                 }
-                Console.WriteLine("Staff not found!\n");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            Console.WriteLine("Staff not found!\n");
         }
 
        

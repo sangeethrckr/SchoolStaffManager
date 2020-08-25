@@ -10,134 +10,105 @@ namespace SchoolStaffManagerApp
 
         private string path = @"C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\StaffOperations\staff.xml";
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>));
+        private List<Staff> staffList = new List<Staff>();
 
-
-        public void CreateStaff(StaffType staffType)
-        {
-            Staff staff = StaffHelper.AddStaff(staffType);
-            try
-            {
-                var myFileStream = new FileStream(path, FileMode.Open);
-                List<Staff> staffList = (List<Staff>)serializer.Deserialize(myFileStream);
-                myFileStream.Close();
-                staffList.Add(staff);
-
-                TextWriter writer = new StreamWriter(path);
-                serializer.Serialize(writer, staffList);
-                writer.Close();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine( e);
-            }
-
-        }
-
-        public void GetAllStaffByStaffType(StaffType staffType)
+        private void Deserialize()
         {
             try
             {
                 var myFileStream = new FileStream(path, FileMode.Open);
-                List<Staff> staffList = (List<Staff>)serializer.Deserialize(myFileStream);
+                staffList = (List<Staff>)serializer.Deserialize(myFileStream);
                 myFileStream.Close();
-                foreach (Staff staff in staffList)
-                {
-                    if (staff.StaffType == staffType)
-                    {
-                        StaffHelper.ViewDetails(staff);
-                    }
-                }
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+            }
+        }
+
+        private void Serialize()
+        {
+            try
+            {
+                TextWriter writer = new StreamWriter(path);
+                serializer.Serialize(writer, staffList);
+                writer.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        public void CreateStaff(StaffType staffType)
+        {
+            Staff staff = StaffHelper.AddStaff(staffType);
+            Deserialize();
+            staffList.Add(staff);
+            Serialize();
+        }
+
+        public void GetAllStaffByStaffType(StaffType staffType)
+        {
+            Deserialize();
+            foreach (Staff staff in staffList)
+            {
+                if (staff.StaffType == staffType)
+                {
+                    StaffHelper.ViewDetails(staff);
+                }
             }
         }
 
         public void GetStaffByStaffId(int staffId)
         {
-
-            try
+            Deserialize();
+            foreach (Staff staff in staffList)
             {
-                var myFileStream = new FileStream(path, FileMode.Open);
-                List<Staff> staffList = (List<Staff>)serializer.Deserialize(myFileStream);
-                myFileStream.Close();
-                foreach (Staff staff in staffList)
+                if (staff.StaffId == staffId)
                 {
-                    if (staff.StaffId == staffId)
-                    {
-                        StaffHelper.ViewDetails(staff);
-                        return;
-                    }
+                    StaffHelper.ViewDetails(staff);
+                    return;
                 }
-                Console.WriteLine("Staff not found!\n");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            Console.WriteLine("Staff not found!\n");
         }
 
         public void DeleteStaff(int staffId)
         {
-            try
+            Deserialize();
+
+            foreach (Staff staff in staffList)
             {
-                var myFileStream = new FileStream(path, FileMode.Open);
-                List<Staff> staffList = (List<Staff>)serializer.Deserialize(myFileStream);
-                myFileStream.Close();
-                foreach (Staff staff in staffList)
+                if (staff.StaffId == staffId)
                 {
-                    if (staff.StaffId == staffId)
-                    {
-                        staffList.Remove(staff);
+                    staffList.Remove(staff);
 
+                    Serialize();
 
-                        TextWriter writer = new StreamWriter(path);
-                        serializer.Serialize(writer, staffList);
-                        writer.Close();
-
-                        Console.WriteLine("Staff  Removed!\n");
-                        return;
-                    }
+                    Console.WriteLine("Staff  Removed!\n");
+                    return;
                 }
-                Console.WriteLine("Staff not found!\n");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            Console.WriteLine("Staff not found!\n");
         }
         public void UpdateStaff(int staffId)
         {
-            try
+            Deserialize();
+
+            foreach (Staff staff in staffList)
             {
-                var myFileStream = new FileStream(path, FileMode.Open);
-                List<Staff> staffList = (List<Staff>)serializer.Deserialize(myFileStream);
-                myFileStream.Close();
-                foreach (Staff staff in staffList)
+                if (staff.StaffId == staffId)
                 {
-                    if (staff.StaffId == staffId)
-                    {
-                        staffList.Remove(staff);
-                        StaffHelper.Update(staff);
-                        staffList.Add(staff);
+                    StaffHelper.Update(staff);
 
-                        TextWriter writer = new StreamWriter(path);
-                        serializer.Serialize(writer, staffList);
-                        writer.Close();
+                    Serialize();
 
-                        Console.WriteLine("Staff  Updated!\n");
-                        return;
-                    }
+                    Console.WriteLine("Staff  Updated!\n");
+                    return;
                 }
-                Console.WriteLine("Staff not found!\n");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            Console.WriteLine("Staff not found!\n");
         }
 
 
