@@ -1,68 +1,33 @@
-{
-  "Staff": {
-    "teachingStaff": [
-      {
-        "Subject": "maths",
-        "AssignedClass": "10",
-        "StaffId": 1,
-        "Name": "Stu",
-        "Address": {
-          "HouseName": "asd",
-          "AddressLine1": "asd",
-          "AddressLine2": "asd",
-          "Pin": 670670
-        },
-        "PhoneNumber": 9446565656,
-        "Salary": 40000.0,
-        "StaffType": 0
-      },
-      {
-        "Subject": "Chemistry",
-        "AssignedClass": "8",
-        "StaffId": 4,
-        "Name": "Nick",
-        "Address": {
-          "HouseName": "cvb",
-          "AddressLine1": "cvb",
-          "AddressLine2": "cvb",
-          "Pin": 780780
-        },
-        "PhoneNumber": 9566453423,
-        "Salary": 35000.0,
-        "StaffType": 0
-      }
-    ],
-    "administrativeStaff": [
-      {
-        "Post": "manager",
-        "StaffId": 2,
-        "Name": "Franny",
-        "Address": {
-          "HouseName": "asd",
-          "AddressLine1": "qwe",
-          "AddressLine2": "zxc",
-          "Pin": 678679
-        },
-        "PhoneNumber": 9556787878,
-        "Salary": 45000.0,
-        "StaffType": 1
-      }
-    ],
-    "supportStaff": [
-      {
-        "Post": "peoun",
-        "StaffId": 3,
-        "Name": "alice",
-        "Address": {
-          "HouseName": "zxc",
-          "AddressLine1": "zxc",
-          "AddressLine2": "zxc",
-          "Pin": 670670
-        },
-        "PhoneNumber": 9778676767,
-        "Salary": 15000.0,
-        "StaffType": 2
-      }
-    ]
+[
+  {
+    "$type": "SchoolStaffManagerApp.TeachingStaff, SchoolStaffManagerApp",
+    "Subject": "maths",
+    "AssignedClass": "10",
+    "StaffId": 1,
+    "Name": "Stu",
+    "Address": {
+      "HouseName": "abc",
+      "AddressLine1": "def",
+      "AddressLine2": "ghi",
+      "Pin": 670670
+    },
+    "PhoneNumber": 1231231231,
+    "Salary": 30000.0,
+    "StaffType": 0
+  },
+  {
+    "$type": "SchoolStaffManagerApp.AdminstrativeStaff, SchoolStaffManagerApp",
+    "Post": "Manager",
+    "StaffId": 2,
+    "Name": "Franny",
+    "Address": {
+      "HouseName": "qwe",
+      "AddressLine1": "asd",
+      "AddressLine2": "asd",
+      "Pin": 678678
+    },
+    "PhoneNumber": 9667787887,
+    "Salary": 50000.0,
+    "StaffType": 1
   }
-}
+]

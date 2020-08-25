@@ -91,15 +91,11 @@
     <Compile Include="Models\SupportStaff.cs" />
     <Compile Include="Models\TeachingStaff.cs" />
     <Compile Include="StaffOperations\JsonStaffOperator.cs" />
-    <Compile Include="StaffOperations\XmlStaffOperator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="StaffOperations\staff.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="StaffOperations\staff.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
