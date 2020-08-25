@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfStaff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Staff xsi:type="TeachingStaff">
-    <StaffId>1</StaffId>
-    <Name>Stu</Name>
-    <Address>
-      <HouseName>qwe</HouseName>
-      <AddressLine1>qwe</AddressLine1>
-      <AddressLine2>qwe</AddressLine2>
-      <Pin>678678</Pin>
-    </Address>
-    <PhoneNumber>9667787878</PhoneNumber>
-    <Salary>35000</Salary>
-    <StaffType>teachingStaff</StaffType>
-    <Subject>Maths</Subject>
-    <AssignedClass>10</AssignedClass>
-  </Staff>
   <Staff xsi:type="AdminstrativeStaff">
     <StaffId>2</StaffId>
     <Name>Franny</Name>
@@ -42,5 +27,20 @@
     <Salary>25000</Salary>
     <StaffType>supportStaff</StaffType>
     <Post>clerk</Post>
+  </Staff>
+  <Staff xsi:type="TeachingStaff">
+    <StaffId>1</StaffId>
+    <Name>Stu</Name>
+    <Address>
+      <HouseName>qwe</HouseName>
+      <AddressLine1>qwe</AddressLine1>
+      <AddressLine2>qwe</AddressLine2>
+      <Pin>678123</Pin>
+    </Address>
+    <PhoneNumber>9112343434</PhoneNumber>
+    <Salary>30000</Salary>
+    <StaffType>teachingStaff</StaffType>
+    <Subject>Maths</Subject>
+    <AssignedClass>10</AssignedClass>
   </Staff>
 </ArrayOfStaff>

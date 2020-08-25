@@ -11,14 +11,14 @@ namespace SchoolStaffManagerApp
     {
         private string path = @"C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\StaffOperations\staff.json";
         private JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
-        private List<Staff> staffList = new List<Staff>();
+        private InMemoryStaffOperator inMemoryStaffOperator = new InMemoryStaffOperator();
 
         private void Deserialize()
         {
             try
             {
                 string json = File.ReadAllText(path);
-                staffList = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
+                inMemoryStaffOperator.lstStaff = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
             }
             catch (Exception e)
             {
@@ -30,7 +30,7 @@ namespace SchoolStaffManagerApp
         {
             try
             {
-                string newJsonResult = JsonConvert.SerializeObject(staffList, Formatting.Indented, settings);
+                string newJsonResult = JsonConvert.SerializeObject(inMemoryStaffOperator.lstStaff, Formatting.Indented, settings);
                 File.WriteAllText(path, newJsonResult);
             }
             catch (Exception e)
@@ -41,76 +41,35 @@ namespace SchoolStaffManagerApp
 
         public void CreateStaff(StaffType staffType)
         {
-            Staff staff = StaffHelper.AddStaff(staffType);
             Deserialize();
-            staffList.Add(staff);
+            inMemoryStaffOperator.CreateStaff(staffType);
             Serialize();
         }
                
         public void GetAllStaffByStaffType(StaffType staffType)
         {
             Deserialize();
-
-            foreach (Staff staff in staffList)
-            {
-                if (staff.StaffType == staffType)
-                {
-                    StaffHelper.ViewDetails(staff);
-                }
-            }
+            inMemoryStaffOperator.GetAllStaffByStaffType(staffType);
         }
 
         public void GetStaffByStaffId(int staffId)
         {
 
             Deserialize();
-
-            foreach (Staff staff in staffList)
-            {
-                if (staff.StaffId == staffId)
-                {
-                    StaffHelper.ViewDetails(staff);
-                    return;
-                }
-            }
-            Console.WriteLine("Staff not found!\n");
+            inMemoryStaffOperator.GetStaffByStaffId(staffId);
         }
 
         public void DeleteStaff(int staffId)
         {
             Deserialize();
-
-            foreach (Staff staff in staffList)
-            {
-                if (staff.StaffId == staffId)
-                {
-                    staffList.Remove(staff);
-
-                    Serialize();
-
-                    Console.WriteLine("Staff  Removed!\n");
-                    return;
-                }
-            }
-            Console.WriteLine("Staff not found!\n");
+            inMemoryStaffOperator.DeleteStaff(staffId);
+            Serialize();
         }
         public void UpdateStaff(int staffId)
         {
             Deserialize();
-
-            foreach (Staff staff in staffList)
-            {
-                if (staff.StaffId == staffId)
-                {
-                    StaffHelper.Update(staff);
-
-                    Serialize();
-
-                    Console.WriteLine("Staff  Updated!\n");
-                    return;
-                }
-            }
-            Console.WriteLine("Staff not found!\n");
+            inMemoryStaffOperator.UpdateStaff(staffId);
+            Serialize();
         }
 
        
