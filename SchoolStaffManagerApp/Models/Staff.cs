@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Collections.Generic;
-//using System.Text;
+using System.Xml.Serialization;
 
 namespace SchoolStaffManagerApp
 {
-        
+
+    [XmlInclude(typeof(TeachingStaff)), XmlInclude(typeof(AdminstrativeStaff)), XmlInclude(typeof(SupportStaff))]
     public class Staff
     {
 
