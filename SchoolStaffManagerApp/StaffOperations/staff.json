@@ -29,5 +29,20 @@
     "PhoneNumber": 9667787887,
     "Salary": 50000.0,
     "StaffType": 1
+  },
+  {
+    "$type": "SchoolStaffManagerApp.SupportStaff, SchoolStaffManagerApp",
+    "Post": "clerk",
+    "StaffId": 3,
+    "Name": "Nick",
+    "Address": {
+      "HouseName": "rty",
+      "AddressLine1": "rty",
+      "AddressLine2": "rty",
+      "Pin": 678123
+    },
+    "PhoneNumber": 9112232323,
+    "Salary": 25000.0,
+    "StaffType": 2
   }
 ]

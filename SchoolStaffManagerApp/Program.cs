@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Configuration;
-using System.Reflection;
+
 
 namespace SchoolStaffManagerApp
 {
     public class Program
     {
-        
-
-
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello {0}", ConfigurationManager.AppSettings.Get("SchoolName"));
-            IStaffOperator staffOperator = CreateInstance<IStaffOperator>();
+            string objectToInstantiate = ConfigurationManager.AppSettings.Get("staffStoreHandler");
+            var objectType = Type.GetType(objectToInstantiate);
+            IStaffOperator staffOperator = Activator.CreateInstance(objectType) as IStaffOperator;
             ActionMenu(staffOperator);
 
         }
@@ -62,33 +61,6 @@ namespace SchoolStaffManagerApp
            
         }
 
-
-        public static I CreateInstance<I>() where I : class
-        {
-            string assemblyPath = Environment.CurrentDirectory + "\\SchoolStaffManagerApp.exe";
-
-            Assembly assembly;
-
-            assembly = Assembly.LoadFrom(assemblyPath);
-            Type type;
-
-            Console.WriteLine("\nChoose implementaion type\n1.json\n2.xml\n");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
-            {
-                case 1:
-                    type = assembly.GetType(ConfigurationManager.AppSettings.Get("jsonClass"));
-                    break;
-                case 2:
-                    type = assembly.GetType(ConfigurationManager.AppSettings.Get("xmlClass"));
-                    break;
-                default:
-                    Console.WriteLine("\nEnter correct option!!");
-                    return CreateInstance<IStaffOperator>() as I;
-            }
-
-            return Activator.CreateInstance(type) as I;
-        }
     }
 
     
