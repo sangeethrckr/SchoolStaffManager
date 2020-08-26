@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using System.Configuration;
 
 
 
@@ -9,7 +10,10 @@ namespace SchoolStaffManagerApp
 {
     class JsonStaffOperator : IStaffOperator
     {
-        private string path = @"C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\StaffOperations\staff.json";
+        static string workingDirectory = Environment.CurrentDirectory;
+        static string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+        private string path = projectDirectory + ConfigurationManager.AppSettings.Get("jsonPath");
+
         private JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
         private InMemoryStaffOperator inMemoryStaffOperator = new InMemoryStaffOperator();
 

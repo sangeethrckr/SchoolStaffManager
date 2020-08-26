@@ -1,14 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Xml.Serialization; 
+using System.Xml.Serialization;
+using System.Configuration;
 
 namespace SchoolStaffManagerApp
 {
     class XmlStaffOperator :  IStaffOperator
     {
 
-        private string path = @"C:\Users\GS_Kira\source\repos\SchoolStaffManagerApp\SchoolStaffManagerApp\StaffOperations\staff.xml";
+        static string workingDirectory = Environment.CurrentDirectory;
+        static string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+        private string path = projectDirectory + ConfigurationManager.AppSettings.Get("xmlPath");
+
         private XmlSerializer serializer = new XmlSerializer(typeof(List<Staff>));
         private InMemoryStaffOperator inMemoryStaffOperator = new InMemoryStaffOperator();
         private void Deserialize()
