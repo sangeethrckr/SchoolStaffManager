@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Configuration;
+using StaffClassLibrary;
 
 namespace SchoolStaffManagerApp
 {

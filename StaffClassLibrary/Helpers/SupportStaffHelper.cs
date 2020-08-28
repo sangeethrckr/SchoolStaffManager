@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolStaffManagerApp
+namespace StaffClassLibrary
 {
-    class SupportStaffHelper
+    public class SupportStaffHelper
     {
         public static SupportStaff AddStaff()
         {

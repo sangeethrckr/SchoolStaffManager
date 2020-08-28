@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace SchoolStaffManagerApp
+namespace StaffClassLibrary
 {
     public class Validator
     {
@@ -19,9 +19,9 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("\nEnter Address\nHouse name:");
             address.HouseName = Console.ReadLine();
             Console.WriteLine("Address Line 1:");
-            address.AddressLine1 = Console.ReadLine();
+            address.City = Console.ReadLine();
             Console.WriteLine("Address line 2:");
-            address.AddressLine2 = Console.ReadLine();
+            address.State = Console.ReadLine();
             Console.WriteLine("PIN:");
             address.Pin = Convert.ToInt32(Console.ReadLine());
             return address;

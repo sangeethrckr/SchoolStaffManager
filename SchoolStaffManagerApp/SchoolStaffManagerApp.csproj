@@ -75,21 +75,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\AdministrativeStaffHelper.cs" />
-    <Compile Include="Helpers\SupportStaffHelper.cs" />
-    <Compile Include="Helpers\TeachingStaffHelper.cs" />
     <Compile Include="StaffOperations\InMemoryStaffOperator.cs" />
     <Compile Include="StaffOperations\IStaffOperator.cs" />
-    <Compile Include="Helpers\StaffHelper.cs" />
-    <Compile Include="Models\AdministrativeStaff.cs" />
-    <Compile Include="Helpers\Address.cs" />
-    <Compile Include="Helpers\StaffType.cs" />
-    <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Staff.cs" />
-    <Compile Include="Models\SupportStaff.cs" />
-    <Compile Include="Models\TeachingStaff.cs" />
     <Compile Include="StaffOperations\JsonStaffOperator.cs" />
     <Compile Include="StaffOperations\XmlStaffOperator.cs" />
   </ItemGroup>
@@ -100,6 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="StaffOperations\staff.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StaffClassLibrary\StaffClassLibrary.csproj">
+      <Project>{d09f5a5b-fffa-4189-81b0-ffb1549e0ec8}</Project>
+      <Name>StaffClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

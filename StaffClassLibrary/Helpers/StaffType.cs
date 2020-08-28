@@ -1,4 +1,4 @@
-﻿namespace SchoolStaffManagerApp
+﻿namespace StaffClassLibrary
 {    
     public enum StaffType
     {

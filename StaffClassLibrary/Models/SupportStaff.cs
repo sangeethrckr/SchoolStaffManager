@@ -2,7 +2,7 @@
 //using System.Collections.Generic;
 //using System.Text;
 
-namespace SchoolStaffManagerApp
+namespace StaffClassLibrary
 {
     public class SupportStaff : Staff
     {

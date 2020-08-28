@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolStaffManagerApp
+namespace StaffClassLibrary
+
 {
     public  class  StaffHelper
     {
@@ -82,7 +83,7 @@ namespace SchoolStaffManagerApp
             Console.WriteLine("Staff ID : {0}", staff.StaffId);
 
 
-            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", staff.Address.HouseName, staff.Address.AddressLine1, staff.Address.AddressLine2, staff.Address.Pin);
+            Console.WriteLine("\nAddress: \n\t{0}\n\t{1}\n\t{2}\n\tPIN: {3}", staff.Address.HouseName, staff.Address.City, staff.Address.State, staff.Address.Pin);
 
             Console.WriteLine("\tPhone Number : {0}", staff.PhoneNumber);
 

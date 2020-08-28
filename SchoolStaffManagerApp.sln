@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolStaffManagerApp", "SchoolStaffManagerApp\SchoolStaffManagerApp.csproj", "{5B666E04-2B54-479C-838D-423D2D381B91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffClassLibrary", "StaffClassLibrary\StaffClassLibrary.csproj", "{D09F5A5B-FFFA-4189-81B0-FFB1549E0EC8}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StaffDatabase", "StaffDatabase\StaffDatabase.sqlproj", "{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,16 @@ Global
 		{5B666E04-2B54-479C-838D-423D2D381B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B666E04-2B54-479C-838D-423D2D381B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B666E04-2B54-479C-838D-423D2D381B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09F5A5B-FFFA-4189-81B0-FFB1549E0EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09F5A5B-FFFA-4189-81B0-FFB1549E0EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09F5A5B-FFFA-4189-81B0-FFB1549E0EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09F5A5B-FFFA-4189-81B0-FFB1549E0EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

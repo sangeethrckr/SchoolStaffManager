@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Configuration;
+using StaffClassLibrary;
 
 
 
@@ -14,7 +15,11 @@ namespace SchoolStaffManagerApp
         static string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
         private string path = projectDirectory + ConfigurationManager.AppSettings.Get("jsonPath");
 
-        private JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+        private JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Objects,
+            TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Full
+        };
         private InMemoryStaffOperator inMemoryStaffOperator = new InMemoryStaffOperator();
 
         private void Deserialize()
@@ -22,7 +27,7 @@ namespace SchoolStaffManagerApp
             try
             {
                 string json = File.ReadAllText(path);
-                inMemoryStaffOperator.lstStaff = JsonConvert.DeserializeObject<List<Staff>>(json, settings);
+                inMemoryStaffOperator.lstStaff = JsonConvert.DeserializeObject<List<Staff>>(json,settings);
             }
             catch (Exception e)
             {
