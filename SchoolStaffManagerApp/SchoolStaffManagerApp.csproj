@@ -75,20 +75,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StaffOperations\InMemoryStaffOperator.cs" />
-    <Compile Include="StaffOperations\IStaffOperator.cs" />
+    <Compile Include="StaffOperations\AdministrativeStaffHelper.cs" />
+    <Compile Include="InMemoryOperations\InMemoryStaffOperator.cs" />
+    <Compile Include="StaffOperations\InputStaffProperties.cs" />
+    <Compile Include="InMemoryOperations\IStaffOperator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaffOperations\JsonStaffOperator.cs" />
-    <Compile Include="StaffOperations\XmlStaffOperator.cs" />
+    <Compile Include="FileOperations\JsonStaffOperator.cs" />
+    <Compile Include="StaffOperations\StaffHelper.cs" />
+    <Compile Include="StaffOperations\SupportStaffHelper.cs" />
+    <Compile Include="StaffOperations\TeachingStaffHelper.cs" />
+    <Compile Include="FileOperations\XmlStaffOperator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="StaffOperations\staff.json" />
+    <None Include="FileOperations\staff.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="StaffOperations\staff.xml" />
+    <Content Include="FileOperations\staff.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StaffClassLibrary\StaffClassLibrary.csproj">

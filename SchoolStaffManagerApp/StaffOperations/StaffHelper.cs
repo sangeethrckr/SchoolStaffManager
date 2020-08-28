@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StaffClassLibrary;
 
-namespace StaffClassLibrary
+namespace SchoolStaffManagerApp
 
 {
     public  class  StaffHelper
@@ -19,7 +16,6 @@ namespace StaffClassLibrary
 
                 case StaffType.teachingStaff:
                     return TeachingStaffHelper.AddStaff();
-                    
                 case StaffType.administrativeStaff:
                     return AdministrativeStaffHelper.AddStaff();
                 case StaffType.supportStaff:
@@ -96,13 +92,23 @@ namespace StaffClassLibrary
             {
                 case 1:
                     Console.WriteLine("\nUpdate Address\n");
-                    staff.Address = Validator.AskAddress();
+                    staff.Address = InputStaffProperties.AskAddress();
                     break;
                 case 2:
                     Console.WriteLine("\nUpdate Salary\n");
-                    staff.Salary = Validator.AskSalary();
+                    staff.Salary = InputStaffProperties.AskSalary();
                     break;
             }
+        }
+
+        public static void AskCommonDetails(Staff staff)
+        {
+            staff.Name = InputStaffProperties.AskName();
+            staff.StaffId = InputStaffProperties.AskStaffID();
+
+            staff.Address = InputStaffProperties.AskAddress();
+            staff.PhoneNumber = InputStaffProperties.AskPhoneNumber();
+            staff.Salary = InputStaffProperties.AskSalary();
         }
 
     }

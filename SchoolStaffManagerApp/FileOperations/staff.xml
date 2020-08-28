@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStaff xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Staff xsi:type="TeachingStaff">
+    <StaffId>1</StaffId>
+    <Name>Nick</Name>
+    <Address>
+      <HouseName>qwe</HouseName>
+      <City>qwe</City>
+      <State>qwe</State>
+      <Pin>123123</Pin>
+    </Address>
+    <PhoneNumber>1231231231</PhoneNumber>
+    <Salary>30000</Salary>
+    <StaffType>teachingStaff</StaffType>
+    <Subject>Maths</Subject>
+    <AssignedClass>10</AssignedClass>
+  </Staff>
+  <Staff xsi:type="AdminstrativeStaff">
+    <StaffId>2</StaffId>
+    <Name>Franny</Name>
+    <Address>
+      <HouseName>zxc</HouseName>
+      <City>zxc</City>
+      <State>zcx</State>
+      <Pin>123456</Pin>
+    </Address>
+    <PhoneNumber>9223232323</PhoneNumber>
+    <Salary>45000</Salary>
+    <StaffType>administrativeStaff</StaffType>
+    <Post>Manager</Post>
+  </Staff>
+</ArrayOfStaff>

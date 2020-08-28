@@ -42,11 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Address.cs" />
-    <Compile Include="Helpers\AdministrativeStaffHelper.cs" />
-    <Compile Include="Helpers\StaffHelper.cs" />
     <Compile Include="Helpers\StaffType.cs" />
-    <Compile Include="Helpers\SupportStaffHelper.cs" />
-    <Compile Include="Helpers\TeachingStaffHelper.cs" />
     <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Models\AdministrativeStaff.cs" />
     <Compile Include="Models\Staff.cs" />

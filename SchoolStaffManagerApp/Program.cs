@@ -31,24 +31,24 @@ namespace SchoolStaffManagerApp
             switch (actionChoice)
             {
                 case 1:
-                    staffType = Validator.AskStaffType();
+                    staffType = InputStaffProperties.AskStaffType();
                     staffOperator.CreateStaff(staffType);
                                                 
                     break;
                 case 2:
-                    staffId = Validator.AskStaffID();
+                    staffId = InputStaffProperties.AskStaffID();
                     staffOperator.GetStaffByStaffId(staffId);
                     break;
                 case 3:
-                    staffType = Validator.AskStaffType();
+                    staffType = InputStaffProperties.AskStaffType();
                     staffOperator.GetAllStaffByStaffType(staffType);
                     break;
                 case 4:
-                    staffId = Validator.AskStaffID();
+                    staffId = InputStaffProperties.AskStaffID();
                     staffOperator.UpdateStaff(staffId);
                     break;
                 case 5:
-                    staffId = Validator.AskStaffID();
+                    staffId = InputStaffProperties.AskStaffID();
                     staffOperator.DeleteStaff(staffId);
                     break;
                     

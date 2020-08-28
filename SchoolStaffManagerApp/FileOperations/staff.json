@@ -1,0 +1,17 @@
+[
+  {
+    "$type": "StaffClassLibrary.AdminstrativeStaff, StaffClassLibrary",
+    "Post": "manager",
+    "StaffId": 1,
+    "Name": "Franny",
+    "Address": {
+      "HouseName": "qwe",
+      "City": "qwe",
+      "State": "qwe",
+      "Pin": 123123
+    },
+    "PhoneNumber": "1231231231",
+    "Salary": 45000.0,
+    "StaffType": 1
+  }
+]

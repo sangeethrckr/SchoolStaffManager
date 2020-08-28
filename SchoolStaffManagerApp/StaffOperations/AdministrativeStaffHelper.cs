@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StaffClassLibrary;
 
-namespace StaffClassLibrary
+namespace SchoolStaffManagerApp
 {
     public class AdministrativeStaffHelper
     {
@@ -12,16 +9,10 @@ namespace StaffClassLibrary
         {
             AdminstrativeStaff adminStaff = new AdminstrativeStaff();
 
-            adminStaff.Name = Validator.AskName();
-            adminStaff.StaffId = Validator.AskStaffID();
+            StaffHelper.AskCommonDetails(adminStaff);
 
-            adminStaff.Address = Validator.AskAddress();
-            adminStaff.PhoneNumber = Validator.AskPhoneNumber();
-            adminStaff.Salary = Validator.AskSalary();
-            adminStaff.Post = Validator.AskPost();
+            adminStaff.Post = InputStaffProperties.AskPost();
             
-
-
             Console.WriteLine("\nAdministrative Staff added\tStaffID : {0}", adminStaff.StaffId);
             return adminStaff;
         }
@@ -49,7 +40,7 @@ namespace StaffClassLibrary
             else
             {
                 Console.WriteLine("\nUpdate Post");
-                adminStaff.Post = Validator.AskPost();
+                adminStaff.Post = InputStaffProperties.AskPost();
             }
         }
 
