@@ -15,10 +15,15 @@ namespace StaffClassLibrary
         public string PhoneNumber { get; set; }
         public double Salary { get; set; }
         public StaffType StaffType { get; set; }
-             
-                                      
+
+        public Staff()
+        {
+            Address = new Address();
+        }
 
     }
+
+    
 
     
 }

@@ -60,9 +60,17 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Teachers.sql" />
     <Build Include="dbo\Tables\Staff.sql" />
+    <Build Include="dbo\Tables\TeachingStaff.sql" />
+    <Build Include="dbo\Tables\SupportStaff.sql" />
+    <Build Include="dbo\Tables\AdminStaff.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Staff_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Staff_GetAllStaffByType.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Staff_GetStaffByStaffId.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Staff_UpdateStaff.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Staff_RemoveStaff.sql" />
   </ItemGroup>
 </Project>

@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseOperations\DatabaseOperation.cs" />
     <Compile Include="StaffOperations\AdministrativeStaffHelper.cs" />
     <Compile Include="InMemoryOperations\InMemoryStaffOperator.cs" />
     <Compile Include="StaffOperations\InputStaffProperties.cs" />
@@ -101,5 +102,6 @@
       <Name>StaffClassLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
