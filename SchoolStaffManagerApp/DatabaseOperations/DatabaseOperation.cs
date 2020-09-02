@@ -10,13 +10,91 @@ namespace SchoolStaffManagerApp
     class DatabaseOperation
     {
         SqlConnection con;
+        DataTable dataTable = new DataTable("StaffTableType");
+        DataRow dataRow;
 
         public DatabaseOperation()
         {
             con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
-            
+
+            try
+            {
+                
+                dataTable.Columns.Add("StaffName", typeof(string));
+                dataTable.Columns.Add("PhoneNumber", typeof(string));
+                dataTable.Columns.Add("Salary", typeof(double));
+                dataTable.Columns.Add("HouseName", typeof(string));
+                dataTable.Columns.Add("City", typeof(string));
+                dataTable.Columns.Add("State", typeof(string));
+                dataTable.Columns.Add("PinCode", typeof(string));
+                dataTable.Columns.Add("StaffType", typeof(int));
+                dataTable.Columns.Add("SpecificData", typeof(string));
+                dataTable.Columns.Add("ClassAssigned", typeof(int));
+            }
+            catch (Exception)
+            { }
+
         }
 
+        public void InsertBulkData()
+        {
+           
+            dataRow = dataTable.NewRow();
+            StaffType staffType = InputStaffProperties.AskStaffType();
+            dataRow["StaffName"] = InputStaffProperties.AskName();
+            dataRow["PhoneNumber"] = InputStaffProperties.AskPhoneNumber();
+            dataRow["Salary"] = InputStaffProperties.AskSalary();
+            Address address = InputStaffProperties.AskAddress();
+            dataRow["HouseName"] = address.HouseName;
+            dataRow["City"] = address.City;
+            dataRow["State"] = address.State;
+            dataRow["PinCode"] = address.Pin;
+            dataRow["StaffType"] = (int)staffType;
+
+            string specificData;
+            int classAssigned = 0;
+            if (staffType == StaffType.teachingStaff)
+            {
+                specificData = InputStaffProperties.AskSubject();
+                classAssigned = Convert.ToInt32(InputStaffProperties.AskClass());
+            }
+            else
+            {
+                specificData = InputStaffProperties.AskPost();
+            }
+
+            dataRow["SpecificData"] = specificData;
+            dataRow["ClassAssigned"] = classAssigned;
+
+            dataTable.Rows.Add(dataRow);
+            Console.WriteLine("\nInsertion Successfull\nDo you want to add more Staff?(y/n)\n");
+            char choice = Convert.ToChar(Console.ReadLine());
+            if(choice == 'y')
+            {
+                InsertBulkData();
+            }
+
+        }
+
+        public void BulkInsertion()
+        {
+            try
+            {
+                con.Open();
+                SqlCommand sqlCommand;
+                sqlCommand = new SqlCommand("Proc_Staff_BulkInsertion", con);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@staffTable", dataTable);
+                sqlCommand.ExecuteNonQuery();
+                sqlCommand.Dispose();
+                con.Close();
+                dataTable.Clear();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\nBulk insertion error : " + e);
+            }
+        }
 
         public void InsertStaff()
         {
@@ -169,7 +247,7 @@ namespace SchoolStaffManagerApp
             Address address = InputStaffProperties.AskAddress();
 
 
-            string subject = null, post = null;
+            string post = null;
             int classAssigned = 0;
             if (staffType == StaffType.teachingStaff)
             {

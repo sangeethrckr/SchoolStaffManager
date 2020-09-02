@@ -10,8 +10,8 @@ namespace SchoolStaffManagerApp
         public static void Main(string[] args)
         {
             Console.WriteLine("Hello {0}", ConfigurationManager.AppSettings.Get("SchoolName"));
-            string objectToInstantiate = ConfigurationManager.AppSettings.Get("staffStoreHandler");
-            var objectType = Type.GetType(objectToInstantiate);
+            //string objectToInstantiate = ConfigurationManager.AppSettings.Get("staffStoreHandler");
+            //var objectType = Type.GetType(objectToInstantiate);
             //IStaffOperator staffOperator = Activator.CreateInstance(objectType) as IStaffOperator;
             //ActionMenu(staffOperator);
             DatabaseOperation databaseOperation = new DatabaseOperation();
@@ -68,10 +68,8 @@ namespace SchoolStaffManagerApp
         {
 
             int actionChoice;
-            StaffType staffType;
-            int staffId;
-
-            Console.WriteLine("\nChoose Action\n1.Add Staff\n2.View Staff Details\n3.View All Staff of type\n4.Update Staff Details\n5.Remove Staff\n6.Exit\n"); //Action Menu
+            
+            Console.WriteLine("\nChoose Action\n1.Add Staff\n2.Bulk Insert\n3.View Staff Details\n4.View All Staff of type\n5.Update Staff Details\n6.Remove Staff\n7.Exit\n"); //Action Menu
             actionChoice = Convert.ToInt32(Console.ReadLine());
 
             switch (actionChoice)
@@ -80,19 +78,22 @@ namespace SchoolStaffManagerApp
                     databaseOperation.InsertStaff();
                     break;
                 case 2:
-                    databaseOperation.GetStaffByStaffId();
+                    databaseOperation.InsertBulkData();
+                    databaseOperation.BulkInsertion();
                     break;
                 case 3:
-                    databaseOperation.GetAllStaffByType();
+                    databaseOperation.GetStaffByStaffId();
                     break;
                 case 4:
-                    databaseOperation.UpdateStaff();
+                    databaseOperation.GetAllStaffByType();
                     break;
                 case 5:
+                    databaseOperation.UpdateStaff();
+                    break;
+                case 6:
                     databaseOperation.RemoveStaff();
                     break;
-
-                case 6:
+                case 7:
                     System.Environment.Exit(0);
                     break;
                 default:
