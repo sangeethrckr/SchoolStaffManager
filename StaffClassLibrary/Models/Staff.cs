@@ -6,7 +6,7 @@ namespace StaffClassLibrary
 {
 
     [XmlInclude(typeof(TeachingStaff)), XmlInclude(typeof(AdminstrativeStaff)), XmlInclude(typeof(SupportStaff))]
-    public class Staff
+    public abstract class Staff
     {
 
         public int StaffId { get; set; }

@@ -104,7 +104,7 @@ namespace SchoolStaffManagerApp
         public static void AskCommonDetails(Staff staff)
         {
             staff.Name = InputStaffProperties.AskName();
-            staff.StaffId = InputStaffProperties.AskStaffID();
+            //staff.StaffId = InputStaffProperties.AskStaffID();
 
             staff.Address = InputStaffProperties.AskAddress();
             staff.PhoneNumber = InputStaffProperties.AskPhoneNumber();

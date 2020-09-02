@@ -7,77 +7,12 @@ using StaffClassLibrary;
 
 namespace SchoolStaffManagerApp
 {
-    class DatabaseOperation
+    public static class DatabaseOperation
     {
-        SqlConnection con;
-        DataTable dataTable = new DataTable("StaffTableType");
-        DataRow dataRow;
-
-        public DatabaseOperation()
+       
+        public static string BulkInsertion(DataTable dataTable)
         {
-            con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
-
-            try
-            {
-                
-                dataTable.Columns.Add("StaffName", typeof(string));
-                dataTable.Columns.Add("PhoneNumber", typeof(string));
-                dataTable.Columns.Add("Salary", typeof(double));
-                dataTable.Columns.Add("HouseName", typeof(string));
-                dataTable.Columns.Add("City", typeof(string));
-                dataTable.Columns.Add("State", typeof(string));
-                dataTable.Columns.Add("PinCode", typeof(string));
-                dataTable.Columns.Add("StaffType", typeof(int));
-                dataTable.Columns.Add("SpecificData", typeof(string));
-                dataTable.Columns.Add("ClassAssigned", typeof(int));
-            }
-            catch (Exception)
-            { }
-
-        }
-
-        public void InsertBulkData()
-        {
-           
-            dataRow = dataTable.NewRow();
-            StaffType staffType = InputStaffProperties.AskStaffType();
-            dataRow["StaffName"] = InputStaffProperties.AskName();
-            dataRow["PhoneNumber"] = InputStaffProperties.AskPhoneNumber();
-            dataRow["Salary"] = InputStaffProperties.AskSalary();
-            Address address = InputStaffProperties.AskAddress();
-            dataRow["HouseName"] = address.HouseName;
-            dataRow["City"] = address.City;
-            dataRow["State"] = address.State;
-            dataRow["PinCode"] = address.Pin;
-            dataRow["StaffType"] = (int)staffType;
-
-            string specificData;
-            int classAssigned = 0;
-            if (staffType == StaffType.teachingStaff)
-            {
-                specificData = InputStaffProperties.AskSubject();
-                classAssigned = Convert.ToInt32(InputStaffProperties.AskClass());
-            }
-            else
-            {
-                specificData = InputStaffProperties.AskPost();
-            }
-
-            dataRow["SpecificData"] = specificData;
-            dataRow["ClassAssigned"] = classAssigned;
-
-            dataTable.Rows.Add(dataRow);
-            Console.WriteLine("\nInsertion Successfull\nDo you want to add more Staff?(y/n)\n");
-            char choice = Convert.ToChar(Console.ReadLine());
-            if(choice == 'y')
-            {
-                InsertBulkData();
-            }
-
-        }
-
-        public void BulkInsertion()
-        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
             try
             {
                 con.Open();
@@ -87,126 +22,139 @@ namespace SchoolStaffManagerApp
                 sqlCommand.Parameters.AddWithValue("@staffTable", dataTable);
                 sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
-                con.Close();
                 dataTable.Clear();
+                return "Bulk insertion succesful";
             }
             catch (Exception e)
             {
-                Console.WriteLine("\nBulk insertion error : " + e);
+                return e.ToString();
+            }
+            finally
+            {
+                con.Close();
+
             }
         }
 
-        public void InsertStaff()
+        public static string InsertStaff(Staff staff)
         {
-            StaffType staffType = InputStaffProperties.AskStaffType();
 
-            string name = InputStaffProperties.AskName();
-            string phoneNumber = InputStaffProperties.AskPhoneNumber();
-            double salary = InputStaffProperties.AskSalary();
-            Address address = InputStaffProperties.AskAddress();
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
 
-            
             string subject = null, post = null;
             int classAssigned = 0;
-            if (staffType == StaffType.teachingStaff)
+
+            switch (staff.StaffType)
             {
-                subject = InputStaffProperties.AskSubject();
-                classAssigned = Convert.ToInt32(InputStaffProperties.AskClass());
+                case StaffType.teachingStaff:
+                    TeachingStaff tStaff = (TeachingStaff)staff;
+                    subject = tStaff.Subject;
+                    classAssigned = Convert.ToInt32(tStaff.AssignedClass);
+                    break;
+                case StaffType.administrativeStaff:
+                    AdminstrativeStaff aStaff = (AdminstrativeStaff)staff;
+                    post = aStaff.Post;
+                    break;
+                case StaffType.supportStaff:
+                    SupportStaff sStaff = (SupportStaff)staff;
+                    post = sStaff.Post;
+                    break;
             }
-            else
-            {
-                post = InputStaffProperties.AskPost();
-            }
+
 
             try
             {
                 con.Open();
                 SqlCommand sqlCommand = new SqlCommand("Proc_Staff_Insert", con);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@Name", name);
-                sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
-                sqlCommand.Parameters.AddWithValue("@Salary", salary);
-                sqlCommand.Parameters.AddWithValue("@HouseName", address.HouseName);
-                sqlCommand.Parameters.AddWithValue("@City", address.City);
-                sqlCommand.Parameters.AddWithValue("@State", address.State);
-                sqlCommand.Parameters.AddWithValue("@PinCode", address.Pin);
-                sqlCommand.Parameters.AddWithValue("@StaffType", (int)staffType);
+                sqlCommand.Parameters.AddWithValue("@Name", staff.Name);
+                sqlCommand.Parameters.AddWithValue("@PhoneNumber", staff.PhoneNumber);
+                sqlCommand.Parameters.AddWithValue("@Salary", staff.Salary);
+                sqlCommand.Parameters.AddWithValue("@HouseName", staff.Address.HouseName);
+                sqlCommand.Parameters.AddWithValue("@City", staff.Address.City);
+                sqlCommand.Parameters.AddWithValue("@State", staff.Address.State);
+                sqlCommand.Parameters.AddWithValue("@PinCode", staff.Address.Pin);
+                sqlCommand.Parameters.AddWithValue("@StaffType", (int)staff.StaffType);
                 sqlCommand.Parameters.AddWithValue("@Subject", subject);
                 sqlCommand.Parameters.AddWithValue("@Post", post);
                 sqlCommand.Parameters.AddWithValue("@ClassAssigned", classAssigned);
                 sqlCommand.ExecuteNonQuery();
                 sqlCommand.Dispose();
-                con.Close();
+                return "Staff insertion Succesful";
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                return e.ToString();
             }
-           
+            finally
+            {
+                con.Close();
+            }
 
         }
 
-        public void GetAllStaffByType()
+        public static List<Staff> GetAllStaffByType(StaffType staffType)
         {
-            StaffType staffType = InputStaffProperties.AskStaffType();
-
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
             List<Staff> finalResult ;
+            SqlCommand sqlCommand = new SqlCommand("Proc_Staff_GetAllStaffByType", con);
+            
 
             try
             {
-                con.Open();
-
-                SqlCommand sqlCommand = new SqlCommand("Proc_Staff_GetAllStaffByType", con);
+                con.Open();              
                 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@StaffType", staffType);
-
                 SqlDataReader sqlDataReader;
                 sqlDataReader = sqlCommand.ExecuteReader();
-
+               
                 if (sqlDataReader.HasRows)
                 {
 
                     finalResult = Populate(sqlDataReader);
-                    foreach (Staff staff in finalResult)
-                    {
-                        StaffHelper.ViewDetails(staff);
-                    }
+                    sqlDataReader.Close();
+                    return finalResult;
                     
                 }
                 else
                 {
-                    Console.WriteLine("No staff found!!\n");
+                    sqlDataReader.Close();
+                    return null;
                 }
-
-                sqlDataReader.Close();
-                sqlCommand.Dispose();
-                con.Close();
-
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine("Sql connection :" + e);
+                return null;
             }
-            
+
+            finally
+            {
+                
+                sqlCommand.Dispose();
+                con.Close();
+            }
 
         }
 
 
-        public void GetStaffByStaffId()
+        public static Staff GetStaffByStaffId(int staffId)
         {
-            int staffID = InputStaffProperties.AskStaffID();
 
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
             Staff staffFound ;
+            SqlCommand sqlCommand = new SqlCommand("Proc_Staff_GetStaffByStaffId", con);
 
             try
             {
                 con.Open();
 
-                SqlCommand sqlCommand = new SqlCommand("Proc_Staff_GetStaffByStaffId", con);
+                
 
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@StaffId", staffID);
+                sqlCommand.Parameters.AddWithValue("@StaffId", staffId);
 
                 SqlDataReader sqlDataReader;
                 sqlDataReader = sqlCommand.ExecuteReader();
@@ -215,54 +163,44 @@ namespace SchoolStaffManagerApp
                 {
 
                     staffFound = Populate(sqlDataReader)[0];
-                    StaffHelper.ViewDetails(staffFound);
+                    sqlDataReader.Close();
+                    return staffFound;
                 }
                 else
                 {
-                    Console.WriteLine("No staff found!!\n");
+                    sqlDataReader.Close();
+                    return null;
                 }
 
-                sqlDataReader.Close();
-                sqlCommand.Dispose();
-                con.Close();
+                
+                
 
             }
             catch (Exception e)
             {
                 Console.WriteLine("Sql connection :" + e);
+                return null;
+            }
+
+            finally
+            {
+                sqlCommand.Dispose();
+                con.Close();
             }
 
 
         }
 
 
-        public void UpdateStaff()
+        public static string UpdateStaff(int staffID, string name, string phoneNumber, double salary, Address address,string specificData)
         {
-            StaffType staffType = InputStaffProperties.AskStaffType();
-            int staffID = InputStaffProperties.AskStaffID();
-
-            string name = InputStaffProperties.AskName();
-            string phoneNumber = InputStaffProperties.AskPhoneNumber();
-            double salary = InputStaffProperties.AskSalary();
-            Address address = InputStaffProperties.AskAddress();
-
-
-            string post = null;
-            int classAssigned = 0;
-            if (staffType == StaffType.teachingStaff)
-            {
-                
-                classAssigned = Convert.ToInt32(InputStaffProperties.AskClass());
-            }
-            else
-            {
-                post = InputStaffProperties.AskPost();
-            }
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
+            SqlCommand sqlCommand = new SqlCommand("Proc_Staff_UpdateStaff", con);
 
             try
             {
                 con.Open();
-                SqlCommand sqlCommand = new SqlCommand("Proc_Staff_UpdateStaff", con);
+                
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@StaffId", staffID);
                 sqlCommand.Parameters.AddWithValue("@Name", name);
@@ -272,63 +210,119 @@ namespace SchoolStaffManagerApp
                 sqlCommand.Parameters.AddWithValue("@City", address.City);
                 sqlCommand.Parameters.AddWithValue("@State", address.State);
                 sqlCommand.Parameters.AddWithValue("@PinCode", address.Pin);
-                sqlCommand.Parameters.AddWithValue("@Post", post);
-                sqlCommand.Parameters.AddWithValue("@ClassAssigned", classAssigned);
+                sqlCommand.Parameters.AddWithValue("@Post", specificData);
+                sqlCommand.Parameters.AddWithValue("@ClassAssigned", Convert.ToInt32(specificData));
 
-                if (sqlCommand.ExecuteNonQuery() == 1)
+                if (sqlCommand.ExecuteNonQuery() != 0)
                 {
-                    Console.WriteLine("Staff updated!!\n");
+                    return "Staff Updated";
                 }
                 else
                 {
-                    Console.WriteLine("No staff found!!\n");
+                    return "Staff not found!!";
                 }
+                
 
-                sqlCommand.Dispose();
-                con.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                return e.ToString();
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+                con.Close();
             }
         }
 
-        public void RemoveStaff()
+        public static string RemoveStaff( int staffID)
         {
-            int staffID = InputStaffProperties.AskStaffID();
-                        
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
+            SqlCommand sqlCommand = new SqlCommand("Proc_Staff_RemoveStaff", con);
+
+            try
+            {
+                con.Open();
+                         
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@StaffId", staffID);
+
+                if (sqlCommand.ExecuteNonQuery() != 0)
+                {
+                    return "Staff Removed";
+                }
+                else
+                {
+                    return "Staff not found!!";
+                }
+
+                
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            finally
+            {
+                sqlCommand.Dispose();
+                con.Close();
+            }
+
+        }
+
+        public static int GetStaffType(int staffId)
+        {
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("connectionString"));
+            //Staff staffFound;
+            SqlCommand sqlCommand = new SqlCommand("Proc_Staff_GetStaffType", con);
 
             try
             {
                 con.Open();
 
-                SqlCommand sqlCommand = new SqlCommand("Proc_Staff_RemoveStaff", con);
-
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.AddWithValue("@StaffId", staffID);
+                sqlCommand.Parameters.AddWithValue("@StaffId", staffId);
 
-                if (sqlCommand.ExecuteNonQuery() == 1)
+                SqlDataReader sqlDataReader;
+                sqlDataReader = sqlCommand.ExecuteReader();
+
+                if (sqlDataReader.HasRows)
                 {
-                    Console.WriteLine("Staff removed!!\n");
+                    sqlDataReader.Read();
+                    int staffType = Convert.ToInt32(sqlDataReader.GetValue(0));
+                    
+                    sqlDataReader.Close();
+                    return staffType;
                 }
                 else
                 {
-                    Console.WriteLine("No staff found!!\n");
+                    sqlDataReader.Close();
+                    return 3;
                 }
 
-                sqlCommand.Dispose();
-                con.Close();
+
+
 
             }
             catch (Exception e)
             {
                 Console.WriteLine("Sql connection :" + e);
+                return 3;
+            }
+
+            finally
+            {
+                sqlCommand.Dispose();
+                con.Close();
             }
 
 
         }
 
-        public List<Staff> Populate(SqlDataReader sqlDataReader)
+        private static List<Staff> Populate(SqlDataReader sqlDataReader)
         {
             List<Staff> staffList = new List<Staff>();
             while (sqlDataReader.Read())
@@ -340,53 +334,48 @@ namespace SchoolStaffManagerApp
                 {
                     case StaffType.teachingStaff:
                         TeachingStaff tStaff = new TeachingStaff();
-                        tStaff.StaffId = Convert.ToInt32(sqlDataReader.GetValue(0));
-                        tStaff.Name = sqlDataReader.GetValue(1).ToString();
-                        tStaff.PhoneNumber = sqlDataReader.GetValue(2).ToString();
-                        tStaff.Salary = Convert.ToInt64(sqlDataReader.GetValue(3));
-                        tStaff.Address.HouseName = sqlDataReader.GetValue(4).ToString();
-                        tStaff.Address.City = sqlDataReader.GetValue(5).ToString();
-                        tStaff.Address.State = sqlDataReader.GetValue(6).ToString();
-                        tStaff.Address.Pin = Convert.ToInt32(sqlDataReader.GetValue(7));
+
+                        PopulateCommonDetails(tStaff);
+                        
                         tStaff.Subject = sqlDataReader.GetValue(8).ToString();
                         tStaff.AssignedClass = sqlDataReader.GetValue(9).ToString();
                         staffList.Add(tStaff);
                         break;
+
                     case StaffType.administrativeStaff:
                         AdminstrativeStaff aStaff = new AdminstrativeStaff();
-                        aStaff.StaffId = Convert.ToInt32(sqlDataReader.GetValue(0));
-                        aStaff.Name = sqlDataReader.GetValue(1).ToString();
-                        aStaff.PhoneNumber = sqlDataReader.GetValue(2).ToString();
-                        aStaff.Salary = Convert.ToInt64(sqlDataReader.GetValue(3));
-                        aStaff.Address.HouseName = sqlDataReader.GetValue(4).ToString();
-                        aStaff.Address.City = sqlDataReader.GetValue(5).ToString();
-                        aStaff.Address.State = sqlDataReader.GetValue(6).ToString();
-                        aStaff.Address.Pin = Convert.ToInt32(sqlDataReader.GetValue(7));
+                        PopulateCommonDetails(aStaff);
                         aStaff.Post = sqlDataReader.GetValue(10).ToString();
                         staffList.Add(aStaff);
 
                         break;
+
                     case StaffType.supportStaff:
                         SupportStaff sStaff = new SupportStaff();
-                        sStaff.StaffId = Convert.ToInt32(sqlDataReader.GetValue(0));
-                        sStaff.Name = sqlDataReader.GetValue(1).ToString();
-                        sStaff.PhoneNumber = sqlDataReader.GetValue(2).ToString();
-                        sStaff.Salary = Convert.ToInt64(sqlDataReader.GetValue(3));
-                        sStaff.Address.HouseName = sqlDataReader.GetValue(4).ToString();
-                        sStaff.Address.City = sqlDataReader.GetValue(5).ToString();
-                        sStaff.Address.State = sqlDataReader.GetValue(6).ToString();
-                        sStaff.Address.Pin = Convert.ToInt32(sqlDataReader.GetValue(7));
+                        PopulateCommonDetails(sStaff);
                         sStaff.Post = sqlDataReader.GetValue(11).ToString();
                         staffList.Add(sStaff);
 
                         break;
                    
                 }
-
+                void PopulateCommonDetails(Staff staff)
+                {
+                    staff.StaffId = Convert.ToInt32(sqlDataReader.GetValue(0));
+                    staff.Name = sqlDataReader.GetValue(1).ToString();
+                    staff.PhoneNumber = sqlDataReader.GetValue(2).ToString();
+                    staff.Salary = Convert.ToInt64(sqlDataReader.GetValue(3));
+                    staff.Address.HouseName = sqlDataReader.GetValue(4).ToString();
+                    staff.Address.City = sqlDataReader.GetValue(5).ToString();
+                    staff.Address.State = sqlDataReader.GetValue(6).ToString();
+                    staff.Address.Pin = Convert.ToInt32(sqlDataReader.GetValue(7));
+                }
 
             }
             return staffList;
         }
+
+        
 
 
 

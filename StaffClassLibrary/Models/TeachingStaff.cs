@@ -9,7 +9,7 @@ namespace StaffClassLibrary
         public string Subject { get; set; }
         public string AssignedClass { get; set; }
 
-        public TeachingStaff()
+        public TeachingStaff() : base()
         {
             StaffType = StaffType.teachingStaff;
             

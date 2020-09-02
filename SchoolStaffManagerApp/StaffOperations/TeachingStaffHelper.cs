@@ -14,7 +14,7 @@ namespace SchoolStaffManagerApp
             teachingStaff.Subject = InputStaffProperties.AskSubject();
             teachingStaff.AssignedClass = InputStaffProperties.AskClass();
 
-            Console.WriteLine("\nTeacher Staff added\tStaffID : {0}", teachingStaff.StaffId);
+            //Console.WriteLine("\nTeacher Staff added");
             return teachingStaff;
         }
 

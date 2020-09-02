@@ -8,7 +8,7 @@ namespace StaffClassLibrary
     {
         public string Post { get; set; }
 
-        public SupportStaff()
+        public SupportStaff() : base()
         {
             StaffType = StaffType.supportStaff;
             

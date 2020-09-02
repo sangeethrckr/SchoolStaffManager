@@ -75,5 +75,6 @@
     <Build Include="dbo\Stored Procedures\Proc_Staff_RemoveStaff.sql" />
     <Build Include="dbo\Stored Procedures\Proc_Staff_BulkInsertion.sql" />
     <Build Include="dbo\User Defined Types\StaffTableType.sql" />
+    <Build Include="dbo\Stored Procedures\Proc_Staff_GetStaffType.sql" />
   </ItemGroup>
 </Project>

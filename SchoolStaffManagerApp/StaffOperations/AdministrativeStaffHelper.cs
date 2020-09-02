@@ -13,7 +13,7 @@ namespace SchoolStaffManagerApp
 
             adminStaff.Post = InputStaffProperties.AskPost();
             
-            Console.WriteLine("\nAdministrative Staff added\tStaffID : {0}", adminStaff.StaffId);
+            //Console.WriteLine("\nAdministrative Staff added");
             return adminStaff;
         }
 

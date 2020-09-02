@@ -8,7 +8,7 @@ namespace StaffClassLibrary
     {
         public string Post { get; set; }
 
-        public AdminstrativeStaff()
+        public AdminstrativeStaff() :base()
         {
             StaffType = StaffType.administrativeStaff;
             
