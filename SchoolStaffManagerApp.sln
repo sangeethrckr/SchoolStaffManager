@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffClassLibrary", "StaffC
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StaffDatabase", "StaffDatabase\StaffDatabase.sqlproj", "{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolStaffWebAPI", "SchoolStaffWebAPI\SchoolStaffWebAPI.csproj", "{F8AE38EE-0A67-4BCA-BB48-48DF62E9E9AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B073207C-CDAA-4EC6-8396-7ED354F7D4D7}"
+	ProjectSection(SolutionItems) = preProject
+		Files\staff.json = Files\staff.json
+		Files\staff.xml = Files\staff.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +37,10 @@ Global
 		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D18DFCC-91AA-4FC4-8A77-ECC5AA4FC3D5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F8AE38EE-0A67-4BCA-BB48-48DF62E9E9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8AE38EE-0A67-4BCA-BB48-48DF62E9E9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8AE38EE-0A67-4BCA-BB48-48DF62E9E9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AE38EE-0A67-4BCA-BB48-48DF62E9E9AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
