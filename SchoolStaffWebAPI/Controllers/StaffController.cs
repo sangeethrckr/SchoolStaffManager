@@ -13,6 +13,8 @@ namespace SchoolStaffWebAPI.Controllers
     {
         DatabaseStaffOperator staffOperator = new DatabaseStaffOperator();
 
+
+
         [HttpGet]
         public List<Staff> GetStaffByType(string staffType)
         {
