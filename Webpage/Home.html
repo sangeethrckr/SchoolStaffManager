@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="Stylesheets/styles.css">
+    <link rel= "stylesheet" href="Stylesheets/tableStyle.css">
+    <link rel= "stylesheet" href="Stylesheets/formStyle.css">
+    <script src="Scripts/apiConnectors.js"></script>
+    <script src="Scripts/createTableFromJson.js"></script>
+    <script src="Scripts/helpers.js"></script>
+    
+</head>
+
+<body>
+    <div class="header">
+        <h1 >ABC School Staff Management</h1>
+    </div>
+        
+    <div class="column">
+
+        <div class="topnav">
+            
+            <input class = "navButton" type="button" onclick="ShowStaffPage(0)" value="Teaching Staff" />
+            <input class = "navButton" type="button" onclick="ShowStaffPage(1)" value="Administrative Staff" />
+            <input class = "navButton" type="button" onclick="ShowStaffPage(2)" value="Support Staff" />
+        </div>
+        
+        <div id = "showData"></div>
+        <div class="popup" >
+            <span class="popuptext" id="myPopup">
+                <div class = "form">
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name"><br>
+                        
+                        <label for="houseName">Housename:</label>
+                        <input type="text" id="houseName" name="houseName"><br>
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city"><br>
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state"><br>
+                        <label for="pin">PinCode</label>
+                        <input type="text" id="pin" name="pin"><br>
+                        <label for="phoneNumber">Phone number:</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber"><br>
+                        <label for="salary">Salary</label>
+                        <input type="text" id="salary" name="salary"><br>
+                        <label for="post">Post:</label>
+                        <input type="text" id="post" name="post"><br><br>
+                        <input type="button" value="Submit" class = "submit" id = "submit" >
+                        <input type="button" value ="Cancel" id = "cancel" onclick="ToggleCreateAdminOrSupportStaffPopUp()">
+                
+                    </form>     
+                </div>
+            </span>
+        </div>
+
+        <div class="popup" >
+            <span class="popuptext" id="myPopup2">
+                <div class = "form">
+                    <form >
+                        <label for="name">Name:</label>
+                        <input type="text" id="name2" name="name"><br>
+                        <label for="houseName">Housename:</label>
+                        <input type="text" id="houseName2" name="houseName"><br>
+                        <label for="city">City</label>
+                        <input type="text" id="city2" name="city"><br>
+                        <label for="state">State</label>
+                        <input type="text" id="state2" name="state"><br>
+                        <label for="pin">PinCode</label>
+                        <input type="text" id="pin2" name="pin"><br>
+                        <label for="phoneNumber">Phone number:</label>
+                        <input type="text" id="phoneNumber2" name="phoneNumber"><br>
+                        <label for="salary">Salary</label>
+                        <input type="text" id="salary2" name="salary"><br>
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject2" name="subject2"><br><br>
+                        <label for="classAssigned">Class Assigned:</label>
+                        <input type="text" id="classAssigned2" name="classAssigned2"><br><br>
+                        <input type="button" value="Submit" class = "submit" id = "submit2" >
+                        <input type="button" value ="Cancel" id = "cancel" onclick="ToggleCreateTeacherPopUp()">
+                
+                    </form>             
+                </div>
+            </span>
+        </div>
+
+        <div class="popup" >
+            <span class="popuptext" id="delConfirm">
+                <div class = "confirm">
+                    <p>Selected staff will be deleted. Are you sure?</p>
+                    <input type="button" value="confirm" id = "confirmDel" >
+                    <input type="button" value="Cancel" id = "delCancel" onclick="ToggleConfirmDeletePopUp()">         
+                </div>
+            </span>
+        </div>
+
+    </div>    
+</body>
+
+</html>
+
+
+

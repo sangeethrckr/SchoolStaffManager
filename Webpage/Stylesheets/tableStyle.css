@@ -1,0 +1,42 @@
+#staffTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin:auto;
+    margin-top: 10px;
+    
+  }
+  
+#staffTable td, #staffTable th {
+border: 1px solid #ddd;
+padding: 8px;
+}
+
+#staffTable tr{background-color: whitesmoke;}
+
+/* #staffTable tr:nth-child(even){background-color: #c2c1c1;}
+
+#staffTable tr:nth-child(odd){background-color:rgb(255, 255, 255);} */
+
+#staffTable tr:hover {background-color: #ddd;}
+
+#staffTable th {
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+background-color: #254e58;
+color: white;
+}
+
+#delButton{
+  background-color: #e23630;
+    border: none;
+    font-size: 13px;
+    
+    display: block;
+    color: whitesmoke;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
