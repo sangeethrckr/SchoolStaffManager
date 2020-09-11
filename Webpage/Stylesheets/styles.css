@@ -38,9 +38,10 @@ body{
     
 }  
 
-.navButton:hover{
+.navButton:hover,#addStaffButton:hover,.navButton:focus{
     background-color: #ddd;
     color: black;
+    border: none;
 }
 
 #addStaffButton{
@@ -57,6 +58,8 @@ body{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     
 }
+
+
 
 
 

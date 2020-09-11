@@ -1,4 +1,5 @@
 #staffTable {
+    display: table;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 80%;
@@ -14,11 +15,11 @@ padding: 8px;
 
 #staffTable tr{background-color: whitesmoke;}
 
-/* #staffTable tr:nth-child(even){background-color: #c2c1c1;}
+#staffTable tr:nth-child(even){background-color: #daebf0;}
 
-#staffTable tr:nth-child(odd){background-color:rgb(255, 255, 255);} */
+#staffTable tr:nth-child(odd){background-color:rgb(194, 206, 209);}
 
-#staffTable tr:hover {background-color: #ddd;}
+/* #staffTable tr:hover {background-color: rgb(148, 147, 147);} */
 
 #staffTable th {
 padding-top: 12px;
@@ -27,6 +28,8 @@ text-align: left;
 background-color: #254e58;
 color: white;
 }
+
+
 
 #delButton{
   background-color: #e23630;
@@ -40,3 +43,18 @@ color: white;
     text-decoration: none;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+#updateButton{
+  background-color: #333;
+    border: none;
+    font-size: 13px;
+    
+    display: block;
+    color: whitesmoke;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+

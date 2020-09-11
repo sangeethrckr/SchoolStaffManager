@@ -48,7 +48,7 @@
                         <label for="post">Post:</label>
                         <input type="text" id="post" name="post"><br><br>
                         <input type="button" value="Submit" class = "submit" id = "submit" >
-                        <input type="button" value ="Cancel" id = "cancel" onclick="ToggleCreateAdminOrSupportStaffPopUp()">
+                        <input type="button" value ="Cancel" class = "cancel" onclick="ToggleCreateAdminOrSupportStaffPopUp()">
                 
                     </form>     
                 </div>
@@ -78,7 +78,7 @@
                         <label for="classAssigned">Class Assigned:</label>
                         <input type="text" id="classAssigned2" name="classAssigned2"><br><br>
                         <input type="button" value="Submit" class = "submit" id = "submit2" >
-                        <input type="button" value ="Cancel" id = "cancel" onclick="ToggleCreateTeacherPopUp()">
+                        <input type="button" value ="Cancel" class = "cancel" onclick="ToggleCreateTeacherPopUp()">
                 
                     </form>             
                 </div>
@@ -88,9 +88,9 @@
         <div class="popup" >
             <span class="popuptext" id="delConfirm">
                 <div class = "confirm">
-                    <p>Selected staff will be deleted. Are you sure?</p>
-                    <input type="button" value="confirm" id = "confirmDel" >
-                    <input type="button" value="Cancel" id = "delCancel" onclick="ToggleConfirmDeletePopUp()">         
+                    <p id ="confirm-text">Selected staff will be deleted. Are you sure?</p>
+                    <input type="button" value="confirm" id = "confirmDel" class= "submit" >
+                    <input type="button" value="Cancel" id = "delCancel" class = "cancel" onclick="ToggleConfirmDeletePopUp()">         
                 </div>
             </span>
         </div>

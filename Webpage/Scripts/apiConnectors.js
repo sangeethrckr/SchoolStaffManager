@@ -28,3 +28,16 @@ async function DeleteStaff(staffId){
 
   return response;
 }
+
+async function UpdateStaff(staffId,putBody){
+  url = "http://schoolstaff.dev.com/api/staff/"+staffId;
+  const response =  await fetch(url, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: putBody
+});
+
+  return response;
+}

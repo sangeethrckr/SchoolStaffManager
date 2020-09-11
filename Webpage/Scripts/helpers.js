@@ -32,24 +32,39 @@ function ShowStaffPage(staffType){
 
     document.getElementById("addStaffButton").onclick = function(){
         if(staffType == 0){
-            ToggleCreateTeacherPopUp();
+            ToggleCreateTeacherPopUp(1);
         }
         else{
-            ToggleCreateAdminOrSupportStaffPopUp();
+            ToggleCreateAdminOrSupportStaffPopUp(1);
         }
     };
 
     document.getElementById("submit").onclick = function(){
-        CreateAdminOrSupportStaff(staffType);
+        if(this.dataset.task == 1){
+            console.log('create');
+            CreateAdminOrSupportStaff(staffType,1);
+        }
+        else{
+            
+            CreateAdminOrSupportStaff(staffType,2,this.dataset.staffId);
+        }
     };
 
     document.getElementById("submit2").onclick = function(){
-        CreateTeachingStaff(staffType);
+        //CreateTeachingStaff(staffType);
+        if(this.dataset.task == 1){
+            console.log('create');
+            CreateTeachingStaff(staffType,1);
+        }
+        else{
+            
+            CreateTeachingStaff(staffType,2,this.dataset.staffId);
+        }
     };
 }
 
 
-function CreateAdminOrSupportStaff(staffType){
+function CreateAdminOrSupportStaff(staffType,task,staffId){
     var name = document.getElementById("name").value;
     var houseName = document.getElementById("houseName").value;
     var city = document.getElementById("city").value;
@@ -61,24 +76,39 @@ function CreateAdminOrSupportStaff(staffType){
     
     
 
-    var postBody = CreatePostMethodBodyForAdminAndSupport(post,name,houseName,city,state,pin,phoneNumber,salary,staffType);
+    
 
-    CreateStaff(postBody)
-    .then(result=>
-        {
-            alert(result);
-            
-        })
-    .then(() =>{
-        ToggleCreateAdminOrSupportStaffPopUp();
-        ShowStaffPage(staffType);
-    });
+    if(task == 1){
+        var postBody = CreatePostMethodBodyForAdminAndSupport(post,name,houseName,city,state,pin,phoneNumber,salary,staffType);
+        CreateStaff(postBody)
+        .then(result=>
+            {
+                console.log(result);
+                
+            })
+        .then(() =>{
+            ToggleCreateAdminOrSupportStaffPopUp();
+            ShowStaffPage(staffType);
+        });
+    }
+    else{
+        var putBody = CreatePutMethodBody(name,houseName,city,state,pin,phoneNumber,salary,post);
+        UpdateStaff(staffId,putBody)
+        .then(result=>{
+            console.log(result);
+            })
+        .then(()=>{
+            ToggleCreateAdminOrSupportStaffPopUp();
+            ShowStaffPage(staffType);
+        });
+        //console.log('update' + staffId);
+    }
     
     
     
 }
 
-function CreateTeachingStaff(staffType){
+function CreateTeachingStaff(staffType,task,staffId){
     var postBody;
 
     var name = document.getElementById("name2").value;
@@ -90,24 +120,57 @@ function CreateTeachingStaff(staffType){
     var salary = parseFloat(document.getElementById("salary2").value);
     var subject = document.getElementById("subject2").value;
     var classAssigned = document.getElementById("classAssigned2").value;
-    postBody = CreatePostMethodBodyForTeaching(subject,classAssigned,name,houseName,city,state,pin,phoneNumber,salary);
+    
+    
 
-    //document.write(postBody.toString());
-    var body = postBody.toString();
+    if(task == 1){
+        postBody = CreatePostMethodBodyForTeaching(subject,classAssigned,name,houseName,city,state,pin,phoneNumber,salary);
+        CreateStaff(postBody)
+        .then(result=>
+            {
+                console.log(result);
+                
+            })
+        .then(() =>{
+            ToggleCreateTeacherPopUp();
+            ShowStaffPage(staffType);
+        });
+    }
+    else{
+        var putBody = CreatePutMethodBody(name,houseName,city,state,pin,phoneNumber,salary,classAssigned);
+        UpdateStaff(staffId,putBody)
+        .then(result=>{
+            console.log(result);
+            })
+        .then(()=>{
+            ToggleCreateTeacherPopUp();
+            ShowStaffPage(staffType);
+        });
+        //console.log('update' + staffId);
+    }
     
-    CreateStaff(body)
-    .then(result=>
+    
+    
+}
+
+function CreatePutMethodBody(name,houseName,city,state,pin,phoneNumber,salary,specificData){
+    var result = JSON.stringify(
         {
-            alert(result);
-            
-        })
-    .then(() =>{
-        ToggleCreateTeacherPopUp();
-        ShowStaffPage(staffType);
-    });
-    
-    
-    
+        Name:name,
+        Address:{
+            HouseName:houseName,
+            City:city,
+            State:state,
+            Pin:pin
+        },
+        PhoneNumber:phoneNumber,
+        Salary:salary,
+        SpecificData:specificData
+        }
+        );
+
+    return result;
+
 }
 
 
@@ -158,15 +221,39 @@ function CreatePostMethodBodyForTeaching(subject,classAssigned,name,houseName,ci
 
 
 
-function ToggleCreateAdminOrSupportStaffPopUp() {
+function ToggleCreateAdminOrSupportStaffPopUp(task,staffId,name,houseName,city,state,pin,phoneNumber,salary,post) {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
-  
+    document.getElementById("submit").dataset.task = task;
+    document.getElementById("submit").dataset.staffId = staffId;
+    if(task == 2){
+    document.getElementById("name").value = name;
+    document.getElementById("houseName").value = houseName;
+    document.getElementById("city").value = city;
+    document.getElementById("state").value = state;
+    document.getElementById("pin").value = pin;
+    document.getElementById("phoneNumber").value = phoneNumber;
+    document.getElementById("salary").value = salary;
+    document.getElementById("post").value = post;
+    }
   }
 
-function ToggleCreateTeacherPopUp() {
-var popup = document.getElementById("myPopup2");
-popup.classList.toggle("show");
+function ToggleCreateTeacherPopUp(task,staffId,name,houseName,city,state,pin,phoneNumber,salary,subject,classAssigned) {
+    var popup = document.getElementById("myPopup2");
+    popup.classList.toggle("show");
+    document.getElementById("submit2").dataset.task = task;
+    document.getElementById("submit2").dataset.staffId = staffId;
+    if(task == 2){
+        document.getElementById("name2").value = name;
+        document.getElementById("houseName2").value = houseName;
+        document.getElementById("city2").value = city;
+        document.getElementById("state2").value = state;
+        document.getElementById("pin2").value = pin;
+        document.getElementById("phoneNumber2").value = phoneNumber;
+        document.getElementById("salary2").value = salary;
+        document.getElementById("subject2").value = subject;
+        document.getElementById("classAssigned2").value = classAssigned;
+        }
 }
 
 function ToggleConfirmDeletePopUp(staffId,staffType) {
@@ -182,7 +269,7 @@ document.getElementById("confirmDel").onclick = function(){
 function DeleteStaffFromTable(staffId,staffType){
     DeleteStaff(staffId)
     .then(data=>{
-        alert("Staff Deleted");
+        console.log(data);
     })
     .then(() =>{
         ToggleConfirmDeletePopUp(staffId);

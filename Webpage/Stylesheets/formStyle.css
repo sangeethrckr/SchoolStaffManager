@@ -22,7 +22,7 @@ input[type=text] {
 
  
 
-  .submit,#cancel {
+  .submit,.cancel {
     width: 30%;
     background-color: #333;
     color: white;
@@ -33,7 +33,16 @@ input[type=text] {
     cursor: pointer;
   }
 
-  #cancel{
+  .cancel{
     background-color: #e23630;
   }
+
+  .confirm{
+    height: 200px;
+    
+  }
   
+  #confirm-text{
+    padding:30px 0px;
+    font-size: 18px;
+  }
