@@ -1,7 +1,9 @@
 #staffTable {
-    display: table;
+    
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 4px solid rgba(122, 117, 117, 0.438);
     border-collapse: collapse;
+    
     width: 80%;
     margin:auto;
     margin-top: 10px;
@@ -9,24 +11,28 @@
   }
   
 #staffTable td, #staffTable th {
-border: 1px solid #ddd;
+
 padding: 8px;
 }
 
-#staffTable tr{background-color: whitesmoke;}
+#staffTable tr{
+  background-color: whitesmoke;
+  border: 2px solid rgba(122, 117, 117, 0.493);
+}
 
-#staffTable tr:nth-child(even){background-color: #daebf0;}
+/* #staffTable tr:nth-child(even){background-color: #daebf0;}
 
-#staffTable tr:nth-child(odd){background-color:rgb(194, 206, 209);}
+#staffTable tr:nth-child(odd){background-color:rgb(194, 206, 209);} */
 
-/* #staffTable tr:hover {background-color: rgb(148, 147, 147);} */
+#staffTable tr:hover {background-color:rgb(221, 217, 217)}
 
 #staffTable th {
 padding-top: 12px;
 padding-bottom: 12px;
 text-align: left;
-background-color: #254e58;
-color: white;
+background-color: #7da4aa80;
+color: rgb(0, 0, 0);
+font-size: 18px;
 }
 
 

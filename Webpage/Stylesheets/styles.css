@@ -1,11 +1,11 @@
 body{
     
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family:'Cambria, Cochin, Georgia, Times, 'Times New Roman', serif';
     margin: 0;
 }
 
 .header{
-    background-color: #254e58;
+    background-color: #254e58e0;
     color: whitesmoke;
     padding: 10px;
     padding-left: 20px;
@@ -45,7 +45,7 @@ body{
 }
 
 #addStaffButton{
-    background-color: #254e58;
+    background-color: #254e58d7;
     border: none;
     font-size: 16px;
     margin-left: 93%;
@@ -56,6 +56,7 @@ body{
     padding: 14px 16px;
     text-decoration: none;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 5%;
     
 }
 
@@ -71,7 +72,7 @@ height: 100vh;
 float: left;
 
 width: 100%;
-background-color: #88bdbc ;
+background-color: #e6faff ;
 }
 
 
@@ -88,9 +89,9 @@ clear: both;
     left: 55%;
     top: 55%;
     width: 50%;
-    /* -ms-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
     -moz-transform:translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%); */
+    -webkit-transform: translate(-50%,-50%);
      transform: translate(-50%,-50%);
     
     
@@ -130,7 +131,19 @@ clear: both;
 .confirm{
   background-color: #254e58;
 }
+
+.pagination-button{
+
+  padding: 10px 20px;
+  color: white;
+  background-color: #254e58c4;
+  border: 1px solid white;
+  border-radius: 10%;
+}
   
+#first-page{
+  margin-left: 10%;
+}
 
 /* .column.left{
     width: 15%;
