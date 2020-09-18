@@ -4,10 +4,11 @@
     <tr>
         
         <th *ngFor = "let heading of headers">{{heading}}</th>
+        <th>Delete</th>
         
     </tr>
 
-    <tr *ngFor = "let staff of lstStaff" routerLink = "/form/update/{{staffType}}" >
+    <tr *ngFor = "let staff of lstStaff" routerLink = "/form/update/{{staffType}}" (click) = "collectData(staff)" >
         
         <td>{{staff.Name}}</td>
         <td>{{staff.Address.HouseName}},{{staff.Address.City}},{{staff.Address.State}},{{staff.Address.Pin}}</td>
@@ -16,6 +17,7 @@
         <td *ngIf = "staffType == 1">{{staff.Subject}}</td>
         <td *ngIf = "staffType == 1">{{staff.AssignedClass}}</td>
         <td *ngIf = "staffType != 1">{{staff.Post}}</td>
+        <td><input type="button" value="Delete" id = "delButton" (click) = "delete()"></td>
         
     </tr>
 

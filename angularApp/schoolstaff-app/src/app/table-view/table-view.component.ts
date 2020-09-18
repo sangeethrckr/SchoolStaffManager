@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, OnChanges } from '@angular/core';
 import { ApiConnectorsService } from '../api-connectors.service';
+import { CollectStaffDataService } from '../collect-staff-data.service';
 
 import {  Staff } from '../staff';
 
@@ -20,6 +21,7 @@ export class TableViewComponent implements OnChanges {
 
   constructor(
     private apiConnector : ApiConnectorsService,
+    private collectStaffData : CollectStaffDataService,
   ) { }
 
   ngOnChanges():void{
@@ -33,6 +35,8 @@ export class TableViewComponent implements OnChanges {
     this.getStaff();
     
   }
+
+  
 
   
 
@@ -80,7 +84,18 @@ export class TableViewComponent implements OnChanges {
     }
   }
 
-  
+  // getId(id){
+  //   this.collectStaffData.collectData(id);
+  //   //console.log(id);
+  // }
+
+  collectData(staff : Staff){
+    this.collectStaffData.collectData(staff);
+  }
+
+  delete(){
+    event.stopPropagation();
+  }
 
     
     

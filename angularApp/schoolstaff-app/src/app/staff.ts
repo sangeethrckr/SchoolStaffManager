@@ -28,5 +28,5 @@ export class StaffForm{
     AssignedClass:string;
     Post :string;
     StaffType:number;
-
+    
 }

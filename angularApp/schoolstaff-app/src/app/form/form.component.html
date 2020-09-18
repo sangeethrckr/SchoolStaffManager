@@ -16,12 +16,18 @@
         <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)] = "staff.PhoneNumber"><br>
         <label for="salary">Salary</label>
         <input type="text" id="salary" name="salary" [(ngModel)] = "staff.Salary"><br>
+
+        <div *ngIf = "staffType!=1">
         <label for="post" id = "post">Post:</label>
         <input type="text" id="post-subject" name="post" [(ngModel)] = "staff.Post"><br><br>
-        <label for="post" id = "subject-label">Subject:</label>
-        <input type="text" id="subject" name="subject" [(ngModel)] = "staff.Subject"><br><br>
+        </div>
+
+        <div *ngIf = "staffType == 1">
+        <label for="subject" id = "subject-label">Subject:</label>
+        <input type="text" id="subject" name="subject" [(ngModel)] = "staff.Subject" ><br><br>
         <label for="classAssigned" id = "class-label">Class Assigned:</label>
         <input type="text" id="classAssigned2" name="classAssigned2" [(ngModel)] = "staff.AssignedClass"><br><br>
+        </div>
         
         <input type="button" value="Submit" class = "submit" id = "submit" (click) = "onSubmit()">
         <input type="button" value ="Cancel" class = "cancel" (click) = "goBack()">

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import {  Staff } from './staff';
+import {  Staff, StaffForm } from './staff';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +32,12 @@ export class ApiConnectorsService {
 
   }
 
-  createStaff(jsonBody : JSON) : Observable<Staff>{
+  createStaff(jsonBody : StaffForm) : Observable<Staff>{
     return this.http.post< Staff >(this.baseUrl ,jsonBody);
+  }
+
+  updateStaff(staffId: number, jsonBody : JSON) : Observable<Staff>{
+    return this.http.put< Staff >(this.baseUrl + '/' + staffId,jsonBody);
   }
 
 

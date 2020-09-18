@@ -9,6 +9,10 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { TableViewComponent } from './table-view/table-view.component';
 import { FormComponent } from './form/form.component';
 
+import { CollectStaffDataService } from './collect-staff-data.service';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,7 @@ import { FormComponent } from './form/form.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CollectStaffDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
