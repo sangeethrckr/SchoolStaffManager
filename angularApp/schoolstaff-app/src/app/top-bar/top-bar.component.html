@@ -1,0 +1,13 @@
+
+<div class="header">
+    <h1 >ABC School Staff Management</h1>
+</div>
+<div class="topnav">
+            
+    <input class = "navButton" type="button"  value="Teaching Staff" id = "teaching-navButton " (click) = "setStaffType(1)" />
+    <input class = "navButton" type="button"  value="Administrative Staff" id = "admin-navButton" (click) = "setStaffType(2)"/>
+    <input class = "navButton" type="button"  value="Support Staff" id = "support-navButton" (click) = "setStaffType(3)"/>
+
+</div>
+
+<app-table-view [staffType] = "selectedStaffType"></app-table-view>

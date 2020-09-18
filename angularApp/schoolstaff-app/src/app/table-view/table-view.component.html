@@ -1,0 +1,24 @@
+<input type="button" id="addStaffButton" value="Add Staff" routerLink = "/form/create/{{staffType}}">
+<table>
+
+    <tr>
+        
+        <th *ngFor = "let heading of headers">{{heading}}</th>
+        
+    </tr>
+
+    <tr *ngFor = "let staff of lstStaff" routerLink = "/form/update/{{staffType}}" >
+        
+        <td>{{staff.Name}}</td>
+        <td>{{staff.Address.HouseName}},{{staff.Address.City}},{{staff.Address.State}},{{staff.Address.Pin}}</td>
+        <td>{{staff.PhoneNumber}}</td>
+        <td>{{staff.Salary}}</td>
+        <td *ngIf = "staffType == 1">{{staff.Subject}}</td>
+        <td *ngIf = "staffType == 1">{{staff.AssignedClass}}</td>
+        <td *ngIf = "staffType != 1">{{staff.Post}}</td>
+        
+    </tr>
+
+</table>
+
+

@@ -1,0 +1,94 @@
+.form{
+    border-radius: 10px;
+    border-color: #333;
+    background-color: #254e58;
+    padding: 5px 30px;
+    width: 80%;
+    color: whitesmoke;
+}
+
+
+
+input[type=text] {
+    width: 100%;
+    
+    padding: 6px 20px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+ 
+
+  .submit,.cancel {
+    width: 30%;
+    background-color: rgb(149, 241, 121);
+    color: rgb(59, 58, 58);
+    padding: 10px 20px;
+    margin: 0px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .cancel{
+    background-color: #e23630;
+    color: rgb(255, 255, 255);
+  }
+
+  .confirm{
+    height: 200px;
+    background-color: #333;
+  }
+  
+  #confirm-text{
+    padding:30px 0px;
+    font-size: 18px;
+  }
+
+  
+.popup {
+  position:fixed;
+  left: 55%;
+  top: 55%;
+  width: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -moz-transform:translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+   transform: translate(-50%,-50%);
+  
+  
+}
+
+.popup .popuptext {
+  visibility: visible;
+  display: block;
+  width: 80%;
+  background-color: rgba(150, 140, 140, 0);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 3px 0;
+
+}
+
+
+/* .popup .show {
+  visibility: visible;
+  display: block;
+  
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+} */

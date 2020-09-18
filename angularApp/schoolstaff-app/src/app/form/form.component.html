@@ -1,0 +1,32 @@
+<div class="popup" >
+            
+    <form class="popuptext" id="myPopup">
+        <div class = "form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)] = "staff.Name"><br>  
+        <label for="houseName">Housename:</label>
+        <input type="text" id="houseName" name="houseName" [(ngModel)] = "staff.HouseName"><br>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" [(ngModel)] = "staff.City"><br>
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" [(ngModel)] = "staff.State"><br>
+        <label for="pin">PinCode</label>
+        <input type="text" id="pin" name="pin" [(ngModel)] = "staff.Pin"><br>
+        <label for="phoneNumber">Phone number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)] = "staff.PhoneNumber"><br>
+        <label for="salary">Salary</label>
+        <input type="text" id="salary" name="salary" [(ngModel)] = "staff.Salary"><br>
+        <label for="post" id = "post">Post:</label>
+        <input type="text" id="post-subject" name="post" [(ngModel)] = "staff.Post"><br><br>
+        <label for="post" id = "subject-label">Subject:</label>
+        <input type="text" id="subject" name="subject" [(ngModel)] = "staff.Subject"><br><br>
+        <label for="classAssigned" id = "class-label">Class Assigned:</label>
+        <input type="text" id="classAssigned2" name="classAssigned2" [(ngModel)] = "staff.AssignedClass"><br><br>
+        
+        <input type="button" value="Submit" class = "submit" id = "submit" (click) = "onSubmit()">
+        <input type="button" value ="Cancel" class = "cancel" (click) = "goBack()">
+        
+        </div>
+    </form>   
+            
+</div>
