@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
+// import { TopBarComponent } from './top-bar/top-bar.component';
 import { TableViewComponent } from './table-view/table-view.component';
 import { FormComponent } from './form/form.component';
 
@@ -16,7 +16,7 @@ import { CollectStaffDataService } from './collect-staff-data.service';
 @NgModule({
   declarations: [
     AppComponent,
-    TopBarComponent,
+    // TopBarComponent,
     TableViewComponent,
     FormComponent
   ],

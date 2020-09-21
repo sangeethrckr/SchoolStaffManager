@@ -33,6 +33,7 @@ text-align: left;
 background-color: #7da4aa80;
 color: rgb(0, 0, 0);
 font-size: 18px;
+
 }
 
 
@@ -66,4 +67,84 @@ font-size: 18px;
   
 }
 
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.navButton{
+  background-color: #333;
+  border: none;
+  font-size: 16px;
+  float: left;
+  display: block;
+  color: whitesmoke;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  
+}  
+
+.popup {
+  position:fixed;
+  left: 55%;
+  top: 55%;
+  width: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -moz-transform:translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+   transform: translate(-50%,-50%);
+  
+  
+}
+
+.popup .popuptext {
+  visibility: hidden;
+  display: none;
+  width: 80%;
+  background-color: rgba(150, 140, 140, 0);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 3px 0;
+
+}
+
+
+.popup .show {
+  visibility: visible;
+  display: block;
+  
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.submit,.cancel {
+  width: 30%;
+  background-color: rgb(149, 241, 121);
+  color: rgb(59, 58, 58);
+  padding: 10px 20px;
+  margin: 0px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel{
+  background-color: #e23630;
+  color: rgb(255, 255, 255);
+}
+
+.confirm{
+  height: 200px;
+  background-color: #333;
+}
+
+#confirm-text{
+  padding:30px 0px;
+  font-size: 18px;
+}
 

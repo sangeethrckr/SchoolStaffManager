@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { StaffForm} from '../staff'
+import { Staff } from '../staff'
 
 import { ApiConnectorsService } from '../api-connectors.service';
 import { CollectStaffDataService } from '../collect-staff-data.service';
@@ -14,7 +14,7 @@ import { CollectStaffDataService } from '../collect-staff-data.service';
 })
 export class FormComponent implements OnInit {
 
-  staff  = new StaffForm();
+  staff  = new Staff();
   
   jsonString : JSON;
   staffType : number;
@@ -29,9 +29,11 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.staffType = +this.route.snapshot.paramMap.get('staffType');
     this.task = this.route.snapshot.paramMap.get('task');
     if(this.task=='update'){
+      
       this.staff = this.collectStaffData.getData();
     }
   }
@@ -45,32 +47,31 @@ export class FormComponent implements OnInit {
   onSubmit(){
     if(this.task=='create'){
 
-      // if(this.staffType == 1){
-      //   this.jsonString = this.JsonStringifyCreateTeacher(this.staff.Subject,this.staff.AssignedClass,this.staff.Name,this.staff.HouseName,this.staff.City,this.staff.State,+this.staff.Pin,this.staff.PhoneNumber,+this.staff.Salary);
-      // // console.log(JSON.stringify(this.jsonString));
-      // }
-      // else{
-      //   this.jsonString = this.JsonStringifyCreateAdminSupport(this.staff.Post,this.staff.Name,this.staff.HouseName,this.staff.City,this.staff.State,+this.staff.Pin,this.staff.PhoneNumber,+this.staff.Salary,this.staffType-1);
+      if(this.staffType == 1){
+        this.jsonString = this.JsonStringifyCreateTeacher(this.staff.Subject,this.staff.AssignedClass,this.staff.Name,this.staff.Address.HouseName,this.staff.Address.City,this.staff.Address.State,+this.staff.Address.Pin,this.staff.PhoneNumber,+this.staff.Salary);
+      // console.log(JSON.stringify(this.jsonString));
+      }
+      else{
+        this.jsonString = this.JsonStringifyCreateAdminSupport(this.staff.Post,this.staff.Name,this.staff.Address.HouseName,this.staff.Address.City,this.staff.Address.State,+this.staff.Address.Pin,this.staff.PhoneNumber,+this.staff.Salary,this.staffType-1);
 
-      // }
-      this.apiConnector.createStaff(this.staff)
-          .subscribe(staff => console.log(staff));
-      this.goBack();
+      }
+      this.apiConnector.createStaff(this.jsonString)
+          .subscribe(()=>{ this.goBack() });
 
     }
 
     else{
       if(this.staffType == 1){
-        this.jsonString = this.JsonStringifyUpdate(this.staff.Name,this.staff.HouseName,this.staff.City,this.staff.State,this.staff.Pin,this.staff.PhoneNumber,this.staff.Salary,this.staff.AssignedClass);
+        this.jsonString = this.JsonStringifyUpdate(this.staff.Name,this.staff.Address.HouseName,this.staff.Address.City,this.staff.Address.State,this.staff.Address.Pin,this.staff.PhoneNumber,this.staff.Salary,this.staff.AssignedClass);
       }
       else{
-        this.jsonString = this.JsonStringifyUpdate(this.staff.Name,this.staff.HouseName,this.staff.City,this.staff.State,this.staff.Pin,this.staff.PhoneNumber,this.staff.Salary,this.staff.Post);
+        this.jsonString = this.JsonStringifyUpdate(this.staff.Name,this.staff.Address.HouseName,this.staff.Address.City,this.staff.Address.State,this.staff.Address.Pin,this.staff.PhoneNumber,this.staff.Salary,this.staff.Post);
       }
       
       //console.log("update staff" + this.staff.StaffId);
       this.apiConnector.updateStaff(this.staff.StaffId,this.jsonString)
-          .subscribe(staff => console.log(staff));
-      this.goBack();
+          .subscribe(()=>{ this.goBack() });
+      
     }
     
 

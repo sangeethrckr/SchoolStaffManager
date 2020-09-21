@@ -1,3 +1,4 @@
+
 <div class="popup" >
             
     <form class="popuptext" id="myPopup">
@@ -5,13 +6,13 @@
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" [(ngModel)] = "staff.Name"><br>  
         <label for="houseName">Housename:</label>
-        <input type="text" id="houseName" name="houseName" [(ngModel)] = "staff.HouseName"><br>
+        <input type="text" id="houseName" name="houseName" [(ngModel)] = "staff.Address.HouseName"><br>
         <label for="city">City</label>
-        <input type="text" id="city" name="city" [(ngModel)] = "staff.City"><br>
+        <input type="text" id="city" name="city" [(ngModel)] = "staff.Address.City"><br>
         <label for="state">State</label>
-        <input type="text" id="state" name="state" [(ngModel)] = "staff.State"><br>
+        <input type="text" id="state" name="state" [(ngModel)] = "staff.Address.State"><br>
         <label for="pin">PinCode</label>
-        <input type="text" id="pin" name="pin" [(ngModel)] = "staff.Pin"><br>
+        <input type="text" id="pin" name="pin" [(ngModel)] = "staff.Address.Pin"><br>
         <label for="phoneNumber">Phone number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)] = "staff.PhoneNumber"><br>
         <label for="salary">Salary</label>

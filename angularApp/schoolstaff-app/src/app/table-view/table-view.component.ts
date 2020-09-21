@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, OnChanges } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ApiConnectorsService } from '../api-connectors.service';
 import { CollectStaffDataService } from '../collect-staff-data.service';
 
@@ -9,9 +9,9 @@ import {  Staff } from '../staff';
   templateUrl: './table-view.component.html',
   styleUrls: ['./table-view.component.css']
 })
-export class TableViewComponent implements OnChanges {
+export class TableViewComponent implements OnInit {
 
-  @Input() staffType : number ;
+  staffType : number ;
 
   json :JSON;
 
@@ -24,10 +24,7 @@ export class TableViewComponent implements OnChanges {
     private collectStaffData : CollectStaffDataService,
   ) { }
 
-  ngOnChanges():void{
-    this.setHeaders();
-    this.getStaff();
-  }
+ 
 
   ngOnInit():void{
     this.staffType = 1;
@@ -36,66 +33,57 @@ export class TableViewComponent implements OnChanges {
     
   }
 
-  
+  ChangeStaffType(staffType : number){
+    this.staffType = staffType;
+    this.setHeaders();
+    this.getStaff();
+    
+  }
 
   
-
   getStaff(){
 
-    switch(this.staffType){
-      case 1:
-        this.apiConnector.getStaff(1)
-        .subscribe((data )=>{
-          this.lstStaff = data;
-          
-        });
-        break;
-        
-      case 2:
-        this.apiConnector.getStaff(2)
-        .subscribe((data )=>{
-          this.lstStaff = data;
-          
-        });
-        break;
-      case 3:
-        this.apiConnector.getStaff(3)
-        .subscribe((data )=>{
-          this.lstStaff = data;
-          
-        });
-        break;
-    }
-
+    this.apiConnector.getStaff(this.staffType)
+      .subscribe((data )=>{
+        // debugger;
+        this.lstStaff = data;});
+    
   }
 
   setHeaders(){
+    this.headers = ['Name','Address','Phonenumber','Salary'];
     switch(this.staffType){
       case 1:
-        this.headers = ['Name','Address','Phonenumber','Salary','Subject','Class'];
+        this.headers.push('Subject','Class');
         break;
         
       case 2:
-        this.headers = ['Name','Address','Phonenumber','Salary','Post'];
-        break;
       case 3:
-        this.headers = ['Name','Address','Phonenumber','Salary','Post'];
+        this.headers.push('Post');
         break;
     }
   }
 
-  // getId(id){
-  //   this.collectStaffData.collectData(id);
-  //   //console.log(id);
-  // }
+ 
 
   collectData(staff : Staff){
     this.collectStaffData.collectData(staff);
   }
 
-  delete(){
+  ToggleDeletePopup(){
     event.stopPropagation();
+    var popup = document.getElementById("delConfirm");
+    popup.classList.toggle("show");
+    // this.apiConnector.deleteStaff(staffId).subscribe(()=>{this.getStaff()});
+    
   }
+
+  DeleteStaff(staffId : number){
+    this.apiConnector.deleteStaff(staffId).subscribe(()=>{this.getStaff()});
+    this.ToggleDeletePopup();
+  }
+
+  
 
     
     

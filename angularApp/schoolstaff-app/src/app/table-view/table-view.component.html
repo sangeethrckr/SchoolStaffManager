@@ -1,3 +1,12 @@
+<div class="topnav">
+            
+    <input class = "navButton" type="button"  value="Teaching Staff" id = "teaching-navButton " (click) = "ChangeStaffType(1)" />
+    <input class = "navButton" type="button"  value="Administrative Staff" id = "admin-navButton" (click) = "ChangeStaffType(2)"/>
+    <input class = "navButton" type="button"  value="Support Staff" id = "support-navButton" (click) = "ChangeStaffType(3)"/>
+
+</div>
+
+
 <input type="button" id="addStaffButton" value="Add Staff" routerLink = "/form/create/{{staffType}}">
 <table>
 
@@ -17,10 +26,22 @@
         <td *ngIf = "staffType == 1">{{staff.Subject}}</td>
         <td *ngIf = "staffType == 1">{{staff.AssignedClass}}</td>
         <td *ngIf = "staffType != 1">{{staff.Post}}</td>
-        <td><input type="button" value="Delete" id = "delButton" (click) = "delete()"></td>
+        <td><input type="button" value="Delete" id = "delButton" (click) = "ToggleDeletePopup()"></td>
+        
+        <div class="popup" >
+            <span class="popuptext" id="delConfirm">
+                <div class = "confirm">
+                    <p id ="confirm-text">Selected staff will be deleted. Are you sure?</p>
+                    <input type="button" value="Confirm" id = "confirmDel" class= "submit" (click) = "DeleteStaff(staff.StaffId)" >
+                    <input type="button" value="Cancel" id = "delCancel" class = "cancel" (click) = "ToggleDeletePopup()">         
+                </div>
+            </span>
+        </div>
         
     </tr>
 
 </table>
+
+    
 
 
