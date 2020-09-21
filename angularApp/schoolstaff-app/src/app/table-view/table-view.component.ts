@@ -17,6 +17,8 @@ export class TableViewComponent implements OnInit {
 
   lstStaff : Staff[];
 
+  selectedStaff = [];
+
   headers = [];
 
   constructor(
@@ -28,13 +30,6 @@ export class TableViewComponent implements OnInit {
 
   ngOnInit():void{
     this.staffType = 1;
-    this.setHeaders();
-    this.getStaff();
-    
-  }
-
-  ChangeStaffType(staffType : number){
-    this.staffType = staffType;
     this.setHeaders();
     this.getStaff();
     
@@ -83,7 +78,77 @@ export class TableViewComponent implements OnInit {
     this.ToggleDeletePopup();
   }
 
+  clickCheckBox(){
+    event.stopPropagation();
+  }
   
+  checkRow(e,staffId : number){
+      if(e.target.checked){
+        this.selectedStaff.push(staffId);
+        //console.log(this.selectedStaff);
+      }
+      else{
+        const index = this.selectedStaff.indexOf(staffId, 0);
+        if (index > -1) {
+          this.selectedStaff.splice(index, 1);
+          //console.log(this.selectedStaff);
+        }
+
+      }
+
+  }
+
+  ToggleMultipleDeletePopUp(){
+    var popup = document.getElementById("multipleDelConfirm");
+    popup.classList.toggle("show");
+    console.log(this.selectedStaff);
+  }
+
+  // DeleteMultiple(){
+  //   for(var i = 0;i<this.selectedStaff.length;i++){
+  //     //console.log(this.selectedStaff[i]);
+  //     this.apiConnector.deleteStaff(this.selectedStaff[i]).subscribe(()=>{this.getStaff()});
+  //   }
+  //   //this.getStaff();
+  //   this.ToggleMultipleDeletePopUp();
+  // }
+
+  DeleteMultiple(){
+    this.apiConnector.deleteMultipleStaff(this.selectedStaff).subscribe(()=>{this.getStaff()});
+      
+      //this.getStaff();
+      this.ToggleMultipleDeletePopUp();
+  }
+
+
+
+  ChangeStaffType(staffType : number){
+    this.staffType = staffType;
+    this.setHeaders();
+    this.getStaff();
+
+    switch(staffType){
+      case 1:
+        document.getElementById("TnavButton").className = "navButton   active";
+        document.getElementById("AnavButton").className = "navButton";
+        document.getElementById("SnavButton").className = "navButton";
+        break;
+      case 2:
+        document.getElementById("TnavButton").className = "navButton";
+        document.getElementById("AnavButton").className = "navButton   active";
+        document.getElementById("SnavButton").className = "navButton";
+        break;
+        break;
+      case 3:
+        document.getElementById("TnavButton").className = "navButton";
+        document.getElementById("AnavButton").className = "navButton";
+        document.getElementById("SnavButton").className = "navButton   active";
+        break;
+        break;
+    }
+    
+    
+  }
 
     
     

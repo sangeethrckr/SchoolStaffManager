@@ -62,6 +62,18 @@ export class ApiConnectorsService {
     );
   }
 
+  deleteMultipleStaff(lstStaffId : number[]){
+    var appendToUrl = "?";
+    lstStaffId.forEach(function(staffId){
+      appendToUrl += "ids=" + staffId + "&";
+    })
+    //console.log(appendToUrl);
+    return this.http.delete(this.baseUrl + '/' + appendToUrl)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       
