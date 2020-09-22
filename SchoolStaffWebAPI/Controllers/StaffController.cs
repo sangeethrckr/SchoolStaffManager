@@ -86,5 +86,15 @@ namespace SchoolStaffWebAPI.Controllers
         {
             staffOperator.DeleteStaff(id);
         }
+
+        [HttpDelete]
+        public void DeleteMultipleStaff([FromUri] int[] ids)
+        {
+            foreach(int id in ids)
+            {
+                staffOperator.DeleteStaff(id);
+            }
+        }
+
     }
 }

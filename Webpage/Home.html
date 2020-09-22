@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Stylesheets/styles.css">
+    <link rel= "stylesheet" href="Stylesheets/tableStyle.css">
+    <link rel= "stylesheet" href="Stylesheets/formStyle.css">
+    <script src="Scripts/apiConnectors.js"></script>
+    <script src="Scripts/createTableFromJson.js"></script>
+    <script src="Scripts/helpers.js"></script>
+    <script src="Scripts/formActions.js"></script>
+    <script src="Scripts/pagination.js"></script>
+    
+</head>
+
+<body>
+    <div class="header">
+        <h1 >ABC School Staff Management</h1>
+    </div>
+        
+    <div class="column">
+
+        <div class="topnav">
+            
+            <input class = "navButton" type="button" onclick="ShowStaffPage(0)" value="Teaching Staff" id = "teaching-navButton" />
+            <input class = "navButton" type="button" onclick="ShowStaffPage(1)" value="Administrative Staff" id = "admin-navButton"/>
+            <input class = "navButton" type="button" onclick="ShowStaffPage(2)" value="Support Staff" id = "support-navButton"/>
+        </div>
+        
+        
+        <div id = "showData"></div>
+        <div class="popup" >
+            
+            <form class="popuptext" id="myPopup">
+                <div class = "form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name"><br>  
+                <label for="houseName">Housename:</label>
+                <input type="text" id="houseName" name="houseName"><br>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city"><br>
+                <label for="state">State</label>
+                <input type="text" id="state" name="state"><br>
+                <label for="pin">PinCode</label>
+                <input type="text" id="pin" name="pin"><br>
+                <label for="phoneNumber">Phone number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber"><br>
+                <label for="salary">Salary</label>
+                <input type="text" id="salary" name="salary"><br>
+                <label for="post" id = "post-label">Post/Subject:</label>
+                <input type="text" id="post-subject" name="post"><br><br>
+                <label for="classAssigned" id = "class-label">Class Assigned:</label>
+                <input type="text" id="classAssigned2" name="classAssigned2"><br><br>
+                <input type="button" value="Submit" class = "submit" id = "submit" >
+                <input type="button" value ="Cancel" class = "cancel" onclick="ToggleFormPopup(1)">
+                </div>
+            </form>   
+                    
+        </div>
+
+   
+
+        <div class="popup" >
+            <span class="popuptext" id="delConfirm">
+                <div class = "confirm">
+                    <p id ="confirm-text">Selected staff will be deleted. Are you sure?</p>
+                    <input type="button" value="Confirm" id = "confirmDel" class= "submit" >
+                    <input type="button" value="Cancel" id = "delCancel" class = "cancel" onclick="ToggleConfirmPopUp()">         
+                </div>
+            </span>
+        </div>
+
+    </div>    
+    <script>
+        ShowStaffPage(0);
+        
+    </script>
+</body>
+
+</html>
+
+
+
