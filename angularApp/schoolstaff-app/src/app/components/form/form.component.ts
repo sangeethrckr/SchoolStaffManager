@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { Staff } from '../staff'
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+// import { Location } from '@angular/common';
+// import { ActivatedRoute } from '@angular/router';
+import { Staff } from '../../models/staff'
 
-import { ApiConnectorsService } from '../api-connectors.service';
-import { CollectStaffDataService } from '../collect-staff-data.service';
+import { ApiConnectorsService } from '../../services/api-connectors.service';
+import { CollectStaffDataService } from '../../services/collect-staff-data.service';
 
 
 @Component({
@@ -12,40 +12,40 @@ import { CollectStaffDataService } from '../collect-staff-data.service';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnChanges {
 
   staff  = new Staff();
   
   jsonString : JSON;
-  staffType : number;
+  @Input() staffType : number;
 
-  task : string;
+  @Input() task : number;
 
   constructor(
-    private location: Location,
-    private route: ActivatedRoute,
+    // private location: Location,
+    // private route: ActivatedRoute,
     private apiConnector : ApiConnectorsService,
     private collectStaffData : CollectStaffDataService,
   ) { }
 
   ngOnInit(): void {
-    
-    this.staffType = +this.route.snapshot.paramMap.get('staffType');
-    this.task = this.route.snapshot.paramMap.get('task');
-    if(this.task=='update'){
-      
+  }
+
+  ngOnChanges():void{
+    if(this.task==2){
       this.staff = this.collectStaffData.getData();
     }
   }
 
   goBack(): void {
-    this.location.back();
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
   }
 
   
 
   onSubmit(){
-    if(this.task=='create'){
+    if(this.task==1){
 
       if(this.staffType == 1){
         this.jsonString = this.JsonStringifyCreateTeacher(this.staff.Subject,this.staff.AssignedClass,this.staff.Name,this.staff.Address.HouseName,this.staff.Address.City,this.staff.Address.State,+this.staff.Address.Pin,this.staff.PhoneNumber,+this.staff.Salary);

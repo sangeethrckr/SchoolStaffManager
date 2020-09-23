@@ -63,8 +63,8 @@ input[type=text] {
 }
 
 .popup .popuptext {
-  visibility: visible;
-  display: block;
+  visibility: hidden;;
+  display: none;
   width: 80%;
   background-color: rgba(150, 140, 140, 0);
   color: #fff;
@@ -75,7 +75,7 @@ input[type=text] {
 }
 
 
-/* .popup .show {
+.popup .show {
   visibility: visible;
   display: block;
   
@@ -91,4 +91,4 @@ input[type=text] {
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
-} */
+}

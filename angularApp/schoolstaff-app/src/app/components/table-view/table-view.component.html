@@ -7,7 +7,7 @@
 </div>
 
 
-<input type="button" class="addStaffButton" value="Add Staff" routerLink = "/form/create/{{staffType}}">
+<input type="button" class="addStaffButton" value="Add Staff" (click) = "ToggleFormPopUp(1)">
 
 <table>
 
@@ -19,7 +19,7 @@
         
     </tr>
 
-    <tr *ngFor = "let staff of lstStaff" routerLink = "/form/update/{{staffType}}" (click) = "collectData(staff)" >
+    <tr *ngFor = "let staff of lstStaff"  (click) = "collectData(staff);ToggleFormPopUp(2)" >
         
         <td>{{staff.Name}}</td>
         <td>{{staff.Address.HouseName}},{{staff.Address.City}},{{staff.Address.State}},{{staff.Address.Pin}}</td>
@@ -56,5 +56,9 @@
     </span>
 </div>
     
+<app-form
+[task] = "task"
+[staffType] = "staffType">
+</app-form>
 
 

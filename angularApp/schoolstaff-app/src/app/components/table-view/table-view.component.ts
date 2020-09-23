@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
-import { ApiConnectorsService } from '../api-connectors.service';
-import { CollectStaffDataService } from '../collect-staff-data.service';
+import { ApiConnectorsService } from '../../services/api-connectors.service';
+import { CollectStaffDataService } from '../../services/collect-staff-data.service';
 
-import {  Staff } from '../staff';
+import {  Staff } from '../../models/staff';
 
 @Component({
   selector: 'app-table-view',
@@ -20,6 +20,8 @@ export class TableViewComponent implements OnInit {
   selectedStaff = [];
 
   headers = [];
+
+  task : number;
 
   constructor(
     private apiConnector : ApiConnectorsService,
@@ -104,14 +106,13 @@ export class TableViewComponent implements OnInit {
     console.log(this.selectedStaff);
   }
 
-  // DeleteMultiple(){
-  //   for(var i = 0;i<this.selectedStaff.length;i++){
-  //     //console.log(this.selectedStaff[i]);
-  //     this.apiConnector.deleteStaff(this.selectedStaff[i]).subscribe(()=>{this.getStaff()});
-  //   }
-  //   //this.getStaff();
-  //   this.ToggleMultipleDeletePopUp();
-  // }
+  ToggleFormPopUp(task){
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+    this.task = task;
+  }
+
+  
 
   DeleteMultiple(){
     this.apiConnector.deleteMultipleStaff(this.selectedStaff).subscribe(()=>{this.getStaff()});

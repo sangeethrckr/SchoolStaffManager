@@ -3,7 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import {  Staff } from './staff';
+import {  Staff } from '../models/staff';
+import * as myGlobals from '../utils/global';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ApiConnectorsService {
     private http:HttpClient
   ) { }
 
-  baseUrl = "http://schoolstaff.dev.com/api/staff";
+  baseUrl = myGlobals.baseUrl;
 
   
 
