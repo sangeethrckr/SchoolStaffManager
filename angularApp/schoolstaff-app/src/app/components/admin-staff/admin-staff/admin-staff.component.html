@@ -10,7 +10,7 @@
         
     </tr>
 
-    <tr *ngFor = "let staff of lstStaff"  (click) = "collectData(staff);ToggleFormPopUp(2)" >
+    <tr *ngFor = "let staff of lstStaff"  (click) = "this.collectStaffData.collectData(staff);ToggleFormPopUp(2)" >
         
         <td>{{staff.Name}}</td>
         <td>{{staff.Address.HouseName}},{{staff.Address.City}},{{staff.Address.State}},{{staff.Address.Pin}}</td>
@@ -23,7 +23,7 @@
         <td><input type="checkbox"  id="isCheckBox" (change)="checkRow($event,staff.StaffId)" (click)="clickCheckBox()"/></td>
         
         <div class="popup" >
-            <span class="popuptext" id="delConfirm">
+            <span class="popuptext" id="delConfirm" *ngIf = "showDeleteConfirmation">
                 <div class = "confirm">
                     <p id ="confirm-text">Selected staff will be deleted. Are you sure?</p>
                     <input type="button" value="Confirm" id = "confirmDel" class= "submit" (click) = "DeleteStaff(staff.StaffId)" >
@@ -38,7 +38,7 @@
 
 <input type="button" class="addStaffButton" id ="delStaffButton" value="Delete Staff" (click) = "ToggleMultipleDeletePopUp()" >
 <div class="popup" >
-    <span class="popuptext" id="multipleDelConfirm">
+    <span class="popuptext" id="multipleDelConfirm" *ngIf = "showMultipleDeleteConfirmation">
         <div class = "confirm">
             <p id ="confirm-text">Selected staffs will be deleted. Are you sure?</p>
             <input type="button" value="Confirm" id = "confirmDel" class= "submit" (click) = "DeleteMultiple()" >
@@ -47,9 +47,13 @@
     </span>
 </div>
     
+<div *ngIf = "showForm">
 <app-form
 [task] = "task"
-[staffType] = "staffType">
+[staffType] = "staffType"
+(newItemEvent)="getStaff();ToggleFormPopUp(1)"
+(cancelEvent) = "ToggleFormPopUp(1)">
 </app-form>
+</div>
 
 <!-- <p>Works</p> -->

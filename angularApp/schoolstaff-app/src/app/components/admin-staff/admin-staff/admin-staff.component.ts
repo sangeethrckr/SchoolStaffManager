@@ -14,7 +14,7 @@ export class AdminStaffComponent implements OnInit {
 
   staffType : number ;
 
-  json :JSON;
+  // json :JSON;
 
   lstStaff : Staff[];
 
@@ -23,6 +23,10 @@ export class AdminStaffComponent implements OnInit {
   headers = ['Name','Address','Phonenumber','Salary','Post'];
 
   task : number;
+
+  showForm : boolean = false;
+  showDeleteConfirmation : boolean =false;
+  showMultipleDeleteConfirmation : boolean =false;
 
   constructor(
     private apiConnector : ApiConnectorsService,
@@ -64,16 +68,23 @@ export class AdminStaffComponent implements OnInit {
 
  
 
-  collectData(staff : Staff){
-    this.collectStaffData.collectData(staff);
+  // collectData(staff : Staff){
+  //   this.collectStaffData.collectData(staff);
+  // }
+
+  ToggleFormPopUp(task){
+    this.showForm = !this.showForm;
+    this.task = task;
   }
 
   ToggleDeletePopup(){
     event.stopPropagation();
-    var popup = document.getElementById("delConfirm");
-    popup.classList.toggle("show");
-    // this.apiConnector.deleteStaff(staffId).subscribe(()=>{this.getStaff()});
+    this.showDeleteConfirmation = !this.showDeleteConfirmation;
     
+  }
+
+  ToggleMultipleDeletePopUp(){
+    this.showMultipleDeleteConfirmation = !this.showMultipleDeleteConfirmation;
   }
 
   DeleteStaff(staffId : number){
@@ -101,17 +112,17 @@ export class AdminStaffComponent implements OnInit {
 
   }
 
-  ToggleMultipleDeletePopUp(){
-    var popup = document.getElementById("multipleDelConfirm");
-    popup.classList.toggle("show");
-    console.log(this.selectedStaff);
-  }
+  // ToggleMultipleDeletePopUp(){
+  //   var popup = document.getElementById("multipleDelConfirm");
+  //   popup.classList.toggle("show");
+  //   console.log(this.selectedStaff);
+  // }
 
-  ToggleFormPopUp(task){
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-    this.task = task;
-  }
+  // ToggleFormPopUp(task){
+  //   var popup = document.getElementById("myPopup");
+  //   popup.classList.toggle("show");
+  //   this.task = task;
+  // }
 
   
 

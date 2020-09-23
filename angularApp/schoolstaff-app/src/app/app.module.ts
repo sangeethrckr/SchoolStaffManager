@@ -14,7 +14,8 @@ import { SupportStaffModule} from './components/support-staff/support-staff.modu
 // import { TableViewComponent } from './components/table-view/table-view.component';
 // import { FormComponent } from './components/form/form.component';
 
-import { CollectStaffDataService } from './services/collect-staff-data.service';
+// import { CollectStaffDataService } from './services/collect-staff-data.service';
+// import {HelpersService } from './services/helpers.service'
 
 
 
@@ -35,7 +36,7 @@ import { CollectStaffDataService } from './services/collect-staff-data.service';
     SupportStaffModule,
   ],
   // exports:[FormComponent],
-  providers: [CollectStaffDataService],
+  // providers: [CollectStaffDataService, HelpersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

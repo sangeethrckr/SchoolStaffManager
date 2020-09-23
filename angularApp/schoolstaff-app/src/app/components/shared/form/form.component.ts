@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input ,Output, EventEmitter} from '@angular/core';
 
 import { Staff } from '../../../models/staff'
 
@@ -19,6 +19,9 @@ export class FormComponent implements OnChanges {
 
   @Input() task : number;
 
+  @Output() newItemEvent = new EventEmitter<void>();
+  @Output() cancelEvent = new EventEmitter<void>();
+
   constructor(
     // private location: Location,
     // private route: ActivatedRoute,
@@ -36,10 +39,16 @@ export class FormComponent implements OnChanges {
     }
   }
 
-  goBack(): void {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-    window.location.reload();
+  goBack(isSubmit : boolean): void {
+    // var popup = document.getElementById("myPopup");
+    // popup.classList.toggle("show");
+    //window.location.reload();
+    if(isSubmit){
+      this.newItemEvent.emit();
+    }
+    else{
+      this.cancelEvent.emit();
+    }
   }
 
   
@@ -56,7 +65,7 @@ export class FormComponent implements OnChanges {
 
       }
       this.apiConnector.createStaff(this.jsonString)
-          .subscribe(()=>{ this.goBack() });
+          .subscribe(()=>{ this.goBack(true) });
 
     }
 
@@ -70,7 +79,7 @@ export class FormComponent implements OnChanges {
       
       //console.log("update staff" + this.staff.StaffId);
       this.apiConnector.updateStaff(this.staff.StaffId,this.jsonString)
-          .subscribe(()=>{ this.goBack() });
+          .subscribe(()=>{ this.goBack(true) });
       
     }
     

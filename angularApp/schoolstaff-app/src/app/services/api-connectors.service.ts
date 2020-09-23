@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import {  Staff } from '../models/staff';
-import * as myGlobals from '../utils/global';
+import { GlobalConstants} from '../utils/global';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ApiConnectorsService {
     private http:HttpClient
   ) { }
 
-  baseUrl = myGlobals.baseUrl;
+  baseUrl = GlobalConstants.apiURL;
 
   
 

@@ -114,8 +114,8 @@ font-size: 18px;
 }
 
 .popup .popuptext {
-  visibility: hidden;
-  display: none;
+  visibility: visible;
+  display: block;
   width: 80%;
   background-color: rgba(150, 140, 140, 0);
   color: #fff;
@@ -126,13 +126,13 @@ font-size: 18px;
 }
 
 
-.popup .show {
+/* .popup .show {
   visibility: visible;
   display: block;
   
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
-}
+} */
 
 .submit,.cancel {
   width: 30%;

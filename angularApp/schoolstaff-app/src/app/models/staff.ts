@@ -10,14 +10,14 @@ export class Staff{
     StaffType:number;
 
     constructor(){
-        this.StaffId = 1;
-        this.Name = "";
+        this.StaffId = null;
+        this.Name = null;
         this.Address = new Address();
-        this.Salary = 12;
-        this.Subject = "";
-        this.AssignedClass = "";
-        this.Post = "";
-        this.StaffType =1;
+        this.Salary = null;
+        this.Subject = null;
+        this.AssignedClass = null;
+        this.Post = null;
+        this.StaffType = null;
     }
 }
 
@@ -28,10 +28,10 @@ export class Address{
     Pin:number;
 
     constructor(){
-        this.HouseName = "";
-        this.City = "";
-        this.State = "";
-        this.Pin = 1;
+        this.HouseName = null;
+        this.City = null;
+        this.State = null;
+        this.Pin = null;
     }
 }
 
