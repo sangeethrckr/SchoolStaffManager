@@ -1,15 +1,16 @@
-import { Component, OnInit} from '@angular/core';
-import { ApiConnectorsService } from '../../services/api-connectors.service';
-import { CollectStaffDataService } from '../../services/collect-staff-data.service';
+import { Component, OnInit } from '@angular/core';
 
-import {  Staff } from '../../models/staff';
+import { ApiConnectorsService } from '../../../services/api-connectors.service';
+import { CollectStaffDataService } from '../../../services/collect-staff-data.service';
+
+import {  Staff } from '../../../models/staff';
 
 @Component({
-  selector: 'app-table-view',
-  templateUrl: './table-view.component.html',
-  styleUrls: ['./table-view.component.css']
+  selector: 'app-admin-staff',
+  templateUrl: './admin-staff.component.html',
+  styleUrls: ['./admin-staff.component.css']
 })
-export class TableViewComponent implements OnInit {
+export class AdminStaffComponent implements OnInit {
 
   staffType : number ;
 
@@ -19,7 +20,7 @@ export class TableViewComponent implements OnInit {
 
   selectedStaff = [];
 
-  headers = [];
+  headers = ['Name','Address','Phonenumber','Salary','Post'];
 
   task : number;
 
@@ -31,8 +32,8 @@ export class TableViewComponent implements OnInit {
  
 
   ngOnInit():void{
-    this.staffType = 1;
-    this.setHeaders();
+    this.staffType = 2;
+    // // this.setHeaders();
     this.getStaff();
     
   }
@@ -47,19 +48,19 @@ export class TableViewComponent implements OnInit {
     
   }
 
-  setHeaders(){
-    this.headers = ['Name','Address','Phonenumber','Salary'];
-    switch(this.staffType){
-      case 1:
-        this.headers.push('Subject','Class');
-        break;
+  // setHeaders(){
+  //   this.headers = ['Name','Address','Phonenumber','Salary'];
+  //   switch(this.staffType){
+  //     case 1:
+  //       this.headers.push('Subject','Class');
+  //       break;
         
-      case 2:
-      case 3:
-        this.headers.push('Post');
-        break;
-    }
-  }
+  //     case 2:
+  //     case 3:
+  //       this.headers.push('Post');
+  //       break;
+  //   }
+  // }
 
  
 
@@ -121,37 +122,5 @@ export class TableViewComponent implements OnInit {
       this.ToggleMultipleDeletePopUp();
   }
 
-
-
-  ChangeStaffType(staffType : number){
-    this.staffType = staffType;
-    this.setHeaders();
-    this.getStaff();
-
-    switch(staffType){
-      case 1:
-        document.getElementById("TnavButton").className = "navButton   active";
-        document.getElementById("AnavButton").className = "navButton";
-        document.getElementById("SnavButton").className = "navButton";
-        break;
-      case 2:
-        document.getElementById("TnavButton").className = "navButton";
-        document.getElementById("AnavButton").className = "navButton   active";
-        document.getElementById("SnavButton").className = "navButton";
-        break;
-        break;
-      case 3:
-        document.getElementById("TnavButton").className = "navButton";
-        document.getElementById("AnavButton").className = "navButton";
-        document.getElementById("SnavButton").className = "navButton   active";
-        break;
-        break;
-    }
-    
-    
-  }
-
-    
-    
 
 }

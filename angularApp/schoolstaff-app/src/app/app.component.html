@@ -1,6 +1,13 @@
 <div class="header">
     <h1 >{{title}}</h1>
 </div>
-<app-table-view ></app-table-view>
 
-<!-- <router-outlet></router-outlet> -->
+<div class="topnav">
+            
+    <input class = "navButton active" type="button"  value="Teaching Staff" id = "TnavButton" routerLink ="teaching" (click) = "ChangeNavActiveColor(1)" />
+    <input class = "navButton" type="button"  value="Administrative Staff" id = "AnavButton" routerLink ="admin" (click) = "ChangeNavActiveColor(2)"/>
+    <input class = "navButton" type="button"  value="Support Staff" id = "SnavButton" routerLink ="support" (click) = "ChangeNavActiveColor(3)"/>
+
+</div>
+
+<router-outlet></router-outlet>

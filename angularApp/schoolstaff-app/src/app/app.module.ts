@@ -6,8 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { TopBarComponent } from './top-bar/top-bar.component';
-import { TableViewComponent } from './components/table-view/table-view.component';
-import { FormComponent } from './components/form/form.component';
+
+import { TeachingStaffModule } from './components/teaching-staff/teaching-staff.module';
+import { AdminStaffModule} from './components/admin-staff/admin-staff.module';
+import { SupportStaffModule} from './components/support-staff/support-staff.module'
+
+// import { TableViewComponent } from './components/table-view/table-view.component';
+// import { FormComponent } from './components/form/form.component';
 
 import { CollectStaffDataService } from './services/collect-staff-data.service';
 
@@ -17,15 +22,19 @@ import { CollectStaffDataService } from './services/collect-staff-data.service';
   declarations: [
     AppComponent,
     // TopBarComponent,
-    TableViewComponent,
-    FormComponent
+    // TableViewComponent,
+    // FormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    TeachingStaffModule,
+    AdminStaffModule,
+    SupportStaffModule,
   ],
+  // exports:[FormComponent],
   providers: [CollectStaffDataService],
   bootstrap: [AppComponent]
 })

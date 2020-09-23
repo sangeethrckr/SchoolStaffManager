@@ -1,0 +1,55 @@
+<input type="button" class="addStaffButton" value="Add Staff" (click) = "ToggleFormPopUp(1)">
+
+<table>
+
+    <tr>
+        
+        <th *ngFor = "let heading of headers">{{heading}}</th>
+        <th>Delete</th>
+        <th>Select</th>
+        
+    </tr>
+
+    <tr *ngFor = "let staff of lstStaff"  (click) = "collectData(staff);ToggleFormPopUp(2)" >
+        
+        <td>{{staff.Name}}</td>
+        <td>{{staff.Address.HouseName}},{{staff.Address.City}},{{staff.Address.State}},{{staff.Address.Pin}}</td>
+        <td>{{staff.PhoneNumber}}</td>
+        <td>{{staff.Salary}}</td>
+        <!-- <td >{{staff.Subject}}</td>
+        <td >{{staff.AssignedClass}}</td> -->
+        <td >{{staff.Post}}</td>
+        <td><input type="button" value="Delete" id = "delButton" (click) = "ToggleDeletePopup()"></td>
+        <td><input type="checkbox"  id="isCheckBox" (change)="checkRow($event,staff.StaffId)" (click)="clickCheckBox()"/></td>
+        
+        <div class="popup" >
+            <span class="popuptext" id="delConfirm">
+                <div class = "confirm">
+                    <p id ="confirm-text">Selected staff will be deleted. Are you sure?</p>
+                    <input type="button" value="Confirm" id = "confirmDel" class= "submit" (click) = "DeleteStaff(staff.StaffId)" >
+                    <input type="button" value="Cancel" id = "delCancel" class = "cancel" (click) = "ToggleDeletePopup()">         
+                </div>
+            </span>
+        </div>
+        
+    </tr>
+
+</table>
+
+<input type="button" class="addStaffButton" id ="delStaffButton" value="Delete Staff" (click) = "ToggleMultipleDeletePopUp()" >
+<div class="popup" >
+    <span class="popuptext" id="multipleDelConfirm">
+        <div class = "confirm">
+            <p id ="confirm-text">Selected staffs will be deleted. Are you sure?</p>
+            <input type="button" value="Confirm" id = "confirmDel" class= "submit" (click) = "DeleteMultiple()" >
+            <input type="button" value="Cancel" id = "delCancel" class = "cancel" (click) = "ToggleMultipleDeletePopUp()" >         
+        </div>
+    </span>
+</div>
+    
+<app-form
+[task] = "task"
+[staffType] = "staffType">
+</app-form>
+
+<!-- <p>Works</p> -->

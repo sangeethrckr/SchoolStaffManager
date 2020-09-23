@@ -1,12 +1,3 @@
-<div class="topnav">
-            
-    <input class = "navButton active" type="button"  value="Teaching Staff" id = "TnavButton" (click) = "ChangeStaffType(1)" />
-    <input class = "navButton" type="button"  value="Administrative Staff" id = "AnavButton" (click) = "ChangeStaffType(2)"/>
-    <input class = "navButton" type="button"  value="Support Staff" id = "SnavButton" (click) = "ChangeStaffType(3)"/>
-
-</div>
-
-
 <input type="button" class="addStaffButton" value="Add Staff" (click) = "ToggleFormPopUp(1)">
 
 <table>
@@ -25,9 +16,9 @@
         <td>{{staff.Address.HouseName}},{{staff.Address.City}},{{staff.Address.State}},{{staff.Address.Pin}}</td>
         <td>{{staff.PhoneNumber}}</td>
         <td>{{staff.Salary}}</td>
-        <td *ngIf = "staffType == 1">{{staff.Subject}}</td>
-        <td *ngIf = "staffType == 1">{{staff.AssignedClass}}</td>
-        <td *ngIf = "staffType != 1">{{staff.Post}}</td>
+        <td >{{staff.Subject}}</td>
+        <td >{{staff.AssignedClass}}</td>
+        <!-- <td *ngIf = "staffType != 1">{{staff.Post}}</td> -->
         <td><input type="button" value="Delete" id = "delButton" (click) = "ToggleDeletePopup()"></td>
         <td><input type="checkbox"  id="isCheckBox" (change)="checkRow($event,staff.StaffId)" (click)="clickCheckBox()"/></td>
         
@@ -61,4 +52,4 @@
 [staffType] = "staffType">
 </app-form>
 
-
+<!-- <p>Works</p> -->

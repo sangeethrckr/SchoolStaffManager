@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-// import { Location } from '@angular/common';
-// import { ActivatedRoute } from '@angular/router';
-import { Staff } from '../../models/staff'
+import { Component, OnChanges, Input } from '@angular/core';
 
-import { ApiConnectorsService } from '../../services/api-connectors.service';
-import { CollectStaffDataService } from '../../services/collect-staff-data.service';
+import { Staff } from '../../../models/staff'
 
+import { ApiConnectorsService } from '../../../services/api-connectors.service';
+import { CollectStaffDataService } from '../../../services/collect-staff-data.service';
 
 @Component({
   selector: 'app-form',
@@ -29,6 +27,7 @@ export class FormComponent implements OnChanges {
   ) { }
 
   ngOnInit(): void {
+    // this.staff = this.collectStaffData.getData();
   }
 
   ngOnChanges():void{
@@ -40,6 +39,7 @@ export class FormComponent implements OnChanges {
   goBack(): void {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
+    window.location.reload();
   }
 
   
